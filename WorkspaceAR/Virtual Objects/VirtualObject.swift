@@ -14,6 +14,7 @@ class VirtualObject: SCNReferenceNode {
     /// The model name derived from the `referenceURL`.
     var modelName: String {
         let name = referenceURL.lastPathComponent.replacingOccurrences(of: ".scn", with: "")
+
         return name
     }
     
@@ -24,6 +25,26 @@ class VirtualObject: SCNReferenceNode {
     func reset() {
         recentVirtualObjectDistances.removeAll()
     }
+
+    /**
+        @Use: start animation
+        @Input: None
+        @Author: Xiao Ling
+    */
+    func startAnimate(){
+
+        print("starting to animate!!")
+    }
+
+    /*
+        @Use: pausen animation
+        @Input: None
+        @Author: Xiao Ling
+    */
+    func pauseAnimate(){
+
+        print("paused animation!!")
+    }
 	
     /**
      Set the object's position based on the provided position relative to the `cameraTransform`.
@@ -33,6 +54,7 @@ class VirtualObject: SCNReferenceNode {
      - Tag: VirtualObjectSetPosition
      */
     func setPosition(_ newPosition: float3, relativeTo cameraTransform: matrix_float4x4, smoothMovement: Bool) {
+
         let cameraWorldPosition = cameraTransform.translation
         var positionOffsetFromCamera = newPosition - cameraWorldPosition
         
@@ -43,12 +65,13 @@ class VirtualObject: SCNReferenceNode {
         }
         
         /*
-         Compute the average distance of the object from the camera over the last ten
+          Compute the average distance of the object from the camera over the last ten
          updates. Notice that the distance is applied to the vector from
          the camera to the content, so it affects only the percieved distance to the
          object. Averaging does _not_ make the content "lag".
-         */
+        */
         if smoothMovement {
+
             let hitTestResultDistance = simd_length(positionOffsetFromCamera)
             
             // Add the latest position and keep up to 10 recent distances to smooth with.
@@ -111,17 +134,19 @@ extension VirtualObject {
 
             let url = element as! URL
 
-            // XIAO: changed this extension to load 
+            // XIAO: changed this extension to load dae files as well
             guard url.pathExtension == "scn" || url.pathExtension == "dae" else { return nil }
 
             print("url: ", url)
 
             return VirtualObject(url: url)
         }
+
     }()
     
     /// Returns a `VirtualObject` if one exists as an ancestor to the provided node.
     static func existingObjectContainingNode(_ node: SCNNode) -> VirtualObject? {
+
         if let virtualObjectRoot = node as? VirtualObject {
             return virtualObjectRoot
         }
@@ -130,7 +155,9 @@ extension VirtualObject {
         
         // Recurse up to check if the parent is a `VirtualObject`.
         return existingObjectContainingNode(parent)
+
     }
+
 }
 
 extension Collection where Iterator.Element == Float, IndexDistance == Int {

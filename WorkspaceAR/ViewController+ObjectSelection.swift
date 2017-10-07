@@ -27,7 +27,6 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         virtualObjectInteraction.selectedObject = virtualObject
         virtualObject.setPosition(focusSquarePosition, relativeTo: cameraTransform, smoothMovement: false)
 
-
         print("==================== VirtualObject placed! ===========================")
         
         updateQueue.async {
