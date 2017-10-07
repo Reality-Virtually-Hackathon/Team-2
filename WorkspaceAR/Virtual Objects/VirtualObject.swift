@@ -20,7 +20,7 @@ class VirtualObject: SCNReferenceNode {
     /// Use average of recent virtual object distances to avoid rapid changes in object scale.
     private var recentVirtualObjectDistances = [Float]()
     
-    /// Resets the objects position smoothing.
+    /// Resets the objects t smoothing.
     func reset() {
         recentVirtualObjectDistances.removeAll()
     }
@@ -32,7 +32,10 @@ class VirtualObject: SCNReferenceNode {
      
      - Tag: VirtualObjectSetPosition
      */
-    func setPosition(_ newPosition: float3, relativeTo cameraTransform: matrix_float4x4, smoothMovement: Bool) {
+    func setPosition(_ newPosition: float3
+                    , relativeTo cameraTransform: matrix_float4x4
+                    , smoothMovement: Bool)
+    {
 
         let cameraWorldPosition      = cameraTransform.translation
         var positionOffsetFromCamera = newPosition - cameraWorldPosition
@@ -63,6 +66,7 @@ class VirtualObject: SCNReferenceNode {
             let averageDistance = recentVirtualObjectDistances.average!
             let averagedDistancePosition = simd_normalize(positionOffsetFromCamera) * averageDistance
             simdPosition = cameraWorldPosition + averagedDistancePosition
+            
         } else {
             simdPosition = cameraWorldPosition + positionOffsetFromCamera
         }
@@ -70,6 +74,7 @@ class VirtualObject: SCNReferenceNode {
     
     /// - Tag: AdjustOntoPlaneAnchor
     func adjustOntoPlaneAnchor(_ anchor: ARPlaneAnchor, using node: SCNNode) {
+        
         // Get the object's position in the plane's coordinate system.
         let planePosition = node.convertPosition(position, from: parent)
         

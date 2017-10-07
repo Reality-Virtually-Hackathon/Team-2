@@ -29,13 +29,17 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         virtualObjectInteraction.selectedObject = virtualObject
         
         // Xiao: Hack test type of object placed and set position differently
-        print("virtualObject name: ", virtualObject.modelName)
+        let ext = String(virtualObject.modelName.characters.suffix(4))
+        
+        if ext == ".dae" {
+            
+            // hard-coded position for now
+            virtualObject.position = SCNVector3(0.0, 0.0, -5.0)
 
-        // virtualObject.setPosition(focusSquarePosition, relativeTo: cameraTransform, smoothMovement: false)
-        virtualObject.position = SCNVector3(5.0, 0.5, 0.0)
-
-
-        print("==================== VirtualObject placed! ===========================")
+        } else {
+            
+            virtualObject.setPosition(focusSquarePosition, relativeTo: cameraTransform, smoothMovement: false)
+        }
         
         updateQueue.async {
             self.sceneView.scene.rootNode.addChildNode(virtualObject)

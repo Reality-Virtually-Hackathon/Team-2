@@ -133,7 +133,6 @@ class VirtualObjectARView: ARSCNView {
     }
 
     // MARK: - Hit Tests
-
     func hitTestRayFromScreenPosition(_ point: CGPoint) -> HitTestRay? {
         guard let frame = session.currentFrame else { return nil }
 
