@@ -47,7 +47,6 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         })
 
         displayObjectLoadingUI()
-
     }
     
     func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didDeselectObject object: VirtualObject) {

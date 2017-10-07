@@ -60,10 +60,11 @@ class VirtualObjectSelectionViewController: UITableViewController {
     
     // MARK: - UITableViewDelegate
     
+    // this function is called when selecting a loaded virtual object
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let object = virtualObjects[indexPath.row]
-        
+
         // Check if the current row is already selected, then deselect it.
         if selectedVirtualObjectRows.contains(indexPath.row) {
             delegate?.virtualObjectSelectionViewController(self, didDeselectObject: object)
@@ -75,11 +76,11 @@ class VirtualObjectSelectionViewController: UITableViewController {
     }
         
     // MARK: - UITableViewDataSource
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return virtualObjects.count
     }
     
+    // this function loads all objects into table
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ObjectCell.reuseIdentifier, for: indexPath) as? ObjectCell else {
@@ -87,7 +88,6 @@ class VirtualObjectSelectionViewController: UITableViewController {
         }
         
         cell.modelName = virtualObjects[indexPath.row].modelName
-
 
         print("cell.modelName: ", cell.modelName)
 

@@ -13,7 +13,8 @@ class VirtualObject: SCNReferenceNode {
     
     /// The model name derived from the `referenceURL`.
     var modelName: String {
-        return referenceURL.lastPathComponent.replacingOccurrences(of: ".scn", with: "")
+        let name = referenceURL.lastPathComponent.replacingOccurrences(of: ".scn", with: "")
+        return name
     }
     
     /// Use average of recent virtual object distances to avoid rapid changes in object scale.
@@ -101,14 +102,19 @@ extension VirtualObject {
     
     /// Loads all the model objects within `Models.scnassets`.
     static let availableObjects: [VirtualObject] = {
+
         let modelsURL = Bundle.main.url(forResource: "Models.scnassets", withExtension: nil)!
 
         let fileEnumerator = FileManager().enumerator(at: modelsURL, includingPropertiesForKeys: [])!
 
         return fileEnumerator.flatMap { element in
+
             let url = element as! URL
 
-            guard url.pathExtension == "scn" else { return nil }
+            // XIAO: changed this extension to load 
+            guard url.pathExtension == "scn" || url.pathExtension == "dae" else { return nil }
+
+            print("url: ", url)
 
             return VirtualObject(url: url)
         }

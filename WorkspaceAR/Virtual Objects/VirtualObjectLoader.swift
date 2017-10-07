@@ -13,6 +13,7 @@ import ARKit
  objects quickly once they are needed.
 */
 class VirtualObjectLoader {
+
 	private(set) var loadedObjects = [VirtualObject]()
     
     private(set) var isLoading = false
