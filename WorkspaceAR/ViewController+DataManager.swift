@@ -41,7 +41,7 @@ extension ViewController: DataManagerDelegate{
 			let newVec = SCNVector3.init(cgp.x, 0, cgp.y)
 			vecPoints.append(newVec)
 			let pointNode = SCNNode()
-			let pointGeometry = SCNSphere(radius: 0.006)
+			let pointGeometry = SCNSphere(radius: 0.007)
 			let orangeMaterial = SCNMaterial()
 			orangeMaterial.diffuse.contents = UIColor.red
 			pointGeometry.materials = [orangeMaterial]
@@ -51,16 +51,14 @@ extension ViewController: DataManagerDelegate{
 		}
 		
 		
-		
-		
-//		for i in 0..<points.count-1 {
-//			let newTempNode = SCNNode()
-//			let newLine = newTempNode.buildLineInTwoPointsWithRotation(from: vecPoints[i],
-//														 to: vecPoints[i+1],
-//														 radius: 0.05,
-//														 color: .cyan)
-//			vo.addChildNode(newLine)
-//		}
+		for i in 0..<points.count-1 {
+			let newTempNode = SCNNode()
+			let newLine = newTempNode.buildLineInTwoPointsWithRotation(from: vecPoints[i],
+														 to: vecPoints[i+1],
+														 radius: 0.005,
+														 color: .cyan)
+			vo.addChildNode(newLine)
+		}
 		
 //		planeNode.rotation = SCNVector4Make(1, 0, 0, -Float(Double.pi/2));
 		//let planeVO = planeNode as! VirtualObject
@@ -72,7 +70,6 @@ extension ViewController: DataManagerDelegate{
 			//self.sceneView.scene.rootNode.addChildNode(virtualObject)
 			self.sceneView.scene.rootNode.addChildNode(vo)
 		}
-		
 		
         print("Received Alignment Points")
     }
