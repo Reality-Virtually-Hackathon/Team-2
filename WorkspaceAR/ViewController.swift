@@ -70,7 +70,7 @@ class ViewController: UIViewController {
          The `sceneView.automaticallyUpdatesLighting` option creates an
          ambient light source and modulates its intensity. This sample app
          instead modulates a global lighting environment map for use with
-         physically based materials, so disable automatic lighting.
+         physically based mater@objc @objc ials, so disable automatic lighting.
          */
         sceneView.automaticallyUpdatesLighting = false
         if let environmentMap = UIImage(named: "Models.scnassets/sharedImages/environment_blur.exr") {
@@ -89,7 +89,21 @@ class ViewController: UIViewController {
         let addPointTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleAddPointTap(gestureRecognize:)))
         addPointTapGesture.delegate = self
         sceneView.addGestureRecognizer(addPointTapGesture)
+        
+        self.delay(2.0) {
+            self.checkPrompts()
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(hidePrompt), name: hidePromptNotificationName, object: nil)
+        fadeView.frame = self.view.frame
+        fadeView.backgroundColor = UIColor.black
+        fadeView.alpha = 0.0
+        fadeView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        fadeView.addTarget(self, action: #selector(fadeViewClicked(sender:)), for: .touchUpInside)
+        self.view.addSubview(fadeView)
     }
+    
+    var fadeView = UIButton()
+    var currentPromptViewController: UIViewController?
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)

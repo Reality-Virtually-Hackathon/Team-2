@@ -25,6 +25,9 @@
 		B994CCF91F89319600AFE9B7 /* VirtualNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B994CCF81F89319600AFE9B7 /* VirtualNode.swift */; };
 		BBE132631F8911B900A91FE5 /* ViewContoller+Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE132621F8911B900A91FE5 /* ViewContoller+Host.swift */; };
 		BBE132651F8914D600A91FE5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE132641F8914D600A91FE5 /* Extensions.swift */; };
+		BBE132671F892C7400A91FE5 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE132661F892C7400A91FE5 /* DataManager.swift */; };
+		BBE132691F892F5900A91FE5 /* HostClientPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE132681F892F5900A91FE5 /* HostClientPickerViewController.swift */; };
+		BBE1326C1F89314400A91FE5 /* ViewController+Prompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE1326B1F89314400A91FE5 /* ViewController+Prompts.swift */; };
 		C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41366B81EB80DD400EC054A /* StatusViewController.swift */; };
 		C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42A71BC1E9C0AF200944367 /* FocusSquare.swift */; };
 		C46356671EF9CC500080C8D9 /* VirtualObjectARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46356661EF9CC480080C8D9 /* VirtualObjectARView.swift */; };
@@ -57,6 +60,9 @@
 		B994CCF81F89319600AFE9B7 /* VirtualNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VirtualNode.swift; path = WorkspaceAR/VirtualNode.swift; sourceTree = SOURCE_ROOT; };
 		BBE132621F8911B900A91FE5 /* ViewContoller+Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewContoller+Host.swift"; sourceTree = "<group>"; };
 		BBE132641F8914D600A91FE5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BBE132661F892C7400A91FE5 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		BBE132681F892F5900A91FE5 /* HostClientPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostClientPickerViewController.swift; sourceTree = "<group>"; };
+		BBE1326B1F89314400A91FE5 /* ViewController+Prompts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Prompts.swift"; sourceTree = "<group>"; };
 		C41366B81EB80DD400EC054A /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		C42A71BC1E9C0AF200944367 /* FocusSquare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
 		C46356651EF9CB1A0080C8D9 /* VirtualObjectLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectLoader.swift; sourceTree = "<group>"; };
@@ -153,6 +159,7 @@
 				0491418C1F89171D007FEBDF /* Connectivity */,
 				3929C48B1E89EC2C00E00B60 /* AppDelegate.swift */,
 				3929C48D1E89EC2C00E00B60 /* ViewController.swift */,
+				BBE132661F892C7400A91FE5 /* DataManager.swift */,
 				BBE132621F8911B900A91FE5 /* ViewContoller+Host.swift */,
 				BBE132641F8914D600A91FE5 /* Extensions.swift */,
 				C8C12A701F29277B00B011FE /* ViewController+ARSCNViewDelegate.swift */,
@@ -161,6 +168,7 @@
 				C8C2AC511F3A545C00E86BA3 /* VirtualObjectInteraction.swift */,
 				C812D8671F47628300344E73 /* ThresholdPanGesture.swift */,
 				C46356661EF9CC480080C8D9 /* VirtualObjectARView.swift */,
+				BBE1326A1F892F5F00A91FE5 /* User Flow VCs */,
 				C40DF57B1EC2330700D9D59E /* Virtual Objects */,
 				113B64D01ECA81CA0071CBD1 /* Focus Square */,
 				1488324B1EFC3EBF0043E0AB /* Additional View Controllers */,
@@ -168,6 +176,15 @@
 				1488324C1EFC3ED00043E0AB /* Resources */,
 			);
 			path = WorkspaceAR;
+			sourceTree = "<group>";
+		};
+		BBE1326A1F892F5F00A91FE5 /* User Flow VCs */ = {
+			isa = PBXGroup;
+			children = (
+				BBE1326B1F89314400A91FE5 /* ViewController+Prompts.swift */,
+				BBE132681F892F5900A91FE5 /* HostClientPickerViewController.swift */,
+			);
+			path = "User Flow VCs";
 			sourceTree = "<group>";
 		};
 		C40DF57B1EC2330700D9D59E /* Virtual Objects */ = {
@@ -274,13 +291,16 @@
 			files = (
 				C812D8681F47628300344E73 /* ThresholdPanGesture.swift in Sources */,
 				11BD822A1F09D750003F11C8 /* ViewController+ObjectSelection.swift in Sources */,
+				BBE1326C1F89314400A91FE5 /* ViewController+Prompts.swift in Sources */,
 				1488323F1EFC378A0043E0AB /* ViewController+Actions.swift in Sources */,
 				3929C48E1E89EC2C00E00B60 /* ViewController.swift in Sources */,
 				C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */,
 				39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */,
 				049141901F893490007FEBDF /* SharedARObject.swift in Sources */,
 				147062641F06FA790003EE03 /* VirtualObjectSelection.swift in Sources */,
+				BBE132671F892C7400A91FE5 /* DataManager.swift in Sources */,
 				C8C12A711F29277B00B011FE /* ViewController+ARSCNViewDelegate.swift in Sources */,
+				BBE132691F892F5900A91FE5 /* HostClientPickerViewController.swift in Sources */,
 				C8C2AC521F3A545C00E86BA3 /* VirtualObjectInteraction.swift in Sources */,
 				B994CCF91F89319600AFE9B7 /* VirtualNode.swift in Sources */,
 				B97A19E81F891C6000D8E39D /* SyncSquare.swift in Sources */,

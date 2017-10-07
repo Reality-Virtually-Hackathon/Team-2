@@ -312,6 +312,7 @@ class FocusSquare: SCNNode {
 		SCNTransaction.commit()
 		
 		// Scale/bounce animation
+        
 		positioningNode.addAnimation(scaleAnimation(for: "transform.scale.x"), forKey: "transform.scale.x")
 		positioningNode.addAnimation(scaleAnimation(for: "transform.scale.y"), forKey: "transform.scale.y")
 		positioningNode.addAnimation(scaleAnimation(for: "transform.scale.z"), forKey: "transform.scale.z")

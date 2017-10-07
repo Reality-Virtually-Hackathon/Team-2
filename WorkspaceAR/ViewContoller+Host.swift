@@ -12,38 +12,31 @@ extension ViewController{
     
     @objc func handleAddPointTap(gestureRecognize: UITapGestureRecognizer) {
         print("Add Point tapped")
-//        guard !addObjectButton.isHidden && !virtualObjectLoader.isLoading else { return }
+        //        guard !addObjectButton.isHidden && !virtualObjectLoader.isLoading else { return }
         print("Adding point with hittest")
         
-        guard let (worldPosition, _ /*planeAnchor*/, _) = sceneView.worldPosition(fromScreenPosition: gestureRecognize.location(in: sceneView), objectPosition: focusSquare.lastPosition) else {
+        
+        guard let (worldPosition, _, onPlane) = sceneView.worldPosition(fromScreenPosition: gestureRecognize.location(in: sceneView), objectPosition: focusSquare.lastPosition, infinitePlane: true) else {
             print("No Plane found")
             return
         }
         print("World position - \(worldPosition)")
-//        planeAnchor?.center
-//        sceneView.hitTest(gestureRecognize.location(in: sceneView), types: ARHitTestResult.c)
-//        let planeNode = sceneView.node(for: planeAnchor!)
-//        print("Plane Center - \(planeNode?.position)")
-//
-//        let hitTestResults = sceneView.hitTestWithInfiniteHorizontalPlane(gestureRecognize.location(in: sceneView), (planeNode?.position.float3FromPosition())!)
-//
-//
-//        if let pointLocation = hitTestResults{
+        if onPlane{
+            self.statusViewController.showMessage("Point added")
             let pointNode = SCNNode()
             let pointGeometry = SCNSphere(radius: 0.01)
             pointGeometry.firstMaterial?.ambient.contents = UIColor.orange
-        
+            
             pointNode.geometry = pointGeometry
             
             
             pointNode.position = SCNVector3Make(worldPosition.x, worldPosition.y, worldPosition.z)
             self.sceneView.scene.rootNode.addChildNode(pointNode)
-//            planeNode?.addChildNode(pointNode)
-        
-//            print("Point found - \(pointLocation)")
-//        }
+        }else{
+            self.statusViewController.showMessage("Point not detected on plane")
+        }
         
     }
     
-
+    
 }
