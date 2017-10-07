@@ -20,8 +20,7 @@ protocol ConnectivityManagerDelegate {
                       data: Data)
 }
 
-class ConnectivityManager : NSObject
-{
+class ConnectivityManager : NSObject {
     let ServiceType = "MIT-ar-demo-service"
     let myPeerId = MCPeerID(displayName: UIDevice.current.name)
     var advertiser: MCNearbyServiceAdvertiser?
@@ -46,6 +45,7 @@ class ConnectivityManager : NSObject
         }
     }
     
+    // Act as the host
     func startAdvertising() {
         advertiser = MCNearbyServiceAdvertiser(peer: myPeerId,
                                                discoveryInfo: nil,
@@ -56,6 +56,7 @@ class ConnectivityManager : NSObject
         }
     }
     
+    // Act as the client
     func startBrowsing() {
         browser = MCNearbyServiceBrowser(peer: myPeerId,
                                          serviceType: ServiceType)
@@ -65,6 +66,7 @@ class ConnectivityManager : NSObject
         }
     }
     
+    // Broadcast data to all peers
     func sendTestString() {
         if session.connectedPeers.count > 0 {
             do {
@@ -73,7 +75,7 @@ class ConnectivityManager : NSObject
                                       with: .reliable)
             }
             catch let error {
-                NSLog("%@", "Error for sending: \(error)")
+                print("%@", "Error for sending: \(error)")
             }
         }
     }
@@ -85,14 +87,14 @@ extension ConnectivityManager: MCNearbyServiceAdvertiserDelegate {
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
                     didNotStartAdvertisingPeer error: Error) {
-        NSLog("%@", "didNotStartAdvertisingPeer: \(error)")
+        print("%@", "didNotStartAdvertisingPeer: \(error)")
     }
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
                     didReceiveInvitationFromPeer peerID: MCPeerID,
                     withContext context: Data?,
                     invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
+        print("%@", "didReceiveInvitationFromPeer \(peerID)")
         invitationHandler(true, self.session)
     }
 }
@@ -103,14 +105,14 @@ extension ConnectivityManager : MCNearbyServiceBrowserDelegate {
     
     func browser(_ browser: MCNearbyServiceBrowser,
                  didNotStartBrowsingForPeers error: Error) {
-        NSLog("%@", "didNotStartBrowsingForPeers: \(error)")
+        print("%@", "didNotStartBrowsingForPeers: \(error)")
     }
     
     func browser(_ browser: MCNearbyServiceBrowser,
                  foundPeer peerID: MCPeerID,
                  withDiscoveryInfo info: [String : String]?) {
-        NSLog("%@", "foundPeer: \(peerID)")
-        NSLog("%@", "invitePeer: \(peerID)")
+        print("%@", "foundPeer: \(peerID)")
+        print("%@", "invitePeer: \(peerID)")
         browser.invitePeer(peerID,
                            to: self.session,
                            withContext: nil,
@@ -119,7 +121,7 @@ extension ConnectivityManager : MCNearbyServiceBrowserDelegate {
     
     func browser(_ browser: MCNearbyServiceBrowser,
                  lostPeer peerID: MCPeerID) {
-        NSLog("%@", "lostPeer: \(peerID)")
+        print("%@", "lostPeer: \(peerID)")
     }
 }
 
@@ -130,7 +132,7 @@ extension ConnectivityManager : MCSessionDelegate {
     func session(_ session: MCSession,
                  peer peerID: MCPeerID,
                  didChange state: MCSessionState) {
-        NSLog("%@", "peer \(peerID) didChangeState: \(state)")
+        print("%@", "peer \(peerID) didChangeState: \(state)")
         self.delegate?.connectedDevicesChanged(manager: self,
                                                connectedDevices: session.connectedPeers.map{$0.displayName})
     }
@@ -138,7 +140,7 @@ extension ConnectivityManager : MCSessionDelegate {
     func session(_ session: MCSession,
                  didReceive data: Data,
                  fromPeer peerID: MCPeerID) {
-        NSLog("%@", "didReceiveData: \(data)")
+        print("%@", "didReceiveData: \(data)")
         if let message = String(data: data,
                                 encoding: .utf8) {
             self.delegate?.dataReceived(manager: self,
