@@ -27,6 +27,9 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         virtualObject.setPosition(focusSquarePosition, relativeTo: cameraTransform, smoothMovement: false)
         
         updateQueue.async {
+			//let ss = SyncSquare()
+			//self.sceneView.scene.rootNode.addChildNode(ss)
+			//original:
             self.sceneView.scene.rootNode.addChildNode(virtualObject)
         }
     }

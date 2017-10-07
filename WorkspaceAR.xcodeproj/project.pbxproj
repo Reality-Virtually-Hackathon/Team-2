@@ -18,6 +18,8 @@
 		3929C49F1E89EE4400E00B60 /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 3929C49E1E89EE4400E00B60 /* Models.scnassets */; };
 		39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C0B9581E9C6B1F003FCA0C /* Utilities.swift */; };
 		39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */; };
+		B97A19E81F891C6000D8E39D /* SyncSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97A19E71F891C6000D8E39D /* SyncSquare.swift */; };
+		B97A19EA1F891DF600D8E39D /* SyncSquareSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97A19E91F891DF600D8E39D /* SyncSquareSegment.swift */; };
 		C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41366B81EB80DD400EC054A /* StatusViewController.swift */; };
 		C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42A71BC1E9C0AF200944367 /* FocusSquare.swift */; };
 		C46356671EF9CC500080C8D9 /* VirtualObjectARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46356661EF9CC480080C8D9 /* VirtualObjectARView.swift */; };
@@ -43,6 +45,8 @@
 		3929C49E1E89EE4400E00B60 /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
 		39C0B9581E9C6B1F003FCA0C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B97A19E71F891C6000D8E39D /* SyncSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SyncSquare.swift; path = WorkspaceAR/SyncSquare.swift; sourceTree = SOURCE_ROOT; };
+		B97A19E91F891DF600D8E39D /* SyncSquareSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SyncSquareSegment.swift; path = WorkspaceAR/SyncSquareSegment.swift; sourceTree = SOURCE_ROOT; };
 		C41366B81EB80DD400EC054A /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		C42A71BC1E9C0AF200944367 /* FocusSquare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
 		C46356651EF9CB1A0080C8D9 /* VirtualObjectLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectLoader.swift; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 		113B64D01ECA81CA0071CBD1 /* Focus Square */ = {
 			isa = PBXGroup;
 			children = (
+				B97A19E71F891C6000D8E39D /* SyncSquare.swift */,
+				B97A19E91F891DF600D8E39D /* SyncSquareSegment.swift */,
 				C42A71BC1E9C0AF200944367 /* FocusSquare.swift */,
 				148832401EFC3B250043E0AB /* FocusSquareSegment.swift */,
 			);
@@ -252,8 +258,10 @@
 				147062641F06FA790003EE03 /* VirtualObjectSelection.swift in Sources */,
 				C8C12A711F29277B00B011FE /* ViewController+ARSCNViewDelegate.swift in Sources */,
 				C8C2AC521F3A545C00E86BA3 /* VirtualObjectInteraction.swift in Sources */,
+				B97A19E81F891C6000D8E39D /* SyncSquare.swift in Sources */,
 				C46356671EF9CC500080C8D9 /* VirtualObjectARView.swift in Sources */,
 				148832411EFC3B250043E0AB /* FocusSquareSegment.swift in Sources */,
+				B97A19EA1F891DF600D8E39D /* SyncSquareSegment.swift in Sources */,
 				C8D71A001F3B7D3D0086AD64 /* VirtualObject.swift in Sources */,
 				C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */,
 				3929C48C1E89EC2C00E00B60 /* AppDelegate.swift in Sources */,
