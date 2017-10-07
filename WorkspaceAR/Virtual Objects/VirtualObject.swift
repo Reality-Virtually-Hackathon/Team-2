@@ -20,7 +20,10 @@ class VirtualObject: SCNReferenceNode {
     /// Use average of recent virtual object distances to avoid rapid changes in object scale.
     private var recentVirtualObjectDistances = [Float]()
     
-    /// Resets the objects t smoothing.
+    // record path of motion imparted onto the object
+    var motionPath = [SCNVector3]()
+    
+    /// Resets the objects smoothing.
     func reset() {
         recentVirtualObjectDistances.removeAll()
     }
