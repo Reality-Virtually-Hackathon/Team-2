@@ -86,6 +86,9 @@ class ViewController: UIViewController {
         // Set the delegate to ensure this gesture is only used when there are no virtual objects in the scene.
         tapGesture.delegate = self
         sceneView.addGestureRecognizer(tapGesture)
+        let addPointTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleAddPointTap(gestureRecognize:)))
+        addPointTapGesture.delegate = self
+        sceneView.addGestureRecognizer(addPointTapGesture)
     }
 
 	override func viewDidAppear(_ animated: Bool) {
