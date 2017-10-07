@@ -13,8 +13,9 @@ class VirtualObjectARView: ARSCNView {
     // MARK: - Types
 
     struct HitTestRay {
-        var origin   : float3
-        var direction: float3
+
+        var origin    : float3
+        var direction : float3
 
         func intersectionWithHorizontalPlane(atY planeY: Float) -> float3? {
             let normalizedDirection = simd_normalize(direction)

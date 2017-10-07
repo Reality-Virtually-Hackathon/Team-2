@@ -57,6 +57,7 @@ class ViewController: UIViewController {
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
+
         super.viewDidLoad()
         
         sceneView.delegate = self
@@ -73,6 +74,7 @@ class ViewController: UIViewController {
          physically based materials, so disable automatic lighting.
          */
         sceneView.automaticallyUpdatesLighting = false
+
         if let environmentMap = UIImage(named: "Models.scnassets/sharedImages/environment_blur.exr") {
             sceneView.scene.lightingEnvironment.contents = environmentMap
         }
