@@ -33,7 +33,7 @@ extension ViewController{
             pointGeometry.materials = [orangeMaterial]
             pointNode.geometry = pointGeometry
             
-            if DataManager.shared().alignmentSCNVectors.count > 0 {
+            if DataManager.shared().alignmentSCNNodes.count > 0 {
                 let rootPosition = DataManager.shared().rootNode!.position
                 let nodePosition = SCNVector3Make(worldPosition.x - rootPosition.x, 0, worldPosition.z - rootPosition.z)
                 
@@ -47,7 +47,7 @@ extension ViewController{
                 pointNode.position = SCNVector3Make(0, 0, 0)
             }
             DataManager.shared().alignmentPoints.append(CGPoint(x: Double(pointNode.position.x), y: Double(pointNode.position.z)))
-            DataManager.shared().alignmentSCNVectors.append(pointNode.position)
+            DataManager.shared().alignmentSCNNodes.append(pointNode)
             print("Alignment Points- \(DataManager.shared().alignmentPoints))")
                 
             DataManager.shared().rootNode!.addChildNode(pointNode)
