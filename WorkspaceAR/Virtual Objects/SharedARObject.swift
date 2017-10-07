@@ -28,13 +28,6 @@ class SharedARObject: NSObject, NSCoding {
     
     // MARK: NSCoding
     
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.id, forKey: "id")
-        aCoder.encode(self.modelName, forKey: "modelName")
-        aCoder.encodeCInt(Int32(self.animation), forKey: "animation")
-        aCoder.encode(self.transform, forKey: "transform")
-    }
-    
     required convenience init(coder aDecoder: NSCoder) {
         let id = aDecoder.decodeObject(forKey: "id") as! String
         let modelName = aDecoder.decodeObject(forKey: "modelName") as! String
@@ -46,5 +39,12 @@ class SharedARObject: NSObject, NSCoding {
             animation: animation,
             transform: transform
         )
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.id, forKey: "id")
+        aCoder.encode(self.modelName, forKey: "modelName")
+        aCoder.encodeCInt(Int32(self.animation), forKey: "animation")
+        aCoder.encode(self.transform, forKey: "transform")
     }
 }
