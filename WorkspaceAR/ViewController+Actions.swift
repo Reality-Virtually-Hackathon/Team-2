@@ -19,10 +19,12 @@ extension ViewController: UIGestureRecognizerDelegate {
     /// Displays the `VirtualObjectSelectionViewController` from the `addObjectButton` or in response to a tap gesture in the `sceneView`.
     @IBAction func showVirtualObjectSelectionViewController() {
         // Ensure adding objects is an available action and we are not loading another object (to avoid concurrent modifications of the scene).
+//        print("Screen Tapped")
         guard !addObjectButton.isHidden && !virtualObjectLoader.isLoading else { return }
-        
+//        print("Tap valid")
         statusViewController.cancelScheduledMessage(for: .contentPlacement)
-        performSegue(withIdentifier: SegueIdentifier.showObjects.rawValue, sender: addObjectButton)
+        
+//        performSegue(withIdentifier: SegueIdentifier.showObjects.rawValue, sender: addObjectButton)
     }
     
     /// Determines if the tap gesture for presenting the `VirtualObjectSelectionViewController` should be used.
