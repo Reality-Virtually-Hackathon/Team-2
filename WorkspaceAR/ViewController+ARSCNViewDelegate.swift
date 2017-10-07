@@ -32,7 +32,10 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
         DispatchQueue.main.async {
             self.statusViewController.cancelScheduledMessage(for: .planeEstimation)
             self.statusViewController.showMessage("SURFACE DETECTED")
-            self.sendSimpleMessage(text: "Tap 👇 placemarkers on the surface ⬜️  to send for calibration ✨⚡️ with other devices")
+            if self.alignmentPointInstructionsShown == false{
+                self.sendSimpleMessage(text: "Tap 👇 placemarkers on the surface ⬜️  to send for calibration ✨⚡️ with other devices")
+                self.alignmentPointInstructionsShown = true
+            }
             if self.virtualObjectLoader.loadedObjects.isEmpty {
                 self.statusViewController.scheduleMessage("TAP + TO PLACE AN OBJECT", inSeconds: 7.5, messageType: .contentPlacement)
             }

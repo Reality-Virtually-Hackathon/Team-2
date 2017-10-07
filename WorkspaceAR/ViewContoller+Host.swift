@@ -12,6 +12,10 @@ extension ViewController{
     
     @objc func handleAddPointTap(gestureRecognize: UITapGestureRecognizer) {
         print("Add Point tapped")
+        if DataManager.shared().state != State.AlignmentStage{
+            print("Not in alignment stage, ")
+            return
+        }
         //        guard !addObjectButton.isHidden && !virtualObjectLoader.isLoading else { return }
         print("Adding point with hittest")
         
@@ -30,15 +34,23 @@ extension ViewController{
             pointNode.geometry = pointGeometry
             
             if DataManager.shared().alignmentSCNVectors.count > 0 {
-                pointNode.position = SCNVector3Make(worldPosition.x, DataManager.shared().alignmentSCNVectors.last!.y, worldPosition.z)
+                let rootPosition = DataManager.shared().rootNode!.position
+                let nodePosition = SCNVector3Make(worldPosition.x - rootPosition.x, 0, worldPosition.z - rootPosition.z)
+                
+//                pointNode.position = SCNVector3Make(worldPosition.x, 0, worldPosition.z)
+                pointNode.position = nodePosition
             }else{
-                pointNode.position = SCNVector3Make(worldPosition.x, worldPosition.y, worldPosition.z)
+                let newRootNode = SCNNode()
+                newRootNode.position = SCNVector3Make(worldPosition.x, worldPosition.y, worldPosition.z)
+                self.sceneView.scene.rootNode.addChildNode(newRootNode)
+                DataManager.shared().rootNode = newRootNode
+                pointNode.position = SCNVector3Make(0, 0, 0)
             }
             DataManager.shared().alignmentPoints.append(CGPoint(x: Double(pointNode.position.x), y: Double(pointNode.position.z)))
             DataManager.shared().alignmentSCNVectors.append(pointNode.position)
             print("Alignment Points- \(DataManager.shared().alignmentPoints))")
                 
-            self.sceneView.scene.rootNode.addChildNode(pointNode)
+            DataManager.shared().rootNode!.addChildNode(pointNode)
         }else{
             self.statusViewController.showMessage("Point not detected on plane")
         }

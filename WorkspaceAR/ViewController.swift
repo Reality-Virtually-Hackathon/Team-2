@@ -43,6 +43,8 @@ class ViewController: UIViewController {
     /// Marks if the AR experience is available for restart.
     var isRestartAvailable = true
     
+    var alignmentPointInstructionsShown = false
+    
     /// A serial queue used to coordinate adding or removing nodes from the scene.
     let updateQueue = DispatchQueue(label: "com.example.apple-samplecode.arkitexample.serialSceneKitQueue")
     
