@@ -8,6 +8,7 @@ Main view controller for the AR experience.
 import ARKit
 import SceneKit
 import UIKit
+import CoreMotion
 
 class ViewController: UIViewController {
     
@@ -53,10 +54,16 @@ class ViewController: UIViewController {
     /// Convenience accessor for the session owned by ARSCNView.
     var session: ARSession {
         return sceneView.session
+
     }
     
-    // MARK: - View Controller Life Cycle
+    // @Use: boolean flag if true then motion listern for device is on
+    // @Author: Xiao Ling
+    var senseMotion: Bool = true
+    let motionManager     = CMMotionManager()
     
+    // MARK: - View Controller Life Cycle
+
     override func viewDidLoad() {
 
         super.viewDidLoad()
@@ -197,5 +204,25 @@ class ViewController: UIViewController {
         alertController.addAction(restartAction)
         present(alertController, animated: true, completion: nil)
     }
-
+    
+    // MARK: Xiao's Commits
+    
+    /**
+     @Use: listener for device motion and path through world frame at initalization
+     @Author: Xiao Ling
+    */
+    // Print the device attitudes over the last five time periods
+    func startMotionListener(){
+        
+        if !self.senseMotion { return }
+        
+        withMotion(motion   : motionManager
+            , interval : 1.0/2.0
+            , handle   : {(attitudes: FixedQueue<CMAttitude>) -> Void in
+                
+                print("attitudes", attitudes.read())
+                print("====================================")
+        })
+    }
+    
 }
