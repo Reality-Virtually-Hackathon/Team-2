@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0491418E1F8919AF007FEBDF /* ConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491418D1F8919AF007FEBDF /* ConnectivityManager.swift */; };
+		049141901F893490007FEBDF /* SharedARObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491418F1F893490007FEBDF /* SharedARObject.swift */; };
 		11BD822A1F09D750003F11C8 /* ViewController+ObjectSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D76491EFC36070000FEBF /* ViewController+ObjectSelection.swift */; };
 		147062641F06FA790003EE03 /* VirtualObjectSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147062631F06FA790003EE03 /* VirtualObjectSelection.swift */; };
 		1488323F1EFC378A0043E0AB /* ViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488323E1EFC378A0043E0AB /* ViewController+Actions.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		0491418D1F8919AF007FEBDF /* ConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityManager.swift; sourceTree = "<group>"; };
+		0491418F1F893490007FEBDF /* SharedARObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedARObject.swift; sourceTree = "<group>"; };
 		11063F3B1EBE651B0033EE6D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		147062631F06FA790003EE03 /* VirtualObjectSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectSelection.swift; sourceTree = "<group>"; };
 		147D76491EFC36070000FEBF /* ViewController+ObjectSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ObjectSelection.swift"; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			children = (
 				C8D719FF1F3B7D3D0086AD64 /* VirtualObject.swift */,
 				C46356651EF9CB1A0080C8D9 /* VirtualObjectLoader.swift */,
+				0491418F1F893490007FEBDF /* SharedARObject.swift */,
 			);
 			path = "Virtual Objects";
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				3929C48E1E89EC2C00E00B60 /* ViewController.swift in Sources */,
 				C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */,
 				39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */,
+				049141901F893490007FEBDF /* SharedARObject.swift in Sources */,
 				147062641F06FA790003EE03 /* VirtualObjectSelection.swift in Sources */,
 				C8C12A711F29277B00B011FE /* ViewController+ARSCNViewDelegate.swift in Sources */,
 				C8C2AC521F3A545C00E86BA3 /* VirtualObjectInteraction.swift in Sources */,
