@@ -23,14 +23,20 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
             return
         }
         
-        virtualObjectInteraction.selectedObject = virtualObject
-        virtualObject.setPosition(focusSquarePosition, relativeTo: cameraTransform, smoothMovement: false)
-        
+        //virtualObjectInteraction.selectedObject = virtualObject
+        //virtualObject.setPosition(focusSquarePosition, relativeTo: cameraTransform, smoothMovement: false)
+		
+		
+		let plane = SCNPlane.init(width: 0.25, height: 0.25)
+		let planeNode = SCNNode.init(geometry: plane)
+		let planeVO = planeNode as! VirtualObject
+		virtualObjectInteraction.selectedObject = planeVO
+		planeVO.setPosition(focusSquarePosition, relativeTo: cameraTransform, smoothMovement: false)
+		
         updateQueue.async {
-			//let ss = SyncSquare()
-			//self.sceneView.scene.rootNode.addChildNode(ss)
 			//original:
-            self.sceneView.scene.rootNode.addChildNode(virtualObject)
+			//self.sceneView.scene.rootNode.addChildNode(virtualObject)
+            self.sceneView.scene.rootNode.addChildNode(planeVO)
         }
     }
     

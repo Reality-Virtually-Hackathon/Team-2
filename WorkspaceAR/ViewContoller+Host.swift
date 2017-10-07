@@ -15,7 +15,7 @@ extension ViewController{
 //        guard !addObjectButton.isHidden && !virtualObjectLoader.isLoading else { return }
         print("Adding point with hittest")
         
-        guard let (worldPosition, planeAnchor, _) = sceneView.worldPosition(fromScreenPosition: gestureRecognize.location(in: sceneView), objectPosition: focusSquare.lastPosition) else {
+        guard let (worldPosition, _ /*planeAnchor*/, _) = sceneView.worldPosition(fromScreenPosition: gestureRecognize.location(in: sceneView), objectPosition: focusSquare.lastPosition) else {
             print("No Plane found")
             return
         }
