@@ -200,7 +200,7 @@
 				TargetAttributes = {
 					3929C4871E89EC2C00E00B60 = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = R4DQ2L3FBV;
+						DevelopmentTeam = A6PM9X3FG5;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -381,10 +381,10 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R4DQ2L3FBV;
+				DEVELOPMENT_TEAM = A6PM9X3FG5;
 				INFOPLIST_FILE = "$(SRCROOT)/WorkspaceAR/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.team2.workspaceAR;
+				PRODUCT_BUNDLE_IDENTIFIER = lingxiao.workspaceAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -400,10 +400,10 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R4DQ2L3FBV;
+				DEVELOPMENT_TEAM = A6PM9X3FG5;
 				INFOPLIST_FILE = "$(SRCROOT)/WorkspaceAR/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.team2.workspaceAR;
+				PRODUCT_BUNDLE_IDENTIFIER = lingxiao.workspaceAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
