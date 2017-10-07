@@ -116,20 +116,22 @@ extension DataManager: ConnectivityManagerDelegate{
             self.delegate?.newDevicesConnected(devices: newDevices)
         }
     }
-    
+	
     func dataReceived(manager: ConnectivityManager, data: Data) {
-        print("Received Data" )
-        let object = NSKeyedUnarchiver.unarchiveObject(with: data)
-        if let newAlignmentPoints = object as? [CGPoint]{
-            if newAlignmentPoints != self.alignmentPoints{
-                self.alignmentPoints = newAlignmentPoints
-                delegate?.receivedAlignmentPoints(points: self.alignmentPoints)
-            }
-        }
-        if let newObject = object as? SharedARObject{
-            updateObject(object: newObject)
-        }
+		
+		print("Received Data" )
+		DispatchQueue.main.async {
+			let object = NSKeyedUnarchiver.unarchiveObject(with: data)
+			if let newAlignmentPoints = object as? [CGPoint]{
+				//if newAlignmentPoints != self.alignmentPoints{
+					self.alignmentPoints = newAlignmentPoints
+					self.delegate?.receivedAlignmentPoints(points: self.alignmentPoints)
+				//}
+			}
+			if let newObject = object as? SharedARObject{
+				self.updateObject(object: newObject)
+			}
+		}
     }
-    
 }
 

@@ -63,7 +63,10 @@ class ViewController: UIViewController {
         
         sceneView.delegate = self
         sceneView.session.delegate = self
-
+		
+		//debugging
+		sceneView.showsStatistics = true
+		
         // Set up scene content.
         setupCamera()
         sceneView.scene.rootNode.addChildNode(focusSquare)
