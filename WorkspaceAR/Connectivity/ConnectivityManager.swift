@@ -155,11 +155,7 @@ extension ConnectivityManager : MCSessionDelegate {
                  didReceive data: Data,
                  fromPeer peerID: MCPeerID) {
         print("%@", "didReceiveData: \(data)")
-        if let message = String(data: data,
-                                encoding: .utf8) {
-            self.delegate?.dataReceived(manager: self,
-                                        data: message.data(using: .utf8)!)
-        }
+		self.delegate?.dataReceived(manager: self, data: data)
     }
     
     func session(_ session:
