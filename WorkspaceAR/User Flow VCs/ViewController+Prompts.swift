@@ -15,8 +15,6 @@ extension ViewController{
             hostClientPickerVC.view.frame = CGRect(x: 0, y: 0, width: 300, height: 200)
             displayPrompt(viewController: hostClientPickerVC)
         }
-        
-        
     }
     
     func displayPrompt(viewController: UIViewController) {
