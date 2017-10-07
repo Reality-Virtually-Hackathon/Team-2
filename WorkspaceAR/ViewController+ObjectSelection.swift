@@ -31,9 +31,13 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         // Xiao: Hack test type of object placed and set position differently
         let ext = String(virtualObject.modelName.characters.suffix(4))
         
+        // Author: Xiao
         if ext == ".dae" {
-            
+
             // hard-coded position for now
+            // we need to convert this to hitting the world-coordinate
+            // with a translation matrix, then later we'll use
+            // the same translation matrix to position of the ball
             virtualObject.position = SCNVector3(0.0, 0.0, -5.0)
 
         } else {

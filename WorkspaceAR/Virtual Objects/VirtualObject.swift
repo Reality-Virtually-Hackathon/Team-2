@@ -36,8 +36,9 @@ class VirtualObject: SCNReferenceNode {
      @Author: Xiao Ling
      */
     func recordPhonePath(){
-        
+
         print("")
+
     }
  
     /**
