@@ -18,6 +18,7 @@ protocol DataManagerDelegate {
     func receivedAlignmentPoints(points: [CGPoint])
     func receivedObjectsUpdate(objects: [SharedARObject])
     func receivedNewObject(object: SharedARObject)
+    func newDevicesConnected(devices: [String])
 }
 
 class DataManager {
@@ -38,6 +39,8 @@ class DataManager {
     }
     
     var connectivity = ConnectivityManager()
+
+    var allConnectedDevices = [String]()
     
     var userType: UserType?
     
@@ -46,13 +49,42 @@ class DataManager {
     
     var rootNode: SCNNode?
     
-//    var objects
     var objects = [SharedARObject]()
     
-    func addObject(object: SharedARObject){
-        //TODO: - Add object to root node, check ids
+    func sendObject(object: SharedARObject){
         let objectData = NSKeyedArchiver.archivedData(withRootObject: object)
-        connectivity.sendTestString()
+        connectivity.sendData(data: objectData)
+    }
+    
+    func updateObject(object: SharedARObject){
+        if let root = rootNode{
+            if let node = root.childNode(withName: object.id, recursively: true){
+                node.transform = object.transform
+                
+            }else{
+                let pointNode = SCNNode()
+                let pointGeometry = SCNSphere(radius: 0.015)
+                let orangeMaterial = SCNMaterial()
+                orangeMaterial.diffuse.contents = UIColor.orange
+                pointGeometry.materials = [orangeMaterial]
+                pointNode.geometry = pointGeometry
+                
+                pointNode.transform = object.transform
+                pointNode.name = object.id
+                //TODO: - Animated addition
+                root.addChildNode(pointNode)
+            }
+        }
+    }
+    
+    func removeObject(object:SharedARObject){
+        if let root = rootNode{
+            if let node = root.childNode(withName: object.id, recursively: true){
+                //TODO: - Animated remove
+                node.removeFromParentNode()
+            }
+        }
+        
     }
     
     func broadcastAlignmentPoints(){
@@ -66,18 +98,36 @@ extension DataManager: ConnectivityManagerDelegate{
     
     func connectedDevicesChanged(manager: ConnectivityManager, connectedDevices: [String]) {
         print("--- Connected Devices Changed ---")
-        print("New Devices: \(connectedDevices)")
+        var newDevices = [String]()
+        for device in connectedDevices{
+            if !self.allConnectedDevices.contains(device){
+                newDevices.append(device)
+            }
+        }
+        print("New Devices: \(newDevices)")
+        if newDevices.count > 0{
+            self.broadcastAlignmentPoints()
+            for object in self.objects{
+                self.updateObject(object: object)
+            }
+        }
+        self.allConnectedDevices  = connectedDevices
+        DispatchQueue.main.async {
+            self.delegate?.newDevicesConnected(devices: newDevices)
+        }
     }
     
     func dataReceived(manager: ConnectivityManager, data: Data) {
         print("Received Data" )
         let object = NSKeyedUnarchiver.unarchiveObject(with: data)
         if let newAlignmentPoints = object as? [CGPoint]{
-            self.alignmentPoints = newAlignmentPoints
-            delegate?.receivedAlignmentPoints(points: self.alignmentPoints)
+            if newAlignmentPoints != self.alignmentPoints{
+                self.alignmentPoints = newAlignmentPoints
+                delegate?.receivedAlignmentPoints(points: self.alignmentPoints)
+            }
         }
         if let newObject = object as? SharedARObject{
-            
+            updateObject(object: newObject)
         }
     }
     

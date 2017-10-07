@@ -30,6 +30,8 @@ class ViewController: UIViewController {
         return childViewControllers.lazy.flatMap({ $0 as? StatusViewController }).first!
     }()
     
+    @IBOutlet weak var devicesConnectedLabel: UILabel!
+    
     // MARK: - ARKit Configuration Properties
     
     /// A type which manages gesture manipulation of virtual content in the scene.
@@ -86,6 +88,9 @@ class ViewController: UIViewController {
 //        // Set the delegate to ensure this gesture is only used when there are no virtual objects in the scene.
 //        tapGesture.delegate = self
 //        sceneView.addGestureRecognizer(tapGesture)
+        
+        DataManager.shared().delegate = self
+        
         let addPointTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleAddPointTap(gestureRecognize:)))
         addPointTapGesture.delegate = self
         sceneView.addGestureRecognizer(addPointTapGesture)

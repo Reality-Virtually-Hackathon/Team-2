@@ -28,6 +28,7 @@
 		BBE132671F892C7400A91FE5 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE132661F892C7400A91FE5 /* DataManager.swift */; };
 		BBE132691F892F5900A91FE5 /* HostClientPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE132681F892F5900A91FE5 /* HostClientPickerViewController.swift */; };
 		BBE1326C1F89314400A91FE5 /* ViewController+Prompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE1326B1F89314400A91FE5 /* ViewController+Prompts.swift */; };
+		BBE1326E1F8967F000A91FE5 /* ViewController+DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE1326D1F8967F000A91FE5 /* ViewController+DataManager.swift */; };
 		C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41366B81EB80DD400EC054A /* StatusViewController.swift */; };
 		C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42A71BC1E9C0AF200944367 /* FocusSquare.swift */; };
 		C46356671EF9CC500080C8D9 /* VirtualObjectARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46356661EF9CC480080C8D9 /* VirtualObjectARView.swift */; };
@@ -63,6 +64,7 @@
 		BBE132661F892C7400A91FE5 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		BBE132681F892F5900A91FE5 /* HostClientPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostClientPickerViewController.swift; sourceTree = "<group>"; };
 		BBE1326B1F89314400A91FE5 /* ViewController+Prompts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Prompts.swift"; sourceTree = "<group>"; };
+		BBE1326D1F8967F000A91FE5 /* ViewController+DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+DataManager.swift"; sourceTree = "<group>"; };
 		C41366B81EB80DD400EC054A /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		C42A71BC1E9C0AF200944367 /* FocusSquare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
 		C46356651EF9CB1A0080C8D9 /* VirtualObjectLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectLoader.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				0491418C1F89171D007FEBDF /* Connectivity */,
 				3929C48B1E89EC2C00E00B60 /* AppDelegate.swift */,
 				3929C48D1E89EC2C00E00B60 /* ViewController.swift */,
+				BBE1326D1F8967F000A91FE5 /* ViewController+DataManager.swift */,
 				BBE132661F892C7400A91FE5 /* DataManager.swift */,
 				BBE132621F8911B900A91FE5 /* ViewContoller+Host.swift */,
 				BBE132641F8914D600A91FE5 /* Extensions.swift */,
@@ -307,6 +310,7 @@
 				BBE132631F8911B900A91FE5 /* ViewContoller+Host.swift in Sources */,
 				C46356671EF9CC500080C8D9 /* VirtualObjectARView.swift in Sources */,
 				148832411EFC3B250043E0AB /* FocusSquareSegment.swift in Sources */,
+				BBE1326E1F8967F000A91FE5 /* ViewController+DataManager.swift in Sources */,
 				B97A19EA1F891DF600D8E39D /* SyncSquareSegment.swift in Sources */,
 				C8D71A001F3B7D3D0086AD64 /* VirtualObject.swift in Sources */,
 				C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */,

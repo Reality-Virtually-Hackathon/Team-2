@@ -15,7 +15,6 @@ extension ViewController{
         //        guard !addObjectButton.isHidden && !virtualObjectLoader.isLoading else { return }
         print("Adding point with hittest")
         
-        
         guard let (worldPosition, _, onPlane) = sceneView.worldPosition(fromScreenPosition: gestureRecognize.location(in: sceneView), objectPosition: focusSquare.lastPosition, infinitePlane: true) else {
             print("No Plane found")
             return
@@ -25,7 +24,9 @@ extension ViewController{
             self.statusViewController.showMessage("Point added")
             let pointNode = SCNNode()
             let pointGeometry = SCNSphere(radius: 0.006)
-            pointGeometry.firstMaterial?.ambient.contents = UIColor.orange
+            let orangeMaterial = SCNMaterial()
+            orangeMaterial.diffuse.contents = UIColor.red
+            pointGeometry.materials = [orangeMaterial]
             pointNode.geometry = pointGeometry
             
             if DataManager.shared().alignmentSCNVectors.count > 0 {
