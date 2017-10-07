@@ -108,7 +108,7 @@ class ViewController: UIViewController {
         
         
         let testButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height - 50, width: 120, height: 50))
-        testButton.setTitle("Test", for: .normal)
+        testButton.setTitle("Confirm Alignment Points", for: .normal)
         testButton.addTarget(self, action: #selector(testStringSend), for: .touchUpInside)
         self.view.addSubview(testButton)
     }

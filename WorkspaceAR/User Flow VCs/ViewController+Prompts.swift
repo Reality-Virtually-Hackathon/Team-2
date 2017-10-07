@@ -17,6 +17,16 @@ extension ViewController{
         }
     }
     
+    func sendSimpleMessage(text: String, confirm: String = "Okay", size:  CGSize = CGSize(width: 300, height: 200)){
+        
+        if let simpleMessageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SimpleMessageVC") as? SimpleMessageViewController {
+            simpleMessageVC.view.frame = CGRect(x: 0, y: 0, width: 300, height: 150)
+            simpleMessageVC.titleLabel.text = text
+            simpleMessageVC.confirmButton.setTitle(confirm, for: .normal)
+            displayPrompt(viewController: simpleMessageVC)
+        }
+    }
+    
     func displayPrompt(viewController: UIViewController) {
 		if currentPromptViewController != nil {
             hidePrompt()

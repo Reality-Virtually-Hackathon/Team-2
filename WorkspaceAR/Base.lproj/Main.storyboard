@@ -350,6 +350,64 @@
             </objects>
             <point key="canvasLocation" x="1397" y="97"/>
         </scene>
+        <!--Simple Message View Controller-->
+        <scene sceneID="WOD-TD-Kbe">
+            <objects>
+                <viewController storyboardIdentifier="SimpleMessageVC" id="fFi-et-NKD" customClass="SimpleMessageViewController" customModule="WorkspaceAR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tzI-zu-qnw">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="150"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPh-OT-mNb">
+                                <rect key="frame" x="0.0" y="97.5" width="300" height="52.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
+                                <state key="normal" title="HOST">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmButtonClicked:" destination="fFi-et-NKD" eventType="touchUpInside" id="U7l-Mf-mCX"/>
+                                    <action selector="hostButtonClicked:" destination="ZsK-jX-X3r" eventType="touchUpInside" id="Csn-NY-34j"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PGa-gf-nMK">
+                                <rect key="frame" x="0.0" y="96.5" width="300" height="1"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="LoE-fs-pwy"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you the host or are you joining a session?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ODw-NH-Igc">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="97.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="PGa-gf-nMK" firstAttribute="width" secondItem="ODw-NH-Igc" secondAttribute="width" id="11s-x5-Eau"/>
+                            <constraint firstItem="ODw-NH-Igc" firstAttribute="height" secondItem="tzI-zu-qnw" secondAttribute="height" multiplier="0.65" id="4Wh-sU-dtY"/>
+                            <constraint firstItem="bPh-OT-mNb" firstAttribute="height" secondItem="tzI-zu-qnw" secondAttribute="height" multiplier="0.35" id="FGR-Ao-7oj"/>
+                            <constraint firstItem="ODw-NH-Igc" firstAttribute="top" secondItem="Kqr-4E-abT" secondAttribute="top" id="FMX-mc-Seu"/>
+                            <constraint firstItem="bPh-OT-mNb" firstAttribute="centerX" secondItem="ODw-NH-Igc" secondAttribute="centerX" id="MpZ-dT-SYz"/>
+                            <constraint firstItem="ODw-NH-Igc" firstAttribute="centerX" secondItem="Kqr-4E-abT" secondAttribute="centerX" id="RgM-WO-R7y"/>
+                            <constraint firstItem="PGa-gf-nMK" firstAttribute="bottom" secondItem="ODw-NH-Igc" secondAttribute="bottom" id="ZXD-qe-MPv"/>
+                            <constraint firstItem="bPh-OT-mNb" firstAttribute="width" secondItem="Kqr-4E-abT" secondAttribute="width" id="aNO-LZ-4XG"/>
+                            <constraint firstItem="PGa-gf-nMK" firstAttribute="centerX" secondItem="ODw-NH-Igc" secondAttribute="centerX" id="ccj-bv-yJJ"/>
+                            <constraint firstItem="bPh-OT-mNb" firstAttribute="bottom" secondItem="Kqr-4E-abT" secondAttribute="bottom" id="lRk-YX-0qN"/>
+                            <constraint firstItem="ODw-NH-Igc" firstAttribute="width" secondItem="tzI-zu-qnw" secondAttribute="width" id="tI4-7x-Hkg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Kqr-4E-abT"/>
+                    </view>
+                    <size key="freeformSize" width="300" height="150"/>
+                    <connections>
+                        <outlet property="confirmButton" destination="bPh-OT-mNb" id="l8j-c9-nkr"/>
+                        <outlet property="titleLabel" destination="ODw-NH-Igc" id="R0z-9I-362"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aOV-fo-ncS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1960" y="96"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="TAf-hZ-wif">
             <objects>

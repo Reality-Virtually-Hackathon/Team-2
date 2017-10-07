@@ -34,7 +34,7 @@ extension ViewController{
             }else{
                 pointNode.position = SCNVector3Make(worldPosition.x, worldPosition.y, worldPosition.z)
             }
-            DataManager.shared().alignmentPoints.append(CGPoint(x: Double(pointNode.position.x), y: Double(pointNode.position.y)))
+            DataManager.shared().alignmentPoints.append(CGPoint(x: Double(pointNode.position.x), y: Double(pointNode.position.z)))
             DataManager.shared().alignmentSCNVectors.append(pointNode.position)
             print("Alignment Points- \(DataManager.shared().alignmentPoints))")
                 

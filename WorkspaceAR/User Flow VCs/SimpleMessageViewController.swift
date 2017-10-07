@@ -1,5 +1,5 @@
 //
-//  HostClientPickerViewController.swift
+//  SimpleMessageViewController.swift
 //  WorkspaceAR
 //
 //  Created by Avery Lamp on 10/7/17.
@@ -8,8 +8,13 @@
 
 import UIKit
 
-class HostClientPickerViewController: UIViewController {
+class SimpleMessageViewController: UIViewController {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var confirmButton: UIButton!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
@@ -20,26 +25,11 @@ class HostClientPickerViewController: UIViewController {
         
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.insertSubview(blurEffectView, at: 0)
-
-    }
-
-    @IBAction func hostButtonClicked(_ sender: Any) {
-        DataManager.shared().userType = .Host
-        print("Host Picked")
-        
-        DataManager.shared().connectivity.startAdvertising()
-        
-        NotificationCenter.default.post(name: hidePromptNotificationName, object: self)
     }
     
-    @IBAction func clientButtonClicked(_ sender: Any) {
-        print("Client Picked")
-        DataManager.shared().userType = .Client
-        
-        DataManager.shared().connectivity.startBrowsing()
-        
+    @IBAction func confirmButtonClicked(_ sender: Any) {
+        print("Message confirmed")
         NotificationCenter.default.post(name: hidePromptNotificationName, object: self)
+        
     }
-    
 }
-

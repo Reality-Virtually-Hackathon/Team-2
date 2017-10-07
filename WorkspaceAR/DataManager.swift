@@ -1,4 +1,4 @@
-//
+t//
 //  DataManager.swift
 //  WorkspaceAR
 //
@@ -12,6 +12,11 @@ import SceneKit
 enum UserType {
     case Host
     case Client
+}
+
+enum State{
+    case AlignmentStage
+    case Creative
 }
 
 protocol DataManagerDelegate {
@@ -43,6 +48,7 @@ class DataManager {
     var allConnectedDevices = [String]()
     
     var userType: UserType?
+    var state: State = State.AlignmentStage
     
     var alignmentSCNVectors = [SCNVector3]()
     var alignmentPoints = [CGPoint]()
