@@ -13,40 +13,18 @@ class VirtualObject: SCNReferenceNode {
     
     /// The model name derived from the `referenceURL`.
     var modelName: String {
-        let name = referenceURL.lastPathComponent.replacingOccurrences(of: ".scn", with: "")
-
-        return name
+        
+        return referenceURL.lastPathComponent.replacingOccurrences(of: ".scn", with: "")
     }
     
     /// Use average of recent virtual object distances to avoid rapid changes in object scale.
     private var recentVirtualObjectDistances = [Float]()
     
-    /// Resets the objects poisition smoothing.
+    /// Resets the objects position smoothing.
     func reset() {
         recentVirtualObjectDistances.removeAll()
     }
-
-    /**
-        @Use: start animation
-        @Input: None
-        @Author: Xiao Ling
-    */
-    func startAnimate(){
-
-        print("starting to animate!!")
-    }
-
-    /*
-        @Use: pausen animation
-        @Input: None
-        @Author: Xiao Ling
-    */
-    func pauseAnimate(){
-
-        print("paused animation!!")
-
-    }
-	
+ 
     /**
      Set the object's position based on the provided position relative to the `cameraTransform`.
      If `smoothMovement` is true, the new position will be averaged with previous position to
@@ -56,9 +34,12 @@ class VirtualObject: SCNReferenceNode {
      */
     func setPosition(_ newPosition: float3, relativeTo cameraTransform: matrix_float4x4, smoothMovement: Bool) {
 
-        let cameraWorldPosition = cameraTransform.translation
+        let cameraWorldPosition      = cameraTransform.translation
         var positionOffsetFromCamera = newPosition - cameraWorldPosition
-        
+
+        // hard code some stuff to figure out what's going on
+        // var positionOffsetFromCamera = float3(0.206877, -0.20409, -0.357364)
+
         // Limit the distance of the object from the camera to a maximum of 10 meters.
         if simd_length(positionOffsetFromCamera) > 10 {
             positionOffsetFromCamera = simd_normalize(positionOffsetFromCamera)
@@ -67,9 +48,9 @@ class VirtualObject: SCNReferenceNode {
         
         /*
           Compute the average distance of the object from the camera over the last ten
-         updates. Notice that the distance is applied to the vector from
-         the camera to the content, so it affects only the percieved distance to the
-         object. Averaging does _not_ make the content "lag".
+          updates. Notice that the distance is applied to the vector from
+          the camera to the content, so it affects only the percieved distance to the
+          object. Averaging does _not_ make the content "lag".
         */
         if smoothMovement {
 

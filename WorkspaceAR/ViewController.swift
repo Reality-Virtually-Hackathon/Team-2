@@ -89,7 +89,12 @@ class ViewController: UIViewController {
         tapGesture.delegate = self
         sceneView.addGestureRecognizer(tapGesture)
 
-        print("view did load!!")
+        // debug options
+        self.sceneView.debugOptions = [ ARSCNDebugOptions.showWorldOrigin
+                                      , ARSCNDebugOptions.showFeaturePoints
+                                      ]
+        
+        
     }
 
 	override func viewDidAppear(_ animated: Bool) {

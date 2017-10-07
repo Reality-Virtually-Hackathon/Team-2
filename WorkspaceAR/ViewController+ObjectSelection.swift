@@ -15,6 +15,8 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
      currently corresponding to the center of the screen.
      
      - Tag: PlaceVirtualObject
+     
+     @Modification: Xiao, 10/7/2017
      */
     func placeVirtualObject(_ virtualObject: VirtualObject) {
 
@@ -25,7 +27,13 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         }
         
         virtualObjectInteraction.selectedObject = virtualObject
-        virtualObject.setPosition(focusSquarePosition, relativeTo: cameraTransform, smoothMovement: false)
+        
+        // Xiao: Hack test type of object placed and set position differently
+        print("virtualObject name: ", virtualObject.modelName)
+
+        // virtualObject.setPosition(focusSquarePosition, relativeTo: cameraTransform, smoothMovement: false)
+        virtualObject.position = SCNVector3(5.0, 0.5, 0.0)
+
 
         print("==================== VirtualObject placed! ===========================")
         
