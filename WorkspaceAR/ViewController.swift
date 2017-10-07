@@ -100,6 +100,16 @@ class ViewController: UIViewController {
         fadeView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         fadeView.addTarget(self, action: #selector(fadeViewClicked(sender:)), for: .touchUpInside)
         self.view.addSubview(fadeView)
+        
+        
+        let testButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height - 50, width: 120, height: 50))
+        testButton.setTitle("Test", for: .normal)
+        testButton.addTarget(self, action: #selector(testStringSend), for: .touchUpInside)
+        self.view.addSubview(testButton)
+    }
+    
+    @objc func testStringSend(){
+        DataManager.shared().connectivity.sendTestString()
     }
     
     var fadeView = UIButton()

@@ -24,6 +24,12 @@ class DataManager {
         return sharedInstance
     }
     
+    init(){
+        connectivity.delegate = self
+    }
+    
+    var connectivity = ConnectivityManager()
+    
     var userType: UserType?
     
     var alignmentPoints = [CGPoint]()
@@ -35,6 +41,21 @@ class DataManager {
     
     func addObject(object: SharedARObject){
         //TODO: - Add object to root node, check ids
+        let objectData = NSKeyedArchiver.archivedData(withRootObject: object)
+        connectivity.sendTestString()
+    }
+    
+}
+
+extension DataManager: ConnectivityManagerDelegate{
+    
+    func connectedDevicesChanged(manager: ConnectivityManager, connectedDevices: [String]) {
+        print("--- Connected Devices Changed ---")
+        print("New Devices: \(connectedDevices)")
+    }
+    
+    func dataReceived(manager: ConnectivityManager, data: Data) {
+        print("Received Data" )
     }
     
 }

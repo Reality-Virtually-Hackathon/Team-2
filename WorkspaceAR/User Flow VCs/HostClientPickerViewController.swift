@@ -20,7 +20,6 @@ class HostClientPickerViewController: UIViewController {
         
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.insertSubview(blurEffectView, at: 0)
-        ConnectivityManager.shared().delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -28,7 +27,7 @@ class HostClientPickerViewController: UIViewController {
         DataManager.shared().userType = .Host
         print("Host Picked")
         
-        ConnectivityManager.shared().startAdvertising()
+        DataManager.shared().connectivity.startAdvertising()
         
         NotificationCenter.default.post(name: hidePromptNotificationName, object: self)
         
@@ -39,23 +38,10 @@ class HostClientPickerViewController: UIViewController {
         print("Client Picked")
         DataManager.shared().userType = .Client
         
-        ConnectivityManager.shared().startBrowsing()
+        DataManager.shared().connectivity.startBrowsing()
         
         NotificationCenter.default.post(name: hidePromptNotificationName, object: self)
     }
     
 }
 
-
-extension HostClientPickerViewController:ConnectivityManagerDelegate {
-    func connectedDevicesChanged(manager: ConnectivityManager, connectedDevices: [String]) {
-        print("--- Connected Devices Changed ---")
-        print("New Devices: \(connectedDevices)")
-    }
-    
-    func dataReceived(manager: ConnectivityManager, data: Data) {
-        print("Received Data" )
-    }
-    
-    
-}

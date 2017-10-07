@@ -26,16 +26,7 @@ class ConnectivityManager : NSObject {
     var advertiser: MCNearbyServiceAdvertiser?
     var browser: MCNearbyServiceBrowser?
     var delegate : ConnectivityManagerDelegate?
-    
-    static var sharedInstance: ConnectivityManager = {
-        let connectivityManager = ConnectivityManager()
-        return connectivityManager
-    }()
-    
-    class func shared() -> ConnectivityManager {
-        return sharedInstance
-    }
-    
+        
     
     lazy var session : MCSession = {
         let session = MCSession(peer: self.myPeerId,
@@ -78,11 +69,24 @@ class ConnectivityManager : NSObject {
     
     // Broadcast data to all peers
     func sendTestString() {
+        print("Sending test string")
         if session.connectedPeers.count > 0 {
             do {
                 try self.session.send("test string".data(using: .utf8)!,
                                       toPeers: session.connectedPeers,
                                       with: .reliable)
+            }
+            catch let error {
+                print("%@", "Error for sending: \(error)")
+            }
+        }
+    }
+    
+    // Broadcast data to all peers
+    func sendData(data: Data) {
+        if session.connectedPeers.count > 0 {
+            do {
+                try self.session.send(data, toPeers: session.connectedPeers, with: .reliable)
             }
             catch let error {
                 print("%@", "Error for sending: \(error)")
