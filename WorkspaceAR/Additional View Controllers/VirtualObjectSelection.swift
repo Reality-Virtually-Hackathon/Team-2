@@ -10,6 +10,7 @@ import UIKit
 // MARK: - ObjectCell
 
 class ObjectCell: UITableViewCell {
+
     static let reuseIdentifier = "ObjectCell"
     
     @IBOutlet weak var objectTitleLabel: UILabel!
@@ -24,11 +25,12 @@ class ObjectCell: UITableViewCell {
 }
 
 // MARK: - VirtualObjectSelectionViewControllerDelegate
-
 /// A protocol for reporting which objects have been selected.
 protocol VirtualObjectSelectionViewControllerDelegate: class {
+
     func virtualObjectSelectionViewController(_ selectionViewController: VirtualObjectSelectionViewController, didSelectObject: VirtualObject)
     func virtualObjectSelectionViewController(_ selectionViewController: VirtualObjectSelectionViewController, didDeselectObject: VirtualObject)
+
 }
 
 /// A custom table view controller to allow users to select `VirtualObject`s for placement in the scene.
@@ -43,9 +45,13 @@ class VirtualObjectSelectionViewController: UITableViewController {
     weak var delegate: VirtualObjectSelectionViewControllerDelegate?
     
     override func viewDidLoad() {
+
         super.viewDidLoad()
 
         tableView.separatorEffect = UIVibrancyEffect(blurEffect: UIBlurEffect(style: .light))
+
+        print("VirtualObject Selection loaded")
+
     }
     
     override func viewWillLayoutSubviews() {
@@ -55,6 +61,7 @@ class VirtualObjectSelectionViewController: UITableViewController {
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
         let object = virtualObjects[indexPath.row]
         
         // Check if the current row is already selected, then deselect it.
@@ -74,11 +81,15 @@ class VirtualObjectSelectionViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ObjectCell.reuseIdentifier, for: indexPath) as? ObjectCell else {
             fatalError("Expected `\(ObjectCell.self)` type for reuseIdentifier \(ObjectCell.reuseIdentifier). Check the configuration in Main.storyboard.")
         }
         
         cell.modelName = virtualObjects[indexPath.row].modelName
+
+
+        print("cell.modelName: ", cell.modelName)
 
         if selectedVirtualObjectRows.contains(indexPath.row) {
             cell.accessoryType = .checkmark

@@ -16,7 +16,8 @@ extension ViewController: UIGestureRecognizerDelegate {
     
     // MARK: - Interface Actions
     
-    /// Displays the `VirtualObjectSelectionViewController` from the `addObjectButton` or in response to a tap gesture in the `sceneView`.
+    /// Displays the `VirtualObjectSelectionViewController` from the `addObjectButton` or 
+    // in response to a tap gesture in the `sceneView`.
     @IBAction func showVirtualObjectSelectionViewController() {
         // Ensure adding objects is an available action and we are not loading another object (to avoid concurrent modifications of the scene).
         guard !addObjectButton.isHidden && !virtualObjectLoader.isLoading else { return }
@@ -34,8 +35,9 @@ extension ViewController: UIGestureRecognizerDelegate {
         return true
     }
     
-    /// - Tag: restartExperience
+     /// - Tag: restartExperience
     func restartExperience() {
+ 
         guard isRestartAvailable, !virtualObjectLoader.isLoading else { return }
         isRestartAvailable = false
 
