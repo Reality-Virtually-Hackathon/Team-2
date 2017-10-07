@@ -170,8 +170,8 @@
 				C46356661EF9CC480080C8D9 /* VirtualObjectARView.swift */,
 				BBE1326A1F892F5F00A91FE5 /* User Flow VCs */,
 				C40DF57B1EC2330700D9D59E /* Virtual Objects */,
-				113B64D01ECA81CA0071CBD1 /* Focus Square */,
 				1488324B1EFC3EBF0043E0AB /* Additional View Controllers */,
+				113B64D01ECA81CA0071CBD1 /* Focus Square */,
 				1488324A1EFC3E9C0043E0AB /* Utilities */,
 				1488324C1EFC3ED00043E0AB /* Resources */,
 			);
@@ -246,7 +246,7 @@
 				TargetAttributes = {
 					3929C4871E89EC2C00E00B60 = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = F29E8CU7JT;
+						DevelopmentTeam = 9XWYL3K4YT;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -449,7 +449,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F29E8CU7JT;
+				DEVELOPMENT_TEAM = 9XWYL3K4YT;
 				INFOPLIST_FILE = "$(SRCROOT)/WorkspaceAR/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.team2.workspaceAR;
@@ -468,7 +468,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F29E8CU7JT;
+				DEVELOPMENT_TEAM = 9XWYL3K4YT;
 				INFOPLIST_FILE = "$(SRCROOT)/WorkspaceAR/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.team2.workspaceAR;

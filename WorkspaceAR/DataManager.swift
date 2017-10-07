@@ -26,13 +26,14 @@ class DataManager {
     
     var userType: UserType?
     
-    var rectangleCoordinates = [SCNVector3]()
+    var alignmentPoints = [CGPoint]()
     
     var rootNode: SCNNode?
     
 //    var objects
+    var objects = [SharedARObject]()
     
-    func addObject(){
+    func addObject(object: SharedARObject){
         //TODO: - Add object to root node, check ids
     }
     

@@ -21,11 +21,21 @@ protocol ConnectivityManagerDelegate {
 }
 
 class ConnectivityManager : NSObject {
-    let ServiceType = "MIT-ar-demo-service"
+    let ServiceType = "WorkspaceAR"
     let myPeerId = MCPeerID(displayName: UIDevice.current.name)
     var advertiser: MCNearbyServiceAdvertiser?
     var browser: MCNearbyServiceBrowser?
     var delegate : ConnectivityManagerDelegate?
+    
+    static var sharedInstance: ConnectivityManager = {
+        let connectivityManager = ConnectivityManager()
+        return connectivityManager
+    }()
+    
+    class func shared() -> ConnectivityManager {
+        return sharedInstance
+    }
+    
     
     lazy var session : MCSession = {
         let session = MCSession(peer: self.myPeerId,
