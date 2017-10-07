@@ -20,7 +20,7 @@ extension ViewController{
     }
     
     func displayPrompt(viewController: UIViewController) {
-        if let vc = currentPromptViewController {
+		if currentPromptViewController != nil {
             hidePrompt()
         }
         self.view.bringSubview(toFront: fadeView)
