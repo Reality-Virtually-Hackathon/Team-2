@@ -38,7 +38,9 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
 
         } else {
             
-            virtualObject.setPosition(focusSquarePosition, relativeTo: cameraTransform, smoothMovement: false)
+            virtualObject.setPosition(focusSquarePosition
+                                     , relativeTo: cameraTransform
+                                     , smoothMovement: false)
         }
         
         updateQueue.async {
