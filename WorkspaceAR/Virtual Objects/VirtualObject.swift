@@ -44,6 +44,7 @@ class VirtualObject: SCNReferenceNode {
     func pauseAnimate(){
 
         print("paused animation!!")
+
     }
 	
     /**

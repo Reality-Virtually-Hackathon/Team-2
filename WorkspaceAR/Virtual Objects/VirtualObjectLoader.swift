@@ -19,12 +19,12 @@ class VirtualObjectLoader {
     private(set) var isLoading = false
 	
 	// MARK: - Loading object
-
     /**
      Loads a `VirtualObject` on a background queue. `loadedHandler` is invoked
      on a background queue once `object` has been loaded.
     */
     func loadVirtualObject(_ object: VirtualObject, loadedHandler: @escaping (VirtualObject) -> Void) {
+
         isLoading = true
 		loadedObjects.append(object)
 		
@@ -36,10 +36,10 @@ class VirtualObjectLoader {
             self.isLoading = false
             loadedHandler(object)
         }
+
 	}
     
     // MARK: - Removing Objects
-    
     func removeAllVirtualObjects() {
         // Reverse the indicies so we don't trample over indicies as objects are removed.
         for index in loadedObjects.indices.reversed() {
