@@ -31,7 +31,7 @@ class VirtualObject: SCNReferenceNode {
     
     /**
      @Use: record the path of the phone as a series of vectors in R^3 relative to
-           world frame initialized by arkit
+            world frame initialized by arkit
      @Return: None
      @Author: Xiao Ling
      */

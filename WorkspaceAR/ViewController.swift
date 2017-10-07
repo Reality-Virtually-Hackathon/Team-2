@@ -47,6 +47,7 @@ class ViewController: UIViewController {
     var screenCenter: CGPoint {
         let bounds = sceneView.bounds
         return CGPoint(x: bounds.midX, y: bounds.midY)
+        
     }
     
     /// Convenience accessor for the session owned by ARSCNView.
