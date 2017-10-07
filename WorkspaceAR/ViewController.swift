@@ -82,10 +82,10 @@ class ViewController: UIViewController {
             self.restartExperience()
         }
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showVirtualObjectSelectionViewController))
-        // Set the delegate to ensure this gesture is only used when there are no virtual objects in the scene.
-        tapGesture.delegate = self
-        sceneView.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showVirtualObjectSelectionViewController))
+//        // Set the delegate to ensure this gesture is only used when there are no virtual objects in the scene.
+//        tapGesture.delegate = self
+//        sceneView.addGestureRecognizer(tapGesture)
         let addPointTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleAddPointTap(gestureRecognize:)))
         addPointTapGesture.delegate = self
         sceneView.addGestureRecognizer(addPointTapGesture)
@@ -109,7 +109,7 @@ class ViewController: UIViewController {
     }
     
     @objc func testStringSend(){
-        DataManager.shared().connectivity.sendTestString()
+        DataManager.shared().broadcastAlignmentPoints()
     }
     
     var fadeView = UIButton()

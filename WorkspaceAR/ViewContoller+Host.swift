@@ -24,13 +24,19 @@ extension ViewController{
         if onPlane{
             self.statusViewController.showMessage("Point added")
             let pointNode = SCNNode()
-            let pointGeometry = SCNSphere(radius: 0.01)
+            let pointGeometry = SCNSphere(radius: 0.006)
             pointGeometry.firstMaterial?.ambient.contents = UIColor.orange
-            
             pointNode.geometry = pointGeometry
             
-            
-            pointNode.position = SCNVector3Make(worldPosition.x, worldPosition.y, worldPosition.z)
+            if DataManager.shared().alignmentSCNVectors.count > 0 {
+                pointNode.position = SCNVector3Make(worldPosition.x, DataManager.shared().alignmentSCNVectors.last!.y, worldPosition.z)
+            }else{
+                pointNode.position = SCNVector3Make(worldPosition.x, worldPosition.y, worldPosition.z)
+            }
+            DataManager.shared().alignmentPoints.append(CGPoint(x: Double(pointNode.position.x), y: Double(pointNode.position.y)))
+            DataManager.shared().alignmentSCNVectors.append(pointNode.position)
+            print("Alignment Points- \(DataManager.shared().alignmentPoints))")
+                
             self.sceneView.scene.rootNode.addChildNode(pointNode)
         }else{
             self.statusViewController.showMessage("Point not detected on plane")

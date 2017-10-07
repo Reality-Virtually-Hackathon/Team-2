@@ -14,7 +14,16 @@ enum UserType {
     case Client
 }
 
+protocol DataManagerDelegate {
+    func receivedAlignmentPoints(points: [CGPoint])
+    func receivedObjectsUpdate(objects: [SharedARObject])
+    func receivedNewObject(object: SharedARObject)
+}
+
 class DataManager {
+    
+    var delegate : DataManagerDelegate?
+    
     static var sharedInstance: DataManager = {
         let dataManager = DataManager()
         return dataManager
@@ -32,6 +41,7 @@ class DataManager {
     
     var userType: UserType?
     
+    var alignmentSCNVectors = [SCNVector3]()
     var alignmentPoints = [CGPoint]()
     
     var rootNode: SCNNode?
@@ -45,6 +55,11 @@ class DataManager {
         connectivity.sendTestString()
     }
     
+    func broadcastAlignmentPoints(){
+        let pointData = NSKeyedArchiver.archivedData(withRootObject: alignmentPoints)
+        connectivity.sendData(data: pointData)
+    }
+    
 }
 
 extension DataManager: ConnectivityManagerDelegate{
@@ -56,6 +71,14 @@ extension DataManager: ConnectivityManagerDelegate{
     
     func dataReceived(manager: ConnectivityManager, data: Data) {
         print("Received Data" )
+        let object = NSKeyedUnarchiver.unarchiveObject(with: data)
+        if let newAlignmentPoints = object as? [CGPoint]{
+            self.alignmentPoints = newAlignmentPoints
+            delegate?.receivedAlignmentPoints(points: self.alignmentPoints)
+        }
+        if let newObject = object as? SharedARObject{
+            
+        }
     }
     
 }

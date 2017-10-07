@@ -16,11 +16,17 @@ class SharedARObject: NSObject, NSCoding {
     var animation: Int
     var transform: SCNMatrix4
     
-    init(id: String,
-         modelName: String,
-         animation: Int,
-         transform: SCNMatrix4) {
-        self.id = id
+    init(id: String = "",
+        modelName: String,
+        animation: Int,
+        transform: SCNMatrix4) {
+        if id == ""{
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "y-MM-dd H:m:ss.SSSS"
+            self.id = dateFormatter.string(from: Date()) + "\(CACurrentMediaTime())"
+        }else{
+            self.id = id
+        }
         self.modelName = modelName
         self.animation = animation
         self.transform = transform
