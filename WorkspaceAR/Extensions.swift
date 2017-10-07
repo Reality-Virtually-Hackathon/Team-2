@@ -19,3 +19,13 @@ extension SCNVector3 {
         return float3(arrayLiteral: self.x, self.y, self.z)
     }
 }
+
+
+extension UIViewController{
+    
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        DispatchQueue.main.asyncAfter(
+            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
+    }
+    
+}
