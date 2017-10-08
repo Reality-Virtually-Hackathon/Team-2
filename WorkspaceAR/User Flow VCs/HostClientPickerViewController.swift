@@ -35,7 +35,7 @@ class HostClientPickerViewController: UIViewController {
     @IBAction func clientButtonClicked(_ sender: Any) {
         print("Client Picked")
         DataManager.shared().userType = .Client
-        
+        DataManager.shared().state = .FindingPlane
         DataManager.shared().connectivity.startBrowsing()
         
         NotificationCenter.default.post(name: hidePromptNotificationName, object: self)

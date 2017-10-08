@@ -179,7 +179,14 @@ class ViewController: UIViewController {
         if DataManager.shared().state == State.AlignmentStage{
             self.endAlignmentMode()
         }
-        
+		
+		if DataManager.shared().state == State.FindingPlane{
+			DataManager.shared().state = State.AlignmentStage
+			if DataManager.shared().alignmentPoints.count > 0 {
+				drawPoints()
+			}
+		}
+		
         continueButton.setTitle("", for: .normal)
         continueButtonHeightConstraint.constant = 0
         UIView.animate(withDuration: 0.8, animations: {
