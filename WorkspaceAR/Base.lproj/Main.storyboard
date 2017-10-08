@@ -145,21 +145,19 @@
                                     <action selector="dropBall:" destination="BV1-FR-VrT" eventType="touchUpInside" id="oBR-0s-8Ht"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2b6-aa-O2m">
+                                <rect key="frame" x="256" y="100" width="96" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="REALLY DO IT"/>
+                                <connections>
+                                    <action selector="moveTestBall:" destination="BV1-FR-VrT" eventType="touchUpInside" id="oIZ-Eh-JJf"/>
+                                </connections>
+                            </button>
                             <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R5W-V8-6lY">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="AjQ-5W-To9">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2b6-aa-O2m">
-                                            <rect key="frame" x="259" y="111" width="96" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="REALLY DO IT"/>
-                                            <connections>
-                                                <action selector="dropBall:" destination="BV1-FR-VrT" eventType="touchUpInside" id="uUp-tr-2JN"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
                                     <gestureRecognizers/>
                                     <connections>
                                         <outletCollection property="gestureRecognizers" destination="c1x-aP-ECc" appends="YES" id="zBQ-0r-hiV"/>
