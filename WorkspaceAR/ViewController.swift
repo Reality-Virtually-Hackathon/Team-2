@@ -119,8 +119,23 @@ class ViewController: UIViewController {
     }
     
     @objc func testStringSend(){
-        DataManager.shared().broadcastAlignmentPoints()
+		guard let type = DataManager.shared().userType else { return }
+		switch type {
+		case .Client:
+			//kenny is going to do his stuff here.
+			//save the transformation state on confirmation! (This is currently acting as the confirmation)
+			confirmAlignmentFromClient()
+			break
+		case .Host:
+			//avery do your stuff here
+			DataManager.shared().broadcastAlignmentPoints()
+			break
+		}
     }
+	
+	func confirmAlignmentFromClient() {
+		
+	}
     
     var fadeView = UIButton()
     var currentPromptViewController: UIViewController?
