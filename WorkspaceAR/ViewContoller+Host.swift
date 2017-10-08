@@ -24,7 +24,7 @@ extension ViewController{
 	
 	func tapCreativeMode(gesture: UITapGestureRecognizer) {
 		
-		guard (DataManager.shared().creativeIsMovingAPoint == false) else {
+		if (DataManager.shared().creativeIsMovingAPoint) {
 			DataManager.shared().lockNewNode()
 			return
 		}
@@ -54,9 +54,17 @@ extension ViewController{
 	}
 	
 	@objc func moveCurrentObjectPlacingNode() {
-		moveDeleteView.removeFromSuperview()
+		
 		DataManager.shared().creativeIsMovingAPoint = true
-		DataManager.shared().lockNewNode()
+
+		guard let currentNode = DataManager.shared().currentObjectPlacing else { return }
+	
+		//three step solution: 1) change transform 2) remove from parent 3) add to new child
+		currentNode.transform = (currentNode.parent?.convertTransform(currentNode.transform, to: sceneView.pointOfView))!
+		currentNode.removeFromParentNode() //remove from main node
+		sceneView.pointOfView?.addChildNode(currentNode) //add to camera
+		
+		moveDeleteView.removeFromSuperview()
 	}
 	
 	@objc func deleteCurrentObjectPlacingNode() {
