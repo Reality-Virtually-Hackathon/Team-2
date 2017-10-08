@@ -96,12 +96,15 @@ class ViewController: UIViewController {
         // Set the delegate to ensure this gesture is only used when there are no virtual objects in the scene.
         tapGesture.delegate = self
         sceneView.addGestureRecognizer(tapGesture)
-
+        
+        
+        
+        // @Xiao's changes
         // debug options
         self.sceneView.debugOptions = [ ARSCNDebugOptions.showWorldOrigin
                                       , ARSCNDebugOptions.showFeaturePoints
                                       ]
-        
+        self.startMotionListener()
         
     }
 
@@ -205,24 +208,50 @@ class ViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    // MARK: Xiao's Commits
+    // MARK: Xiao's Changes
     
     /**
-     @Use: listener for device motion and path through world frame at initalization
+     @Use: listener for device motion
+           record device pose relative to world frame at initalization
+           print the device attitudes over the last five time periods
      @Author: Xiao Ling
     */
-    // Print the device attitudes over the last five time periods
     func startMotionListener(){
         
         if !self.senseMotion { return }
         
-        withMotion(motion   : motionManager
-            , interval : 1.0/2.0
-            , handle   : {(attitudes: FixedQueue<CMAttitude>) -> Void in
+        withMotion( motion   : motionManager
+                  , interval : 1.0/2.0
+                  , handle   : {(attitudes: FixedQueue<CMAttitude>) -> Void in
                 
-                print("attitudes", attitudes.read())
+//                print("attitudes", attitudes.read())
+             
+                let cameraTransform = self.sceneView.session.currentFrame?.camera.transform
+                    
+                if cameraTransform != nil {
+                    
+//                    print("transform")
+                    let cameraCoordinates = MDLTransform(matrix: cameraTransform!)
+                    
+                    print("cameraCoordinate "
+                        , cameraCoordinates.translation.x
+                        , cameraCoordinates.translation.y
+                        , cameraCoordinates.translation.z
+                        )
+                    
+                } else {
+                    
+                    print("no transform yet")
+                }
+                    
+                    
+//                let cameraCoordinates = MDLTransform(matrix: cameraTransform!)
+//                    print("cameraTransform: ", cameraCoordinates)
+
                 print("====================================")
+//                print("camera coordinates: ", cameraCoordinates.x, cameraCoordinates.y, cameraCoordinates.z)
+     
         })
     }
-    
+
 }

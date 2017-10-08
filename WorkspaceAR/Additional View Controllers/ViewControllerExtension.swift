@@ -20,7 +20,6 @@ extension UIViewController {
      
      handle takes the last five device attitudes in a list
      
-     source: https://developer.apple.com/documentation/coremotion/getting_processed_device_motion_data
      */
     func withMotion (
         
@@ -29,6 +28,8 @@ extension UIViewController {
         , handle  : @escaping (FixedQueue<CMAttitude>) -> Void)
         
     {
+        
+        print("withMotion running =================================================")
         
         if motion.isDeviceMotionAvailable {
             
