@@ -225,15 +225,16 @@ class ViewController: UIViewController {
         
         withMotion( motion   : motionManager
                   , interval : 1.0/2.0             // sample rate in hertz
-                  , handle   : {(attitudes: FixedQueue<CMAttitude>) -> Void in
+                  , handle   : {(attitudes: FixedQueue<CMAttitude>
+                  ) -> Void in
                 
 //                print("attitudes", attitudes.read())
                 
                 // camera transform from origin
                 let cameraTransform = self.sceneView.session.currentFrame?.camera.transform
-                    
+
                 if cameraTransform != nil {
-                    
+                   
 //                    print("transform")
                     let cameraCoordinates = MDLTransform(matrix: cameraTransform!)
                     
