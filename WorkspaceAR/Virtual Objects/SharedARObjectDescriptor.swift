@@ -16,4 +16,28 @@ struct SharedARObjectDescriptor {
     var rotation: SCNVector4
     var modelName: String
     var description: String
+    
+    func BuildSCNNode() -> SCNNode? {
+        let node = SCNNode()
+        
+        let scene = SCNScene(named: "Models.scnassets/" + modelName)
+        if let nodeArray = scene?.rootNode.childNodes {
+            // generate child nodes
+            for childNode in nodeArray {
+                node.addChildNode(childNode as SCNNode)
+            }
+            
+            // configure physics
+            node.physicsBody = physicsBody
+            
+            // configure transform
+            node.position = position
+            node.rotation = rotation
+            
+            // configure description
+            node.name = name
+        }
+        
+        return nil
+    }
 }
