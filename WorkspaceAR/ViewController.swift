@@ -164,6 +164,14 @@ class ViewController: UIViewController {
         })
     }
     
+    func hideContinueButton(){
+        self.continueButtonHeightConstraint.constant = 0
+        self.continueButton.setTitle("", for: .normal)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+    
     @IBAction func continueButtonClicked(_ sender: Any) {
         //Replace later TODO
         testStringSend()

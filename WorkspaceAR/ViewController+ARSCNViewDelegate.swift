@@ -32,14 +32,17 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
         DispatchQueue.main.async {
             self.statusViewController.cancelScheduledMessage(for: .planeEstimation)
             self.statusViewController.showMessage("SURFACE DETECTED")
-            if self.alignmentPointInstructionsShown == false, let type = DataManager.shared().userType {
+            if  let type = DataManager.shared().userType {
                 if type == .Host{
-                    self.sendSimpleMessage(text: "Tap 👇 placemarkers on the surface ⬜️  to send for calibration ✨⚡️ with other devices")
+                    if self.alignmentPointInstructionsShown == false{
+                        self.sendSimpleMessage(text: "Tap 👇 placemarkers on the surface ⬜️  to send for calibration ✨⚡️ with other devices", size: CGSize(width: 300, height: 220))
+                        
+                    }
+                    self.alignmentPointInstructionsShown = true
                 }else if type == .Client{
                     print("Expanding Continue Button")
                     self.expandContinueButton(message: "Confirm Plane Selection")
                 }
-                self.alignmentPointInstructionsShown = true
             }
         }
         updateQueue.async {
