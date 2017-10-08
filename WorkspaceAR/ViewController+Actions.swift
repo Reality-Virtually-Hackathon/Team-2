@@ -24,7 +24,13 @@ extension ViewController: UIGestureRecognizerDelegate {
 //        print("Tap valid")
         statusViewController.cancelScheduledMessage(for: .contentPlacement)
         
-        performSegue(withIdentifier: SegueIdentifier.showObjects.rawValue, sender: addObjectButton)
+        if addObjectButton.tag != 100{
+            performSegue(withIdentifier: SegueIdentifier.showObjects.rawValue, sender: addObjectButton)
+        }else{
+            addObjectButton.tag = 0
+            DataManager.shared().lockNewNode()
+            addObjectButton.setImage(#imageLiteral(resourceName: "add"), for: [])
+        }
     }
     
     /// Determines if the tap gesture for presenting the `VirtualObjectSelectionViewController` should be used.

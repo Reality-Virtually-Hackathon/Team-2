@@ -52,7 +52,7 @@ class DataManager {
     
     
     var connectivity = ConnectivityManager()
-
+    
     var allConnectedDevices = [String]()
     
     var userType: UserType? = .Host
@@ -65,6 +65,36 @@ class DataManager {
     var loadedNodes = [SCNNode]()
     
     var objects = [SharedARObject]()
+    
+    var currentObjectPlacing: SCNNode? 
+    
+    func lockNewNode(){
+//        print("Lock node called")
+//            print("Now in queue")
+//            if let node = self.currentObjectPlacing, let root = rootNode{
+//                DispatchQueue.main.sync {
+//                    print("In queue looking for parent")
+//                    if let parent = node.parent{
+//                        print("Found parent")
+//                    }else{
+//                        print("Unable to find parent")
+//                    }
+//                }
+//                print("node and root found")
+//                // TODO: - Lock the node in place with respect to root
+//                print("Lock node called")
+//                                self.currentObjectPlacing = nil
+//                                node.removeFromParentNode()
+//                                let orgTransform = node.transform
+//                print("OVER HERE")
+////                if let parentNode = node.parent{
+//                    print("Here")
+//                node.transform = (node.parent?.convertTransform(orgTransform, to: root))!
+//                root.addChildNode(node)
+//                    print("locked node to root node ")
+//                }
+//            }
+    }
     
     func sendObject(object: SharedARObject){
         let objectData = NSKeyedArchiver.archivedData(withRootObject: object)
@@ -151,22 +181,22 @@ extension DataManager: ConnectivityManagerDelegate{
             self.delegate?.newDevicesConnected(devices: newDevices)
         }
     }
-	
+    
     func dataReceived(manager: ConnectivityManager, data: Data) {
-		
-		print("Received Data" )
-		DispatchQueue.main.async {
-			let object = NSKeyedUnarchiver.unarchiveObject(with: data)
-			if let newAlignmentPoints = object as? [CGPoint]{
+        
+        print("Received Data" )
+        DispatchQueue.main.async {
+            let object = NSKeyedUnarchiver.unarchiveObject(with: data)
+            if let newAlignmentPoints = object as? [CGPoint]{
                 if newAlignmentPoints != self.alignmentPoints{
-					self.alignmentPoints = newAlignmentPoints
-					self.delegate?.receivedAlignmentPoints(points: self.alignmentPoints)
+                    self.alignmentPoints = newAlignmentPoints
+                    self.delegate?.receivedAlignmentPoints(points: self.alignmentPoints)
                 }
-			}
-			if let newObject = object as? SharedARObject{
-				self.updateObject(object: newObject)
-			}
-		}
+            }
+            if let newObject = object as? SharedARObject{
+                self.updateObject(object: newObject)
+            }
+        }
     }
 }
 
@@ -194,7 +224,7 @@ extension DataManager{
         chessObjects.append(SharedARObjectDescriptor(name: "Mercury", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "cup", description: "Mercury is a cool planet.", multipleAllowed: false))
         chessObjects.append(SharedARObjectDescriptor(name: "Venus", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "candle", description: "The sun is the center of our solar system.", multipleAllowed: false))
         chessObjects.append(SharedARObjectDescriptor(name: "Earth", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "cup", description: "Mercury is a cool planet.", multipleAllowed: false))
-
+        
         
         constructionObjects.append(SharedARObjectDescriptor(name: "Sun", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "candle", description: "The sun is the center of our solar system.", multipleAllowed: false))
         constructionObjects.append(SharedARObjectDescriptor(name: "Mercury", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "cup", description: "Mercury is a cool planet.", multipleAllowed: false))
