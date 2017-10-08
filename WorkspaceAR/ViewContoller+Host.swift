@@ -49,7 +49,7 @@ extension ViewController{
 		}
 		
 		DataManager.shared().currentObjectPlacing = rootNodeOfObject
-
+        
 		print("tapped node!")
 		//SHOW DELETE VS. MOVE UI
 		
@@ -99,7 +99,8 @@ extension ViewController{
 		currentNode.transform = (currentNode.parent?.convertTransform(currentNode.transform, to: sceneView.pointOfView))!
 		currentNode.removeFromParentNode() //remove from main node
 		sceneView.pointOfView?.addChildNode(currentNode) //add to camera
-		
+        DataManager.shared().currentPhysicsBody = currentNode.physicsBody
+        currentNode.physicsBody = SCNPhysicsBody.static()
 		moveDeleteView.removeFromSuperview()
 	}
 	
