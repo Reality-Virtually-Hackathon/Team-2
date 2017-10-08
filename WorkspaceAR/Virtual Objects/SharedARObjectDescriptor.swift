@@ -17,6 +17,8 @@ struct SharedARObjectDescriptor {
     var modelName: String
     var description: String
     var multipleAllowed: Bool
+    var animations: [String]
+    
     
     func BuildSCNNode() -> SCNNode? {
         let url = Bundle.main.url(forResource: "Models.scnassets/\(modelName)/\(modelName)", withExtension: ".scn")
