@@ -23,7 +23,7 @@ extension UIViewController {
      */
     func withMotion (
         
-        motion  : CMMotionManager
+          motion  : CMMotionManager
         , interval: Double
         , handle  : @escaping (FixedQueue<CMAttitude>) -> Void)
         

@@ -54,12 +54,11 @@ class ViewController: UIViewController {
     /// Convenience accessor for the session owned by ARSCNView.
     var session: ARSession {
         return sceneView.session
-
     }
     
     // @Use: boolean flag if true then motion listern for device is on
     // @Author: Xiao Ling
-    var senseMotion: Bool = true
+    var senseMotion: Bool = false
     let motionManager     = CMMotionManager()
     
     // MARK: - View Controller Life Cycle
@@ -216,12 +215,16 @@ class ViewController: UIViewController {
            print the device attitudes over the last five time periods
      @Author: Xiao Ling
     */
+//    func session(_ session: ARSession, didUPdate frame: ARFrame){
+//        print("frame update")
+//    }
+
     func startMotionListener(){
-        
+
         if !self.senseMotion { return }
         
         withMotion( motion   : motionManager
-                  , interval : 1.0/2.0
+                  , interval : 1.0/2.0             // sample rate in hertz
                   , handle   : {(attitudes: FixedQueue<CMAttitude>) -> Void in
                 
 //                print("attitudes", attitudes.read())
@@ -233,6 +236,7 @@ class ViewController: UIViewController {
 //                    print("transform")
                     let cameraCoordinates = MDLTransform(matrix: cameraTransform!)
                     
+                    /// NOTE: this is delta, not an absolute distance
                     print("cameraCoordinate "
                         , cameraCoordinates.translation.x
                         , cameraCoordinates.translation.y
@@ -244,7 +248,7 @@ class ViewController: UIViewController {
                     print("no transform yet")
                 }
                     
-                    
+
 //                let cameraCoordinates = MDLTransform(matrix: cameraTransform!)
 //                    print("cameraTransform: ", cameraCoordinates)
 
