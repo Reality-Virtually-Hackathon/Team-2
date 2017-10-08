@@ -33,16 +33,14 @@ extension ViewController{
             self.statusViewController.showMessage("Point added")
             let pointNode = SCNNode()
             let pointGeometry = SCNSphere(radius: 0.006)
-            let orangeMaterial = SCNMaterial()
-            orangeMaterial.diffuse.contents = UIColor.red
-            pointGeometry.materials = [orangeMaterial]
+            let redMaterial = SCNMaterial()
+            redMaterial.diffuse.contents = UIColor.red
+            pointGeometry.materials = [redMaterial]
             pointNode.geometry = pointGeometry
             
             if DataManager.shared().alignmentSCNNodes.count > 0 {
                 let rootPosition = DataManager.shared().rootNode!.position
                 let nodePosition = SCNVector3Make(worldPosition.x - rootPosition.x, 0, worldPosition.z - rootPosition.z)
-                
-//                pointNode.position = SCNVector3Make(worldPosition.x, 0, worldPosition.z)
                 pointNode.position = nodePosition
             }else{
                 let newRootNode = SCNNode()
@@ -50,6 +48,10 @@ extension ViewController{
                 self.sceneView.scene.rootNode.addChildNode(newRootNode)
                 DataManager.shared().rootNode = newRootNode
                 pointNode.position = SCNVector3Make(0, 0, 0)
+                let greenMaterial = SCNMaterial()
+                greenMaterial.diffuse.contents = UIColor.green
+                pointGeometry.materials = [greenMaterial]
+                pointNode.geometry = pointGeometry
             }
             DataManager.shared().alignmentPoints.append(CGPoint(x: Double(pointNode.position.x), y: Double(pointNode.position.z)))
             DataManager.shared().alignmentSCNNodes.append(pointNode)

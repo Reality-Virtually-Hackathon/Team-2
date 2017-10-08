@@ -82,6 +82,8 @@ extension ViewController: DataManagerDelegate{
 	//incoming recieved delegates
 	func receivedAlignmentPoints(points: [CGPoint]) {
 		//must be client!
+        statusViewController.showMessage("Received \(points.count) alignment points")
+        
 		let ut = DataManager.shared().userType
 		guard ut == .Client else { return }
 		//must be alignment!

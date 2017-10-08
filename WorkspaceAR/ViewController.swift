@@ -202,6 +202,7 @@ class ViewController: UIViewController {
             cubeGeometry.materials = [cubeMaterial]
             cubeNode.geometry = cubeGeometry
             cubeNode.position = SCNVector3Make(0, 0.2, 0)
+            
             DataManager.shared().rootNode?.addChildNode(cubeNode)
         default:
             print("Oh no")

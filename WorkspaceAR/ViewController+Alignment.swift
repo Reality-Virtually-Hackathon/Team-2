@@ -14,10 +14,10 @@ extension ViewController{
     func endAlignmentMode(){
         
         //Hiding all nodes but origin
-        if let firstNode = DataManager.shared().alignmentSCNNodes.first {
-            
+        
+        if let firstNode = DataManager.shared().alignmentSCNNodes.first, let rootNode = DataManager.shared().rootNode {
             let animationDuration = 1.5
-            for node in DataManager.shared().alignmentSCNNodes {
+            for node in rootNode.childNodes {
                 if node != firstNode{
                     self.delay(animationDuration, closure: {
                         node.removeFromParentNode()

@@ -44,6 +44,8 @@ class DataManager {
         connectivity.delegate = self
     }
     
+    
+    
     var connectivity = ConnectivityManager()
 
     var allConnectedDevices = [String]()
@@ -150,10 +152,10 @@ extension DataManager: ConnectivityManagerDelegate{
 		DispatchQueue.main.async {
 			let object = NSKeyedUnarchiver.unarchiveObject(with: data)
 			if let newAlignmentPoints = object as? [CGPoint]{
-				//if newAlignmentPoints != self.alignmentPoints{
+                if newAlignmentPoints != self.alignmentPoints{
 					self.alignmentPoints = newAlignmentPoints
 					self.delegate?.receivedAlignmentPoints(points: self.alignmentPoints)
-				//}
+                }
 			}
 			if let newObject = object as? SharedARObject{
 				self.updateObject(object: newObject)
