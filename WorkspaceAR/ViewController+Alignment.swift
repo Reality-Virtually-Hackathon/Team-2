@@ -15,7 +15,7 @@ extension ViewController{
         
         //Hiding all nodes but origin
         
-        if let firstNode = DataManager.shared().alignmentSCNNodes.first, let rootNode = DataManager.shared().rootNode {
+        if let rootNode = DataManager.shared().rootNode, let firstNode = rootNode.childNode(withName: "first-alignment-node", recursively: false) {
             let animationDuration = 1.5
             for node in rootNode.childNodes {
                 if node != firstNode{

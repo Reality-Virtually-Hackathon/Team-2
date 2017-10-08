@@ -52,6 +52,7 @@ extension ViewController{
                 greenMaterial.diffuse.contents = UIColor.green
                 pointGeometry.materials = [greenMaterial]
                 pointNode.geometry = pointGeometry
+                pointNode.name = "first-alignment-node"
             }
             DataManager.shared().alignmentPoints.append(CGPoint(x: Double(pointNode.position.x), y: Double(pointNode.position.z)))
             DataManager.shared().alignmentSCNNodes.append(pointNode)

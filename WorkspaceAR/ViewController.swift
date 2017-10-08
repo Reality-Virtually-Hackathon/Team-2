@@ -118,25 +118,6 @@ class ViewController: UIViewController {
         
     }
     
-    @objc func testStringSend(){
-		guard let type = DataManager.shared().userType else { return }
-		switch type {
-		case .Client:
-			//kenny is going to do his stuff here.
-			//save the transformation state on confirmation! (This is currently acting as the confirmation)
-			confirmAlignmentFromClient()
-			break
-		case .Host:
-			//avery do your stuff here
-			DataManager.shared().broadcastAlignmentPoints()
-			break
-		}
-    }
-	
-	func confirmAlignmentFromClient() {
-		//DataManager.shared().rootNode?.position
-	}
-    
     var fadeView = UIButton()
     var currentPromptViewController: UIViewController?
 
@@ -174,7 +155,6 @@ class ViewController: UIViewController {
     
     @IBAction func continueButtonClicked(_ sender: Any) {
         //Replace later TODO
-        testStringSend()
         
         switch DataManager.shared().state {
         case .Creative:
@@ -190,12 +170,9 @@ class ViewController: UIViewController {
         case .AlignmentStage:
             DataManager.shared().state = .Creative
             if DataManager.shared().userType == .Host{
-                self.endAlignmentMode()
                 DataManager.shared().broadcastAlignmentPoints()
-            }else{
-                self.confirmAlignmentFromClient()
-                self.endAlignmentMode()
             }
+            self.endAlignmentMode()
             let cubeNode = SCNNode()
             let cubeGeometry = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.02)
             let cubeMaterial = SCNMaterial()
