@@ -23,6 +23,24 @@ class ObjectCell: UITableViewCell {
     }
 }
 
+class ObjectCellSub: UITableViewCell {
+    static let reuseIdentifier = "ObjectCellSub"
+    
+    @IBOutlet weak var objectTitleLabel: UILabel!
+    @IBOutlet weak var objectImageView: UIImageView!
+    
+    var titleText = ""{
+        didSet {
+            objectTitleLabel.text = titleText.capitalized
+        }
+    }
+    var imageName = "" {
+        didSet {
+            objectImageView.image = UIImage(named: imageName)
+        }
+    }
+}
+
 // MARK: - VirtualObjectSelectionViewControllerDelegate
 
 /// A protocol for reporting which objects have been selected.
@@ -40,18 +58,65 @@ class VirtualObjectSelectionViewController: UITableViewController {
     /// The rows of the currently selected `VirtualObject`s.
     var selectedVirtualObjectRows = IndexSet()
     
+    var objectSelector = UISegmentedControl()
+    
     weak var delegate: VirtualObjectSelectionViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.layoutIfNeeded()
         tableView.separatorEffect = UIVibrancyEffect(blurEffect: UIBlurEffect(style: .light))
+        objectSelector.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 30)
+        objectSelector.insertSegment(withTitle: "Learn", at: 0, animated: false)
+        objectSelector.insertSegment(withTitle: "Play", at: 1, animated: false)
+        objectSelector.insertSegment(withTitle: "Build", at: 2, animated: false)
+        self.tableView.tableHeaderView = objectSelector
+        objectSelector.selectedSegmentIndex = DataManager.shared().lastSelectedObjectSet
+        objectSelector.tintColor = UIColor.black
+        objectSelector.addTarget(self, action: #selector(newObjectSetClicked(sender:)), for: .valueChanged)
+    }
+    
+    @objc func newObjectSetClicked(sender: UISegmentedControl){
+        let newValue = sender.selectedSegmentIndex
+        switch newValue {
+        case 0:
+            sharedObjectDescriptors = DataManager.shared().solarSystemObjects
+        case 1:
+            sharedObjectDescriptors = DataManager.shared().chessObjects
+        case 2:
+            sharedObjectDescriptors = DataManager.shared().constructionObjects
+        default:
+            sharedObjectDescriptors = DataManager.shared().solarSystemObjects
+        }
+        DataManager.shared().lastSelectedObjectSet = newValue
+        tableView.reloadData()
     }
     
     override func viewWillLayoutSubviews() {
-        preferredContentSize = CGSize(width: 250, height: tableView.contentSize.height)
+        preferredContentSize = CGSize(width: 300, height: tableView.contentSize.height)
     }
     
     // MARK: - UITableViewDelegate
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let maxWidth = self.view.frame.width - 60
+        let font = UIFont(name: "Avenir-Book", size: 16)
+        let objectRep = sharedObjectDescriptors[indexPath.row]
+        var text = ""
+        if objectRep.description != ""{
+            text = "\(objectRep.name) - \(objectRep.description)"
+        }else{
+            text = "\(objectRep.name)"
+        }
+        
+        let label = UILabel()
+        label.font = font
+        label.text = text
+        label.numberOfLines = 0
+        let size = label.sizeThatFits(CGSize(width: maxWidth, height: .greatestFiniteMagnitude))
+        
+        return size.height + 10
+    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let object = sharedObjectDescriptors[indexPath.row]
@@ -73,11 +138,19 @@ class VirtualObjectSelectionViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ObjectCell.reuseIdentifier, for: indexPath) as? ObjectCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ObjectCellSub.reuseIdentifier, for: indexPath) as? ObjectCellSub else {
             fatalError("Expected `\(ObjectCell.self)` type for reuseIdentifier \(ObjectCell.reuseIdentifier). Check the configuration in Main.storyboard.")
         }
+        let objectRep = sharedObjectDescriptors[indexPath.row]
+        var text = ""
+        if objectRep.description != ""{
+            text = "\(objectRep.name) - \(objectRep.description)"
+        }else{
+            text = "\(objectRep.name)"
+        }
         
-        cell.modelName = sharedObjectDescriptors[indexPath.row].modelName
+        cell.titleText = text
+        cell.imageName = objectRep.modelName
 
         if selectedVirtualObjectRows.contains(indexPath.row) {
             cell.accessoryType = .checkmark

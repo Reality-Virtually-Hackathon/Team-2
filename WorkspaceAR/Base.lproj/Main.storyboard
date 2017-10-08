@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -252,7 +253,7 @@
                                                         <rect key="frame" x="53" y="10" width="200" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -273,6 +274,62 @@
                                 <connections>
                                     <outlet property="objectImageView" destination="K1e-G9-g3C" id="4VU-sM-GtS"/>
                                     <outlet property="objectTitleLabel" destination="dAR-uJ-nmY" id="8qa-vO-JCR"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ObjectCellSub" rowHeight="72" id="1z8-h4-W8W" customClass="ObjectCellSub" customModule="WorkspaceAR" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="73" width="250" height="72"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1z8-h4-W8W" id="kdg-Xv-ZCq">
+                                    <rect key="frame" x="0.0" y="0.0" width="250" height="71.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t9U-m3-peV">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="71.5"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cvi-fL-pEW">
+                                                <rect key="frame" x="0.0" y="0.0" width="250" height="71.5"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sun - The center of the solar system.  Massively large and allows for all life on Earth" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4m-7C-kd0">
+                                                        <rect key="frame" x="53" y="4.5" width="193" height="63.5"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ojF-c4-uej">
+                                                        <rect key="frame" x="15" y="21" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="ojF-c4-uej" secondAttribute="height" multiplier="1:1" id="OIj-8n-G3q"/>
+                                                            <constraint firstAttribute="height" constant="30" id="twA-ah-N0x"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="P4m-7C-kd0" secondAttribute="trailing" constant="4" id="6Cg-bw-as8"/>
+                                                    <constraint firstItem="P4m-7C-kd0" firstAttribute="centerY" secondItem="ojF-c4-uej" secondAttribute="centerY" id="7W2-fO-aTH"/>
+                                                    <constraint firstItem="ojF-c4-uej" firstAttribute="centerY" secondItem="cvi-fL-pEW" secondAttribute="centerY" id="E4N-nF-qm2"/>
+                                                    <constraint firstItem="P4m-7C-kd0" firstAttribute="height" secondItem="cvi-fL-pEW" secondAttribute="height" constant="-8" id="cyE-M9-Wo7"/>
+                                                    <constraint firstItem="P4m-7C-kd0" firstAttribute="leading" secondItem="ojF-c4-uej" secondAttribute="trailing" constant="8" id="kuA-jc-fbl"/>
+                                                    <constraint firstItem="ojF-c4-uej" firstAttribute="leading" secondItem="cvi-fL-pEW" secondAttribute="leading" constant="15" id="qZg-WI-ufo"/>
+                                                </constraints>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="extraLight"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="t9U-m3-peV" firstAttribute="width" secondItem="kdg-Xv-ZCq" secondAttribute="width" id="5mW-1l-eFx"/>
+                                        <constraint firstItem="t9U-m3-peV" firstAttribute="centerY" secondItem="kdg-Xv-ZCq" secondAttribute="centerY" id="Enr-8j-j6g"/>
+                                        <constraint firstItem="t9U-m3-peV" firstAttribute="centerX" secondItem="kdg-Xv-ZCq" secondAttribute="centerX" id="Vf3-kL-9iq"/>
+                                        <constraint firstItem="t9U-m3-peV" firstAttribute="height" secondItem="kdg-Xv-ZCq" secondAttribute="height" id="fsE-Uv-PKo"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="objectImageView" destination="ojF-c4-uej" id="3Ue-De-NN5"/>
+                                    <outlet property="objectTitleLabel" destination="P4m-7C-kd0" id="0nq-y6-JZH"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

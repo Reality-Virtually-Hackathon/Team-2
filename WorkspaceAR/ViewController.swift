@@ -115,6 +115,9 @@ class ViewController: UIViewController {
         fadeView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         fadeView.addTarget(self, action: #selector(fadeViewClicked(sender:)), for: .touchUpInside)
         self.view.addSubview(fadeView)
+        if DataManager.shared().state == .Creative{
+            self.addObjectButton.isHidden = false
+        }
         
     }
     

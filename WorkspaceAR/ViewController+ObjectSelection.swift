@@ -61,15 +61,19 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
     // MARK: - VirtualObjectSelectionViewControllerDelegate
     
     func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didSelectObject object: SharedARObjectDescriptor) {
+        displayObjectLoadingUI()
         if let node = object.BuildSCNNode(), let rootNode = DataManager.shared().rootNode{
             DataManager.shared().loadedNodes.append(node)
             node.position = SCNVector3Zero
             rootNode.addChildNode(node)
             print("Placed node")
+            hideObjectLoadingUI()
+            self.statusViewController.showMessage("Added \(object.name) to the workspace")
+        }else{
+            hideObjectLoadingUI()
+            self.statusViewController.showMessage("Failed to add node")
         }
         
-        
-        displayObjectLoadingUI()
     }
     
     func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didDeselectObject object: SharedARObjectDescriptor) {
