@@ -115,8 +115,8 @@ class DataManager {
     //  For some reason crashes when calling.parent or trying to enter main queue
 		if let node = self.currentObjectPlacing, let root = rootNode {
 			
-			let an = CAAnimation.animation(withSceneName: node.name!)
-			node.addAnimation(an, forKey: "start")
+//			let an = CAAnimation.animation(withSceneName: node.name!)
+//			node.addAnimation(an, forKey: "start")
 			
 			
             print("did we make it here?!?!???!?!?!?!?!?!?!?")
