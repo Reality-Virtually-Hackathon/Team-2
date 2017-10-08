@@ -24,7 +24,10 @@ extension ViewController{
 	
 	func tapCreativeMode(gesture: UITapGestureRecognizer) {
 		
-		guard (DataManager.shared().creativeIsMovingAPoint == false) else { print("not done placing a point"); return; }
+		guard (DataManager.shared().creativeIsMovingAPoint == false) else {
+			DataManager.shared().lockNewNode()
+			return
+		}
 		
 		let location = gesture.location(in: sceneView)
 		let hits = self.sceneView.hitTest(location, options: nil)
@@ -93,16 +96,16 @@ extension ViewController{
 				DataManager.shared().rootNode = newRootNode
 				
 				// Setup the table physics
-				let width = 1;
-				let length = 1;
+				let width = 10;
+				let length = 10;
 				let planeHeight = 0.001
 				let planeGeometry = SCNBox(width: CGFloat(width), height: CGFloat(planeHeight), length: CGFloat(length), chamferRadius: 0)
-				let transparentMaterial = SCNMaterial()
-				transparentMaterial.diffuse.contents = UIColor(white: 1.0, alpha: 0.0)
-				planeGeometry.materials = [transparentMaterial, transparentMaterial, transparentMaterial, transparentMaterial, transparentMaterial, transparentMaterial]
-				
+                let transparentMaterial = SCNMaterial()
+                transparentMaterial.diffuse.contents = UIColor(white: 1.0, alpha: 0.0)
+                planeGeometry.materials = [transparentMaterial, transparentMaterial, transparentMaterial, transparentMaterial, transparentMaterial, transparentMaterial]
+
 				let planeNode = SCNNode(geometry: planeGeometry)
-				planeNode.position = SCNVector3Make(newRootNode.position.x, newRootNode.position.y - 0.02, newRootNode.position.z)
+				planeNode.position = SCNVector3Make(newRootNode.position.x, newRootNode.position.y - 0.0005, newRootNode.position.z)
 				
 				let physicsShape = SCNPhysicsShape(geometry: planeGeometry, options:nil)
 				planeNode.physicsBody = SCNPhysicsBody(type: .kinematic, shape: physicsShape)
