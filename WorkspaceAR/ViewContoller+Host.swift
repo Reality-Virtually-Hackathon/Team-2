@@ -49,6 +49,18 @@ extension ViewController{
                 self.sceneView.scene.rootNode.addChildNode(newRootNode)
                 DataManager.shared().rootNode = newRootNode
                 
+                // Setup the table physics
+                let width = 10;
+                let length = 10;
+                let planeHeight = 0.01
+                let planeGeometry = SCNBox(width: CGFloat(width), height: CGFloat(planeHeight), length: CGFloat(length), chamferRadius: 0)
+                let planeNode = SCNNode(geometry: planeGeometry)
+                planeNode.position = newRootNode.position
+                
+                let physicsShape = SCNPhysicsShape(geometry: planeGeometry, options:nil)
+                planeNode.physicsBody = SCNPhysicsBody(type: .kinematic, shape: physicsShape)
+                self.sceneView.scene.rootNode.addChildNode(planeNode);
+                
                 pointNode.position = SCNVector3Make(0, 0, 0)
                 let greenMaterial = SCNMaterial()
                 greenMaterial.diffuse.contents = UIColor.green
