@@ -90,8 +90,7 @@ class DataManager {
         if let root = rootNode{
             if let node = root.childNode(withName: object.id, recursively: true){
                 node.transform = object.transform
-                
-            }else{
+            } else {
                 let pointNode = SCNNode()
                 let pointGeometry = SCNSphere(radius: 0.015)
                 let orangeMaterial = SCNMaterial()
@@ -220,7 +219,4 @@ extension DataManager{
         
         print(VirtualObject.availableObjects)
     }
-    
-    
 }
-
