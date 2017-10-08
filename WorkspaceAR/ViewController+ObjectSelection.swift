@@ -64,11 +64,9 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         displayObjectLoadingUI()
         if let node = object.BuildSCNNode(), let rootNode = DataManager.shared().rootNode{
             DataManager.shared().loadedNodes.append(node)
-            node.position = SCNVector3Make(0, 0, -1.5)
+            node.position = SCNVector3Make(0, 0, -0.5)
             DataManager.shared().currentObjectPlacing = node
-            //let extraLayerNode = SCNNode()
-            //extraLayerNode.addChildNode(node)
-            //self.sceneView.pointOfView?.addChildNode(extraLayerNode)
+            
             self.sceneView.pointOfView?.addChildNode(node)
             print("Placed node")
             hideObjectLoadingUI()
@@ -130,27 +128,6 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         isRestartAvailable = true
     }
 	
-//	func makeShapeWith(points: [CGPoint]) -> SCNNode {
-//		guard let firstPoint = points.first else { return SCNNode() }
-//
-//		let orangeMaterial = SCNMaterial()
-//		orangeMaterial.diffuse.contents = UIColor.orange
-//
-//		let bez = UIBezierPath()
-//		bez.move(to: firstPoint)
-//		for p in points {
-//			bez.addLine(to: p)
-//		}
-//		bez.close()
-//
-//		let shape = SCNShape(path: bez, extrusionDepth: 0.75)
-//		shape.materials = [orangeMaterial]
-//		let shapeNode = SCNNode(geometry: shape)
-//		shapeNode.position = SCNVector3(x: 0.0, y: 0.0, z: 0.0)
-//		shapeNode.rotation = SCNVector4(x: -1.0, y: -1.0, z: 0.0, w: 0.0)
-//
-//		return shapeNode
-//	}
 }
 
 
