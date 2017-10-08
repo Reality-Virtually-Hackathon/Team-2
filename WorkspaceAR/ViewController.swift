@@ -134,7 +134,7 @@ class ViewController: UIViewController {
     }
 	
 	func confirmAlignmentFromClient() {
-		DataManager.shared().rootNode?.position
+		//DataManager.shared().rootNode?.position
 	}
     
     var fadeView = UIButton()
