@@ -95,7 +95,7 @@ class DataManager {
         if let node = self.currentObjectPlacing, let objectDescriptor  = self.currentObjectDescriptor, let root = rootNode {
             let firstTransform = root.convertTransform(node.transform, from: node.parent)
             
-          //  node.physicsBody?.isAffectedByGravity = true
+            node.physicsBody?.isAffectedByGravity = true
             
             let sharedARObj = SharedARObject(name: objectDescriptor.name,
                                              modelName: objectDescriptor.modelName,
@@ -299,14 +299,18 @@ extension DataManager{
         chessObjects.append(SharedARObjectDescriptor(name: "Chess Board", physicsBody: chessphysics.copy() as! SCNPhysicsBody, transform: SCNMatrix4Identity, modelName: "ChessMatch", description: "Play chess with your friends!!", multipleAllowed: false, animations: []))
       
         // Blocks
-        let physics = SCNPhysicsBody.dynamic()
+        let cubeGeometry = SCNBox(width: 0.09, height: 0.09, length: 0.09, chamferRadius: 0.0)
+        let physicsShape = SCNPhysicsShape(geometry: cubeGeometry, options:nil)
+        var physics = SCNPhysicsBody(type: .dynamic, shape: physicsShape)
         physics.mass = 0.5
         physics.restitution = 0.4
+        
+
         
         constructionObjects.append(SharedARObjectDescriptor(name: "Wood", physicsBody: physics.copy() as! SCNPhysicsBody, transform: SCNMatrix4Identity, modelName: "Block_Wood", description: "", multipleAllowed: false,animations: []))
         constructionObjects.append(SharedARObjectDescriptor(name: "Metal", physicsBody: physics.copy() as! SCNPhysicsBody, transform: SCNMatrix4Identity, modelName: "Block_Wood", description: "", multipleAllowed: false, animations: []))
         constructionObjects.append(SharedARObjectDescriptor(name: "Rubber", physicsBody: physics.copy() as! SCNPhysicsBody, transform: SCNMatrix4Identity, modelName: "Block_Wood", description: "", multipleAllowed: false,  animations: []))
-        
-        print(VirtualObject.availableObjects)
+
+       print(VirtualObject.availableObjects)
     }
 }

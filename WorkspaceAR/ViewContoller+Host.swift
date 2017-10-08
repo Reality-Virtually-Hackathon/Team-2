@@ -142,7 +142,7 @@ extension ViewController{
 				// Setup the table physics
 				let width = 10;
 				let length = 10;
-				let planeHeight = 0.001
+				let planeHeight = 0.00001
 				let planeGeometry = SCNBox(width: CGFloat(width), height: CGFloat(planeHeight), length: CGFloat(length), chamferRadius: 0)
                 let transparentMaterial = SCNMaterial()
                 transparentMaterial.diffuse.contents = UIColor(white: 1.0, alpha: 0.0)

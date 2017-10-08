@@ -70,6 +70,7 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
             DataManager.shared().displayLink.isPaused = false
             DataManager.shared().createSharedARObjectForCurrentNode()
             self.sceneView.pointOfView?.addChildNode(node)
+            
             print("Placed node")
             hideObjectLoadingUI()
             self.statusViewController.showMessage("Added \(object.name) to the workspace")
