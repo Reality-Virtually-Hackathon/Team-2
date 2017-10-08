@@ -41,7 +41,6 @@ extension ViewController{
 		print("tapped node!")
 		//SHOW DELETE VS. MOVE UI
 		
-		
 		let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
 		moveDeleteView = UIVisualEffectView(effect: blurEffect)
 		moveDeleteView.layer.cornerRadius = 20
