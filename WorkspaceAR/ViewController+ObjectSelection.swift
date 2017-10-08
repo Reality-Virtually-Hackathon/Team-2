@@ -66,9 +66,10 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
             DataManager.shared().loadedNodes.append(node)
             node.position = SCNVector3Make(0, 0, -0.5)
             DataManager.shared().currentObjectPlacing = node
-            let extraLayerNode = SCNNode()
-            extraLayerNode.addChildNode(node)
-            self.sceneView.pointOfView?.addChildNode(extraLayerNode)
+            //let extraLayerNode = SCNNode()
+            //extraLayerNode.addChildNode(node)
+            //self.sceneView.pointOfView?.addChildNode(extraLayerNode)
+            self.sceneView.pointOfView?.addChildNode(node)
             print("Placed node")
             hideObjectLoadingUI()
             self.statusViewController.showMessage("Added \(object.name) to the workspace")

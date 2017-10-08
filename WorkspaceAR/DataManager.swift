@@ -69,34 +69,53 @@ class DataManager {
     var currentObjectPlacing: SCNNode? 
     
     func lockNewNode(){
-//      For some reason crashes when calling.parent or trying to enter main queue
+    //  For some reason crashes when calling.parent or trying to enter main queue
+
+        if let node = self.currentObjectPlacing, let root = rootNode {
+          
+            node.transform = root.convertTransform(node.transform, from: node.parent)
+            node.removeFromParentNode()
+            root.addChildNode(node)
+            //node.transform = [rootNode convertTransform:node.transform fromNode:[rootNode parentNode]];
+            
+//            node.transform = (node.parent!.convertTransform(node.transform, to: nil))
+//            node.removeFromParentNode()
+//            root.addChildNode(node)
+
+            
+            //            node.transform = [node.parentNode convertTranform:node.transform toNode:nil];
+//            [node removeFromParentNode];
+//            [scene.rootNode addChildNode:node];
+        }
+
+        
+        
 //
-//
-//        print("Lock node called")
-//            print("Now in queue")
-//            if let node = self.currentObjectPlacing, let root = rootNode{
-//                DispatchQueue.main.sync {
-//                    print("In queue looking for parent")
-//                    if let parent = node.parent{
-//                        print("Found parent")
-//                    }else{
-//                        print("Unable to find parent")
-//                    }
-//                }
-//                print("node and root found")
-//                // TODO: - Lock the node in place with respect to root
-//                print("Lock node called")
-//                                self.currentObjectPlacing = nil
-//                                node.removeFromParentNode()
-//                                let orgTransform = node.transform
-//                print("OVER HERE")
-////                if let parentNode = node.parent{
-//                    print("Here")
-//                node.transform = (node.parent?.convertTransform(orgTransform, to: root))!
-//                root.addChildNode(node)
-//                    print("locked node to root node ")
+        print("Lock node called")
+//        print("Now in queue")
+//        if let node = self.currentObjectPlacing, let root = rootNode{
+//            DispatchQueue.main.sync {
+//                print("In queue looking for parent")
+//                if let parent = node.parent{
+//                    print("Found parent")
+//                }else{
+//                    print("Unable to find parent")
 //                }
 //            }
+//            print("node and root found")
+//            // TODO: - Lock the node in place with respect to root
+//            print("Lock node called")
+//            self.currentObjectPlacing = nil
+//            node.removeFromParentNode()
+//            let orgTransform = node.transform
+//            print("OVER HERE")
+//            if let parentNode = node.parent{
+//                print("Here")
+//                node.transform = (node.parent?.convertTransform(orgTransform, to: root))!
+//                root.addChildNode(node)
+//                print("locked node to root node ")
+//            }
+//        }
     }
     
     func sendObject(object: SharedARObject){
