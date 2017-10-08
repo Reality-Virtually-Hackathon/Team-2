@@ -20,8 +20,6 @@ extension ViewController: DataManagerDelegate{
 				return
 		}
 		expandContinueButton(message: "Confirm Point Alignment")
-		let plane = SCNPlane.init(width: 0.25, height: 0.25)
-		let planeNode = SCNNode.init(geometry: plane)
 		let vo = VirtualObject()
 		let rootNode = SCNNode.init()
 		
