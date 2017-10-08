@@ -80,7 +80,7 @@ class DataManager {
     
     @objc func update(){
 //       print("Run loop update \(CACurrentMediaTime())")
-        if let node = self.currentObjectPlacing, let objectDescriptor = currentObjectDescriptor, let root = rootNode{
+        if let node = self.currentObjectPlacing, let root = rootNode{
             var data = [String: Any]()
             data["name"] = node.name!
             let newTransform = root.convertTransform(node.transform, from: node.parent)
@@ -125,6 +125,7 @@ class DataManager {
             }
             self.currentObjectDescriptor = nil
             self.currentObjectPlacing = nil
+            self.displayLink.isPaused = true
         }
         print("Lock node called")
 		DataManager.shared().creativeIsMovingAPoint = false
@@ -282,7 +283,7 @@ extension DataManager{
         let stationaryPhysicsBody = SCNPhysicsBody.static()
         
         
-        solarSystemObjects.append(SharedARObjectDescriptor(name: "Sun", physicsBody: stationaryPhysicsBody, transform: SCNMatrix4Identity, modelName: "candle", description: "The sun is the center of our solar system.  It is 109 times larger than Earth", multipleAllowed: false, animations: []))
+        solarSystemObjects.append(SharedARObjectDescriptor(name: "Sun", physicsBody: stationaryPhysicsBody, transform: SCNMatrix4Identity, modelName: "SolarSystem_1", description: "The sun is the center of our solar system.  It is 109 times larger than Earth", multipleAllowed: false, animations: []))
         solarSystemObjects.append(SharedARObjectDescriptor(name: "Mercury", physicsBody: stationaryPhysicsBody, transform: SCNMatrix4Identity, modelName: "cup", description: "Mercury is made out of solid iron.  It is the closest to the sun", multipleAllowed: false, animations: []))
         solarSystemObjects.append(SharedARObjectDescriptor(name: "Venus", physicsBody: stationaryPhysicsBody, transform: SCNMatrix4Identity, modelName: "candle", description: "Venus is the brightest planet in our sky.", multipleAllowed: false, animations: []))
         solarSystemObjects.append(SharedARObjectDescriptor(name: "Earth", physicsBody: stationaryPhysicsBody, transform: SCNMatrix4Identity, modelName: "cup", description: "Earth is our home.  It has life and water", multipleAllowed: false, animations: []))
@@ -295,7 +296,7 @@ extension DataManager{
       
         // Chess
         let chessphysics = SCNPhysicsBody.static()
-        chessObjects.append(SharedARObjectDescriptor(name: "Chess", physicsBody: chessphysics.copy() as! SCNPhysicsBody, transform: SCNMatrix4Identity, modelName: "candle", description: "", multipleAllowed: false, animations: []))
+        chessObjects.append(SharedARObjectDescriptor(name: "Chess Board", physicsBody: chessphysics.copy() as! SCNPhysicsBody, transform: SCNMatrix4Identity, modelName: "ChessMatch", description: "", multipleAllowed: false, animations: []))
       
         // Blocks
         let cubeGeometry = SCNBox(width: 0.09, height: 0.09, length: 0.09, chamferRadius: 0.0)

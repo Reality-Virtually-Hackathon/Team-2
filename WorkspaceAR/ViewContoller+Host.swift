@@ -36,17 +36,28 @@ extension ViewController{
 		let hits = self.sceneView.hitTest(location, options: nil)
 		guard let tappedNode = hits.first?.node else { print("tapped, but not on node"); return } //if it didn't hit anything, just return
 		
-		DataManager.shared().currentObjectPlacing = tappedNode
+		var rootNodeOfObject = tappedNode
+		
+		//loop up the parents until one before the virtal root node
+		while true {
+			guard let tempParent = rootNodeOfObject.parent else { break }
+			if (DataManager.shared().rootNode == tempParent) {
+				break
+			} else {
+				rootNodeOfObject = tempParent
+			}
+		}
+		
+		DataManager.shared().currentObjectPlacing = rootNodeOfObject
 
 		print("tapped node!")
 		//SHOW DELETE VS. MOVE UI
-		
 		
 		let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
 		moveDeleteView = UIVisualEffectView(effect: blurEffect)
 		moveDeleteView.layer.cornerRadius = 20
 		moveDeleteView.clipsToBounds = true
-		moveDeleteView.frame = CGRect(x: 40, y: self.view.frame.width-210, width: 200, height: 200)
+		moveDeleteView.frame = CGRect(x: 40, y: self.view.frame.width-210, width: 200, height: 165)
 		moveDeleteView.backgroundColor = .gray
 		sceneView.addSubview(moveDeleteView)
 		let moveButton = UIButton(type: .system)
@@ -70,7 +81,20 @@ extension ViewController{
 		DataManager.shared().creativeIsMovingAPoint = true
 
 		guard let currentNode = DataManager.shared().currentObjectPlacing else { return }
-	
+        var id = ""
+        var sharedARObj: SharedARObject? = nil
+        for item in DataManager.shared().objects {
+            if item.id == currentNode.name{
+                id = item.id
+                sharedARObj = item
+            }
+        }
+        guard id != "" , sharedARObj != nil else{
+            print("NODE DOES NOT HAVE iD")
+            return
+        }
+        DataManager.shared().displayLink.isPaused = false
+        
 		//three step solution: 1) change transform 2) remove from parent 3) add to new child
 		currentNode.transform = (currentNode.parent?.convertTransform(currentNode.transform, to: sceneView.pointOfView))!
 		currentNode.removeFromParentNode() //remove from main node
