@@ -28,13 +28,13 @@ extension ViewController: DataManagerDelegate{
         // Setup the table physics
         let width = 10;
         let length = 10;
-        let planeHeight = 0.01
+        let planeHeight = 0.001
         let planeGeometry = SCNBox(width: CGFloat(width), height: CGFloat(planeHeight), length: CGFloat(length), chamferRadius: 0)
         let transparentMaterial = SCNMaterial()
         transparentMaterial.diffuse.contents = UIColor(white: 1.0, alpha: 0.0)
         planeGeometry.materials = [transparentMaterial, transparentMaterial, transparentMaterial, transparentMaterial, transparentMaterial, transparentMaterial]
         let planeNode = SCNNode(geometry: planeGeometry)
-        planeNode.position = SCNVector3Make(0, Float(planeHeight/2), 0)
+        planeNode.position = SCNVector3Make(0, Float(planeHeight - 1.5), 0)
         let physicsShape = SCNPhysicsShape(geometry: planeGeometry, options:nil)
         planeNode.physicsBody = SCNPhysicsBody(type: .kinematic, shape: physicsShape)
         vo.addChildNode(planeNode);

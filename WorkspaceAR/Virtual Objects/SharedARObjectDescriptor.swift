@@ -26,7 +26,9 @@ struct SharedARObjectDescriptor {
         if let node = node {
             node.load()
             // configure physics
+            //physicsBody.isAffectedByGravity = false;
             node.physicsBody = physicsBody
+            
             
             // configure transform
             node.transform = transform

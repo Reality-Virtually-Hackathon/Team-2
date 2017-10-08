@@ -77,6 +77,8 @@ class DataManager {
             node.removeFromParentNode()
             root.addChildNode(node)
             
+          //  node.physicsBody?.isAffectedByGravity = true
+            
             let sharedARObj = SharedARObject(name: objectDescriptor.name,
                                              modelName: objectDescriptor.modelName,
                                              animation: objectDescriptor.animations,
