@@ -34,7 +34,7 @@ extension ViewController: DataManagerDelegate{
         transparentMaterial.diffuse.contents = UIColor(white: 1.0, alpha: 0.0)
         planeGeometry.materials = [transparentMaterial, transparentMaterial, transparentMaterial, transparentMaterial, transparentMaterial, transparentMaterial]
         let planeNode = SCNNode(geometry: planeGeometry)
-        planeNode.position = SCNVector3Make(0, Float(planeHeight - 1.5), 0)
+        planeNode.position = SCNVector3Make(0, Float(planeHeight - 0.00005), 0)
         let physicsShape = SCNPhysicsShape(geometry: planeGeometry, options:nil)
         planeNode.physicsBody = SCNPhysicsBody(type: .kinematic, shape: physicsShape)
         vo.addChildNode(planeNode);

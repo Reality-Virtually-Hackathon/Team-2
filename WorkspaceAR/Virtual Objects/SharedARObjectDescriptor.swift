@@ -27,7 +27,7 @@ struct SharedARObjectDescriptor {
             node.load()
             // configure physics
             //physicsBody.isAffectedByGravity = false;
-            node.physicsBody = physicsBody
+            node.physicsBody = physicsBody.copy() as! SCNPhysicsBody
             
             
             // configure transform

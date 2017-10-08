@@ -240,15 +240,16 @@ extension DataManager{
       
         // Chess
         let chessphysics = SCNPhysicsBody.static()
-        chessObjects.append(SharedARObjectDescriptor(name: "Chess", physicsBody: chessphysics, transform: SCNMatrix4Identity, modelName: "candle", description: "", multipleAllowed: false, animations: []))
+        chessObjects.append(SharedARObjectDescriptor(name: "Chess", physicsBody: chessphysics.copy() as! SCNPhysicsBody, transform: SCNMatrix4Identity, modelName: "candle", description: "", multipleAllowed: false, animations: []))
       
         // Blocks
         let physics = SCNPhysicsBody.dynamic()
         physics.mass = 0.5
         physics.restitution = 0.4
-        constructionObjects.append(SharedARObjectDescriptor(name: "Wood", physicsBody: physics, transform: SCNMatrix4Identity, modelName: "Block_Wood", description: "", multipleAllowed: false,animations: []))
-        constructionObjects.append(SharedARObjectDescriptor(name: "Metal", physicsBody: physics, transform: SCNMatrix4Identity, modelName: "Block_Wood", description: "", multipleAllowed: false, animations: []))
-        constructionObjects.append(SharedARObjectDescriptor(name: "Rubber", physicsBody: physics, transform: SCNMatrix4Identity, modelName: "Block_Wood", description: "", multipleAllowed: false,  animations: []))
+        
+        constructionObjects.append(SharedARObjectDescriptor(name: "Wood", physicsBody: physics.copy() as! SCNPhysicsBody, transform: SCNMatrix4Identity, modelName: "Block_Wood", description: "", multipleAllowed: false,animations: []))
+        constructionObjects.append(SharedARObjectDescriptor(name: "Metal", physicsBody: physics.copy() as! SCNPhysicsBody, transform: SCNMatrix4Identity, modelName: "Block_Wood", description: "", multipleAllowed: false, animations: []))
+        constructionObjects.append(SharedARObjectDescriptor(name: "Rubber", physicsBody: physics.copy() as! SCNPhysicsBody, transform: SCNMatrix4Identity, modelName: "Block_Wood", description: "", multipleAllowed: false,  animations: []))
         
         print(VirtualObject.availableObjects)
     }
