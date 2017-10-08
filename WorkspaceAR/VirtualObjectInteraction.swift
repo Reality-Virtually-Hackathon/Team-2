@@ -104,6 +104,15 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     @objc
     func didRotate(_ gesture: UIRotationGestureRecognizer) {
         guard gesture.state == .changed else { return }
+		
+		//MUST BE A CLIENT TO ROTATE
+		let ut = DataManager.shared().userType
+		guard ut == .Client else { return }
+		
+		//MUST BE A CLIENT IN PLANE-DETECTED MODE (alignment-state)
+		let state = DataManager.shared().state
+		guard state == .AlignmentStage else { return }
+		
         
         /*
          - Note:
