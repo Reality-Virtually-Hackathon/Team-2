@@ -179,13 +179,14 @@ class ViewController: UIViewController {
         switch DataManager.shared().state {
         case .Creative:
             print("Meh")
+            hideContinueButton()
         case .FindingPlane:
 			print("Cool you found a plane")
 			DataManager.shared().state = State.AlignmentStage
 			if DataManager.shared().alignmentPoints.count > 0 {
+                hideContinueButton()
 				drawPoints()
 			}
-            
         case .AlignmentStage:
             DataManager.shared().state = .Creative
             if DataManager.shared().userType == .Host{
@@ -202,19 +203,11 @@ class ViewController: UIViewController {
             cubeGeometry.materials = [cubeMaterial]
             cubeNode.geometry = cubeGeometry
             cubeNode.position = SCNVector3Make(0, 0.2, 0)
-            
             DataManager.shared().rootNode?.addChildNode(cubeNode)
+            hideContinueButton()
         default:
             print("Oh no")
         }
-		
-        continueButton.setTitle("", for: .normal)
-        continueButtonHeightConstraint.constant = 0
-        UIView.animate(withDuration: 0.8, animations: {
-            self.view.layoutIfNeeded()
-        })
-        
-        
     }
     
     
