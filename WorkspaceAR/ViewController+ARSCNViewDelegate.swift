@@ -39,7 +39,7 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
                         
                     }
                     self.alignmentPointInstructionsShown = true
-                }else if type == .Client{
+                }else if type == .Client && DataManager.shared().state == .FindingPlane{
                     print("Expanding Continue Button")
                     self.expandContinueButton(message: "Confirm Plane Selection")
                 }
