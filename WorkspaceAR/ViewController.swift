@@ -185,16 +185,24 @@ class ViewController: UIViewController {
 			if DataManager.shared().alignmentPoints.count > 0 {
 				drawPoints()
 			}
+            
         case .AlignmentStage:
+            DataManager.shared().state = .Creative
             if DataManager.shared().userType == .Host{
-                DataManager.shared().state = .Creative
                 self.endAlignmentMode()
                 DataManager.shared().broadcastAlignmentPoints()
             }else{
-                DataManager.shared().state = .Creative
                 self.confirmAlignmentFromClient()
                 self.endAlignmentMode()
             }
+            let cubeNode = SCNNode()
+            let cubeGeometry = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.02)
+            let cubeMaterial = SCNMaterial()
+            cubeMaterial.ambient.contents = UIColor.green
+            cubeGeometry.materials = [cubeMaterial]
+            cubeNode.geometry = cubeGeometry
+            cubeNode.position = SCNVector3Make(0, 0.2, 0)
+            DataManager.shared().rootNode?.addChildNode(cubeNode)
         default:
             print("Oh no")
         }

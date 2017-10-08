@@ -19,7 +19,7 @@ extension ViewController: DataManagerDelegate{
 				statusViewController.showMessage("CANNOT PLACE OBJECT\nTry moving left or right.")
 				return
 		}
-		
+		expandContinueButton(message: "Confirm Point Alignment")
 		let plane = SCNPlane.init(width: 0.25, height: 0.25)
 		let planeNode = SCNNode.init(geometry: plane)
 		let vo = VirtualObject()
