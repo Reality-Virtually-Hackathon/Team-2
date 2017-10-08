@@ -28,7 +28,9 @@ protocol DataManagerDelegate {
 }
 
 class DataManager {
-    
+	
+	var creativeIsMovingAPoint:Bool = false
+	
     var delegate : DataManagerDelegate?
     
     static var sharedInstance: DataManager = {
@@ -94,6 +96,7 @@ class DataManager {
             self.currentObjectPlacing = nil
         }
         print("Lock node called")
+		DataManager.shared().creativeIsMovingAPoint = false
     }
     
     func sendObject(object: SharedARObject){
@@ -105,7 +108,6 @@ class DataManager {
         if let root = rootNode{
             if let node = root.childNode(withName: object.id, recursively: true){
                 node.transform = object.transform
-                
             }else{
                 var physicsBody = SCNPhysicsBody()
                 if object.mass > 0{
@@ -250,7 +252,4 @@ extension DataManager{
         
         print(VirtualObject.availableObjects)
     }
-    
-    
 }
-

@@ -24,7 +24,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var continueButton: UIButton!
     
     @IBOutlet weak var continueButtonHeightConstraint: NSLayoutConstraint!
-    
+	
+	//class variable to access from multiple methods
+	var moveDeleteView = UIView()
     
     // MARK: - UI Elements
     
