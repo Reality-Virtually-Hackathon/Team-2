@@ -69,6 +69,9 @@ class DataManager {
     var currentObjectPlacing: SCNNode? 
     
     func lockNewNode(){
+//      For some reason crashes when calling.parent or trying to enter main queue
+//
+//
 //        print("Lock node called")
 //            print("Now in queue")
 //            if let node = self.currentObjectPlacing, let root = rootNode{
