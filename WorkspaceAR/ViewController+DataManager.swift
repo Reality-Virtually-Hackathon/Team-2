@@ -25,13 +25,7 @@ extension ViewController: DataManagerDelegate{
 		
 		vo.addChildNode(rootNode)
 		
-		
-		//CGPoint.init(x: 0, y: 0)
-		//let size = 0.25
-		//let incomingNode = self.makeShapeWith(points: [CGPoint.init(x: size, y: size), CGPoint.init(x: -size, y: size), CGPoint.init(x: -size, y: -size), CGPoint.init(x: size, y: -size)])
-		//vo.addChildNode(incomingNode)
-		
-		guard let (worldPosition, _, _/*onPlane*/) = sceneView.worldPosition(fromScreenPosition: screenCenter, objectPosition: focusSquare.lastPosition, infinitePlane: true) else {
+		guard let (worldPosition, _, _) = sceneView.worldPosition(fromScreenPosition: screenCenter, objectPosition: focusSquare.lastPosition, infinitePlane: true) else {
 			print("No Plane found"); return
 		}
 		

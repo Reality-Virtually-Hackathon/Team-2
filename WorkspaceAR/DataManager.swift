@@ -55,6 +55,7 @@ class DataManager {
     var alignmentPoints = [CGPoint]()
     
     var rootNode: SCNNode?
+	var voRoot: VirtualObject?
     
     var objects = [SharedARObject]()
     
