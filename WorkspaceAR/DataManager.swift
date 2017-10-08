@@ -77,10 +77,6 @@ class DataManager {
             node.removeFromParentNode()
             root.addChildNode(node)
             
-            let physics = SCNPhysicsBody.dynamic()
-            physics.mass = 0.5
-            physics.restitution = 0.4
-            node.physicsBody = physics
             
 //            node.physicsBody?.isAffectedByGravity = false
 //            node.physicsBody?.isAffectedByGravity = true
@@ -249,18 +245,18 @@ extension DataManager{
         solarSystemObjects.append(SharedARObjectDescriptor(name: "Uranus", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "cup", description: "Uranus is on a tilted orbit.  It has rings like Saturn too!", multipleAllowed: false))
         solarSystemObjects.append(SharedARObjectDescriptor(name: "Neptune", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "candle", description: "The sun is the center of our solar system.", multipleAllowed: false))
         solarSystemObjects.append(SharedARObjectDescriptor(name: "Pluto", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "cup", description: "The smallest dward planet in our solar system.", multipleAllowed: false))
-        
-        
-        chessObjects.append(SharedARObjectDescriptor(name: "Sun", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "candle", description: "The sun is the center of our solar system.", multipleAllowed: false))
-        chessObjects.append(SharedARObjectDescriptor(name: "Mercury", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "cup", description: "Mercury is a cool planet.", multipleAllowed: false))
-        chessObjects.append(SharedARObjectDescriptor(name: "Venus", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "candle", description: "The sun is the center of our solar system.", multipleAllowed: false))
-        chessObjects.append(SharedARObjectDescriptor(name: "Earth", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "cup", description: "Mercury is a cool planet.", multipleAllowed: false))
-        
-        
-        constructionObjects.append(SharedARObjectDescriptor(name: "Sun", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "Block_Wood", description: "The sun is the center of our solar system.", multipleAllowed: false))
-        constructionObjects.append(SharedARObjectDescriptor(name: "Mercury", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "Block_Wood", description: "Mercury is a cool planet.", multipleAllowed: false))
-        constructionObjects.append(SharedARObjectDescriptor(name: "Venus", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "Block_Wood", description: "The sun is the center of our solar system.", multipleAllowed: false))
-        constructionObjects.append(SharedARObjectDescriptor(name: "Earth", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "Block_Wood", description: "Mercury is a cool planet.", multipleAllowed: false))
+      
+        // Chess
+        let chessphysics = SCNPhysicsBody.static()
+        chessObjects.append(SharedARObjectDescriptor(name: "Chess", physicsBody: chessphysics, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "candle", description: "", multipleAllowed: false))
+      
+        // Blocks
+        let physics = SCNPhysicsBody.dynamic()
+        physics.mass = 0.5
+        physics.restitution = 0.4
+        constructionObjects.append(SharedARObjectDescriptor(name: "Wood", physicsBody: physics, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "Block_Wood", description: "", multipleAllowed: false))
+        constructionObjects.append(SharedARObjectDescriptor(name: "Metal", physicsBody: physics, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "Block_Wood", description: "", multipleAllowed: false))
+        constructionObjects.append(SharedARObjectDescriptor(name: "Rubber", physicsBody: physics, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "Block_Wood", description: "", multipleAllowed: false))
         
         print(VirtualObject.availableObjects)
     }
