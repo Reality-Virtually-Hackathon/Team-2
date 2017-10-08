@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0440A67B1F89CD2F0050D202 /* SharedARObjectDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0440A67A1F89CD2F0050D202 /* SharedARObjectDescriptor.swift */; };
 		0491418E1F8919AF007FEBDF /* ConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491418D1F8919AF007FEBDF /* ConnectivityManager.swift */; };
 		049141901F893490007FEBDF /* SharedARObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491418F1F893490007FEBDF /* SharedARObject.swift */; };
 		11BD822A1F09D750003F11C8 /* ViewController+ObjectSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D76491EFC36070000FEBF /* ViewController+ObjectSelection.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0440A67A1F89CD2F0050D202 /* SharedARObjectDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedARObjectDescriptor.swift; sourceTree = "<group>"; };
 		0491418D1F8919AF007FEBDF /* ConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityManager.swift; sourceTree = "<group>"; };
 		0491418F1F893490007FEBDF /* SharedARObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedARObject.swift; sourceTree = "<group>"; };
 		11063F3B1EBE651B0033EE6D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				B994CCF81F89319600AFE9B7 /* VirtualNode.swift */,
 				C46356651EF9CB1A0080C8D9 /* VirtualObjectLoader.swift */,
 				0491418F1F893490007FEBDF /* SharedARObject.swift */,
+				0440A67A1F89CD2F0050D202 /* SharedARObjectDescriptor.swift */,
 			);
 			path = "Virtual Objects";
 			sourceTree = "<group>";
@@ -255,7 +258,7 @@
 				TargetAttributes = {
 					3929C4871E89EC2C00E00B60 = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = F29E8CU7JT;
+						DevelopmentTeam = 5TR2V85Q83;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -319,6 +322,7 @@
 				BBE132721F89A1AC00A91FE5 /* ViewController+Alignment.swift in Sources */,
 				148832411EFC3B250043E0AB /* FocusSquareSegment.swift in Sources */,
 				BBE1326E1F8967F000A91FE5 /* ViewController+DataManager.swift in Sources */,
+				0440A67B1F89CD2F0050D202 /* SharedARObjectDescriptor.swift in Sources */,
 				B97A19EA1F891DF600D8E39D /* SyncSquareSegment.swift in Sources */,
 				C8D71A001F3B7D3D0086AD64 /* VirtualObject.swift in Sources */,
 				C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */,
@@ -461,7 +465,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F29E8CU7JT;
+				DEVELOPMENT_TEAM = 5TR2V85Q83;
 				INFOPLIST_FILE = "$(SRCROOT)/WorkspaceAR/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.team2.workspaceAR;
@@ -480,7 +484,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F29E8CU7JT;
+				DEVELOPMENT_TEAM = 5TR2V85Q83;
 				INFOPLIST_FILE = "$(SRCROOT)/WorkspaceAR/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.team2.workspaceAR;
