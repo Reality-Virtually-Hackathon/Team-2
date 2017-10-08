@@ -95,26 +95,34 @@ class ViewController: UIViewController {
         self.sceneView.debugOptions = [ ARSCNDebugOptions.showWorldOrigin
                                       , ARSCNDebugOptions.showFeaturePoints
                                       ]
-        
         /**
             prototype an SCNNode that can be moved around
         **/
-        // let ball     = SCNSphere(radius: 0.04)
-        // let ballNode = SCNNode(geometry: ball)
-        // ballNode.position = SCNVector3(0.0, 0.0, -0.2)
-        // self.sceneView.pointOfView?.addChildNode(ballNode)
+        prepBall()
+        
     }
     
     /**
      @Author: Xiao's stuff
     */
+    func prepBall(){
+        
+        let ball     = SCNSphere(radius: 0.04)
+        let ballNode = SCNNode(geometry: ball)
+        ballNode.position = SCNVector3(0.0, 0.0, -0.2)
+        self.sceneView.pointOfView?.addChildNode(ballNode)
+    }
+
     @IBAction func dropBall(_ sender: UIButton) {
         
-        print("Drop ball!!")
+        let cameraTransform = sceneView.session.currentFrame?.camera.transform
+//        print("Drop ball!!")
+
     }
     
 	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
+
+        super.viewDidAppear(animated)
 		
 		// Prevent the screen from being dimmed to avoid interuppting the AR experience.
 		UIApplication.shared.isIdleTimerDisabled = true
