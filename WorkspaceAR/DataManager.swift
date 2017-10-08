@@ -124,6 +124,12 @@ class DataManager {
         }
     }
     
+    func updateWholeScene(){
+        for object in objects{
+            updateObject(object: object)
+        }
+    }
+    
     func removeObject(object:SharedARObject){
         if let root = rootNode{
             if let node = root.childNode(withName: object.id, recursively: true){

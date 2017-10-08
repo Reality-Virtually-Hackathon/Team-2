@@ -29,7 +29,7 @@ extension ViewController: UIGestureRecognizerDelegate {
         }else{
             addObjectButton.tag = 0
             DataManager.shared().lockNewNode()
-        //    addObjectButton.setImage(#imageLiteral(resourceName: "add"), for: [])
+            addObjectButton.setImage(#imageLiteral(resourceName: "add"), for: [])
         }
     }
     

@@ -228,7 +228,7 @@
         <scene sceneID="8F1-Zd-946">
             <objects>
                 <tableViewController id="mYv-Qg-jWH" customClass="VirtualObjectSelectionViewController" customModule="WorkspaceAR" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="28" sectionFooterHeight="28" id="PTA-9M-D7w">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="28" sectionFooterHeight="28" id="PTA-9M-D7w">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
