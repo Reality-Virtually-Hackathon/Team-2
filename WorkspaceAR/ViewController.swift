@@ -228,7 +228,8 @@ class ViewController: UIViewController {
                   , handle   : {(attitudes: FixedQueue<CMAttitude>) -> Void in
                 
 //                print("attitudes", attitudes.read())
-             
+                
+                // camera transform from origin
                 let cameraTransform = self.sceneView.session.currentFrame?.camera.transform
                     
                 if cameraTransform != nil {
@@ -236,12 +237,14 @@ class ViewController: UIViewController {
 //                    print("transform")
                     let cameraCoordinates = MDLTransform(matrix: cameraTransform!)
                     
+                    print("camera Transform: ", cameraTransform!)
+                    
                     /// NOTE: this is delta, not an absolute distance
-                    print("cameraCoordinate "
-                        , cameraCoordinates.translation.x
-                        , cameraCoordinates.translation.y
-                        , cameraCoordinates.translation.z
-                        )
+//                    print("cameraCoordinate "
+//                        , cameraCoordinates.translation.x
+//                        , cameraCoordinates.translation.y
+//                        , cameraCoordinates.translation.z
+//                        )
                     
                 } else {
                     
@@ -255,14 +258,7 @@ class ViewController: UIViewController {
         })
     }
     
-    /**
-     @Use: 
-     @Author: Xiao Ling
-    */
-    
-    
-    
-    
+
     
     
 
