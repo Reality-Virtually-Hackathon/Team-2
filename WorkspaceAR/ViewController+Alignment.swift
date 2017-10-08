@@ -12,15 +12,6 @@ import SceneKit
 extension ViewController{
     
     func endAlignmentMode(){
-        switch DataManager.shared().userType! {
-        case .Host:
-            DataManager.shared().broadcastAlignmentPoints()
-        case .Client:
-            print("Client ending alignment")
-        // Kenny code here for ending alignment
-        default:
-            print("Uh oh")
-        }
         
         //Hiding all nodes but origin
         if let firstNode = DataManager.shared().alignmentSCNNodes.first {
@@ -41,7 +32,6 @@ extension ViewController{
             }
             DataManager.shared().alignmentSCNNodes = [firstNode]
         }
-        
     }
     
     
