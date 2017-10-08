@@ -258,7 +258,7 @@
 				TargetAttributes = {
 					3929C4871E89EC2C00E00B60 = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = 9XWYL3K4YT;
+						DevelopmentTeam = 5TR2V85Q83;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -465,7 +465,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9XWYL3K4YT;
+				DEVELOPMENT_TEAM = 5TR2V85Q83;
 				INFOPLIST_FILE = "$(SRCROOT)/WorkspaceAR/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.team2.workspaceAR;
@@ -484,7 +484,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9XWYL3K4YT;
+				DEVELOPMENT_TEAM = 5TR2V85Q83;
 				INFOPLIST_FILE = "$(SRCROOT)/WorkspaceAR/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.team2.workspaceAR;

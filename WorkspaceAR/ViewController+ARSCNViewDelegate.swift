@@ -30,13 +30,7 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
 
-        // TODO: Add collision to the plane
-        let width = planeAnchor.extent.x;
-        let length = planeAnchor.extent.z;
-        let planeHeight = 0.1
-        let planeGeometry = SCNBox(width: CGFloat(width), height: CGFloat(planeHeight), length: CGFloat(length), chamferRadius: 0)
-        let planeNode = SCNNode(geometry: planeGeometry)
-        planeNode.position = SCNVector3Make(0, Float(planeHeight/2), 0)
+        
         
         DispatchQueue.main.async {
             self.statusViewController.cancelScheduledMessage(for: .planeEstimation)

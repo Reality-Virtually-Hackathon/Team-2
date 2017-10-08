@@ -24,6 +24,17 @@ extension ViewController: DataManagerDelegate{
 		let rootNode = SCNNode.init()
 		
 		vo.addChildNode(rootNode)
+        
+        // Setup the table physics
+        let width = 10;
+        let length = 10;
+        let planeHeight = 0.01
+        let planeGeometry = SCNBox(width: CGFloat(width), height: CGFloat(planeHeight), length: CGFloat(length), chamferRadius: 0)
+        let planeNode = SCNNode(geometry: planeGeometry)
+        planeNode.position = SCNVector3Make(0, Float(planeHeight/2), 0)
+        let physicsShape = SCNPhysicsShape(geometry: planeGeometry, options:nil)
+        planeNode.physicsBody = SCNPhysicsBody(type: .kinematic, shape: physicsShape)
+        vo.addChildNode(planeNode);
 		
 		guard let (worldPosition, _, _) = sceneView.worldPosition(fromScreenPosition: screenCenter, objectPosition: focusSquare.lastPosition, infinitePlane: true) else {
 			print("No Plane found"); return
