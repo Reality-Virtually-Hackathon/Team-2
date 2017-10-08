@@ -48,7 +48,6 @@ class ViewController: UIViewController {
     var screenCenter: CGPoint {
         let bounds = sceneView.bounds
         return CGPoint(x: bounds.midX, y: bounds.midY)
-        
     }
     
     /// Convenience accessor for the session owned by ARSCNView.
@@ -58,8 +57,16 @@ class ViewController: UIViewController {
     
     // @Use: boolean flag if true then motion listern for device is on
     // @Author: Xiao Ling
-    var senseMotion: Bool = true
+    var senseMotion: Bool = false
     let motionManager     = CMMotionManager()
+    
+    /*
+     @Use: keep a reference to virtual object
+     @Comment: this value is mutated in ViewController+ObjectSelection.swift
+               and does not pass a code smell
+     @Author: Xiao Ling
+    */
+    var currentObject : VirtualObject?
     
     // MARK: - View Controller Life Cycle
 
@@ -103,7 +110,11 @@ class ViewController: UIViewController {
         self.sceneView.debugOptions = [ ARSCNDebugOptions.showWorldOrigin
                                       , ARSCNDebugOptions.showFeaturePoints
                                       ]
-        self.startMotionListener()
+        // try joe's code snippet
+//        let ball     = SCNSphere(radius: 0.04)
+//        var ballNode = SCNNode(geometry: ball)
+//        ballNode.position = SCNVector3(0.0, 0.0, -0.2)
+//        self.sceneView.pointOfView?.addChildNode(ballNode)
         
     }
 
@@ -152,7 +163,6 @@ class ViewController: UIViewController {
 	}
 
     // MARK: - Focus Square
-
 	func updateFocusSquare() {
         let isObjectVisible = virtualObjectLoader.loadedObjects.contains { object in
             return sceneView.isNode(object, insideFrustumOf: sceneView.pointOfView!)
@@ -176,6 +186,7 @@ class ViewController: UIViewController {
         }
         
         updateQueue.async {
+
             self.sceneView.scene.rootNode.addChildNode(self.focusSquare)
             let camera = self.session.currentFrame?.camera
             
@@ -207,60 +218,7 @@ class ViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    // MARK: Xiao's Changes
-    
-    /**
-     @Use: listener for device motion
-           record device pose relative to world frame at initalization
-           print the device attitudes over the last five time periods
-     @Author: Xiao Ling
-    */
-//    func session(_ session: ARSession, didUPdate frame: ARFrame){
-//        print("frame update")
-//    }
-
-    func startMotionListener(){
-
-        if !self.senseMotion { return }
-        
-        withMotion( motion   : motionManager
-                  , interval : 1.0/2.0             // sample rate in hertz
-                  , handle   : {(attitudes: FixedQueue<CMAttitude>
-                  ) -> Void in
-                
-//                print("attitudes", attitudes.read())
-                
-                // camera transform from origin
-                let cameraTransform = self.sceneView.session.currentFrame?.camera.transform
-
-                if cameraTransform != nil {
-                   
-//                    print("transform")
-                    let cameraCoordinates = MDLTransform(matrix: cameraTransform!)
-                    
-                    print("camera Transform: ", cameraTransform!)
-                    
-                    /// NOTE: this is delta, not an absolute distance
-//                    print("cameraCoordinate "
-//                        , cameraCoordinates.translation.x
-//                        , cameraCoordinates.translation.y
-//                        , cameraCoordinates.translation.z
-//                        )
-                    
-                } else {
-                    
-                    print("no transform yet")
-                }
-                    
-
-
-                print("====================================")
-
-        })
-    }
-    
-
+    // MARK: Xiao's additions
     
     
-
 }

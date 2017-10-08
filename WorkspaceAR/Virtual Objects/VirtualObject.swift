@@ -8,7 +8,6 @@ A `SCNReferenceNode` subclass for virtual objects placed into the AR scene.
 import Foundation
 import SceneKit
 import ARKit
-import CoreMotion
 
 class VirtualObject: SCNReferenceNode {
     
@@ -21,26 +20,12 @@ class VirtualObject: SCNReferenceNode {
     /// Use average of recent virtual object distances to avoid rapid changes in object scale.
     private var recentVirtualObjectDistances = [Float]()
     
-    // record path of motion onto the object
-    var motionPath = [SCNVector3]()
-    
     /// Resets the objects smoothing.
     func reset() {
         recentVirtualObjectDistances.removeAll()
     }
     
-    /**
-     @Use: record the path of the phone as a series of vectors in R^3 relative to
-            world frame initialized by arkit
-     @Return: None
-     @Author: Xiao Ling
-     */
-    func recordPhonePath(){
 
-        print("")
-
-    }
- 
     /**
      Set the object's position based on the provided position relative to the `cameraTransform`.
      If `smoothMovement` is true, the new position will be averaged with previous position to

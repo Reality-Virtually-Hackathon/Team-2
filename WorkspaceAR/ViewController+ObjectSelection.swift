@@ -9,6 +9,7 @@ import UIKit
 import SceneKit
 
 extension ViewController: VirtualObjectSelectionViewControllerDelegate {
+    
     /**
      Adds the specified virtual object to the scene, placed using
      the focus square's estimate of the world-space position
@@ -33,20 +34,29 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         
         // Author: Xiao
         if ext == ".dae" {
+            
+            print("see if this one works: ...... ", self.senseMotion)
 
             // hard-coded position for now
             // we need to convert this to hitting the world-coordinate
             // with a translation matrix, then later we'll use
             // the same translation matrix to position of the ball
             virtualObject.position = SCNVector3(0.0, 0.0, -5.0)
+            
+            //        let ball     = SCNSphere(radius: 0.04)
+            //        var ballNode = SCNNode(geometry: ball)
+            //        ballNode.position = SCNVector3(0.0, 0.0, -0.2)
+            //        self.sceneView.pointOfView?.addChildNode(ballNode)
 
+            self.currentObject = virtualObject
+            
         } else {
             
             virtualObject.setPosition(focusSquarePosition
                                      , relativeTo: cameraTransform
                                      , smoothMovement: false)
         }
-        
+
         updateQueue.async {
             self.sceneView.scene.rootNode.addChildNode(virtualObject)
         }
