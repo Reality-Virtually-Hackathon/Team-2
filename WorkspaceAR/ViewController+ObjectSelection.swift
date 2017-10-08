@@ -73,6 +73,7 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
             self.statusViewController.showMessage("Added \(object.name) to the workspace")
             self.addObjectButton.setImage(#imageLiteral(resourceName: "lockring"), for: .normal)
             self.addObjectButton.tag = 100
+			DataManager.shared().creativeIsMovingAPoint = true
         }else{
             hideObjectLoadingUI()
             self.statusViewController.showMessage("Failed to add node")

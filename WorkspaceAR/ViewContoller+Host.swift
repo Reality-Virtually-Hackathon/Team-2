@@ -9,7 +9,7 @@
 import ARKit
 
 extension ViewController{
-	
+
 	
     @objc func handleAddPointTap(gestureRecognize: UITapGestureRecognizer) {
         print("Add Point tapped")
@@ -24,6 +24,8 @@ extension ViewController{
 	
 	func tapCreativeMode(gesture: UITapGestureRecognizer) {
 		
+		guard (DataManager.shared().creativeIsMovingAPoint == false) else { print("not done placing a point"); return; }
+		
 		let location = gesture.location(in: sceneView)
 		let hits = self.sceneView.hitTest(location, options: nil)
 		guard let tappedNode = hits.first?.node else { print("tapped, but not on node"); return } //if it didn't hit anything, just return
@@ -32,7 +34,7 @@ extension ViewController{
 
 		print("tapped node!")
 		//SHOW DELETE VS. MOVE UI
-		let moveDeleteView = UIView()
+		moveDeleteView = UIView()
 		moveDeleteView.frame = CGRect(x: 40, y: self.view.frame.width-210, width: 200, height: 200)
 		moveDeleteView.backgroundColor = .red
 		sceneView.addSubview(moveDeleteView)
@@ -49,14 +51,15 @@ extension ViewController{
 	}
 	
 	@objc func moveCurrentObjectPlacingNode() {
-		//remove view
-		print("is this working!?!?!?!")
+		moveDeleteView.removeFromSuperview()
 		DataManager.shared().creativeIsMovingAPoint = true
 		DataManager.shared().lockNewNode()
 	}
 	
 	@objc func deleteCurrentObjectPlacingNode() {
 		//delete and remove view
+		DataManager.shared().currentObjectPlacing?.removeFromParentNode()
+		moveDeleteView.removeFromSuperview()
 	}
 	
 	

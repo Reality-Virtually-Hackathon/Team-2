@@ -80,6 +80,7 @@ class DataManager {
             root.addChildNode(node)
         }
         print("Lock node called")
+		DataManager.shared().creativeIsMovingAPoint = false
 
     }
     
