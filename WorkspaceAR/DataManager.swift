@@ -55,7 +55,7 @@ class DataManager {
     
     var allConnectedDevices = [String]()
     
-    var userType: UserType? = .Host
+    var userType: UserType?
     var state: State = State.AlignmentStage
     
     var alignmentSCNNodes = [SCNNode]()
@@ -77,13 +77,21 @@ class DataManager {
             node.removeFromParentNode()
             root.addChildNode(node)
             
-            let sharedARObj = SharedARObject(modelName: objectDescriptor.modelName, animation: objectDescriptor.animations, transform: node.transform, descriptionText: objectDescriptor.description, mass: Double(objectDescriptor.physicsBody.mass), restitution: Double(objectDescriptor.physicsBody.restitution))
+            let sharedARObj = SharedARObject(name: objectDescriptor.name,
+                                             modelName: objectDescriptor.modelName,
+                                             animation: objectDescriptor.animations,
+                                             transform: node.transform,
+                                             descriptionText: objectDescriptor.description,
+                                             mass: Double(objectDescriptor.physicsBody.mass),
+                                             restitution: Double(objectDescriptor.physicsBody.restitution))
+            node.name = sharedARObj.id
+            self.objects.append(sharedARObj)
+            sendObject(object: sharedARObj)
             
             self.currentObjectDescriptor = nil
             self.currentObjectPlacing = nil
         }
         print("Lock node called")
-
     }
     
     func sendObject(object: SharedARObject){
@@ -97,17 +105,21 @@ class DataManager {
                 node.transform = object.transform
                 
             }else{
-                let pointNode = SCNNode()
-                let pointGeometry = SCNSphere(radius: 0.015)
-                let orangeMaterial = SCNMaterial()
-                orangeMaterial.diffuse.contents = UIColor.orange
-                pointGeometry.materials = [orangeMaterial]
-                pointNode.geometry = pointGeometry
+                var physicsBody = SCNPhysicsBody()
+                if object.mass > 0{
+                    physicsBody = SCNPhysicsBody.dynamic()
+                    physicsBody.mass = CGFloat(object.mass)
+                    physicsBody.restitution = CGFloat(object.restitution)
+                }else{
+                    physicsBody = SCNPhysicsBody.static()
+                }
                 
-                pointNode.transform = object.transform
-                pointNode.name = object.id
-                //TODO: - Animated addition
-                root.addChildNode(pointNode)
+                let objectDescriptor = SharedARObjectDescriptor(name: object.name, physicsBody: physicsBody, transform: object.transform, modelName: object.modelName, description: object.descriptionText, multipleAllowed: true, animations:object.animation)
+                if let pointNode = objectDescriptor.BuildSCNNode(){
+                    root.addChildNode(pointNode)
+                }else{
+                    print("FAILED TO BUILD NODE")
+                }
             }
         }
     }
@@ -163,6 +175,7 @@ extension DataManager: ConnectivityManagerDelegate{
         if newDevices.count > 0{
             self.broadcastAlignmentPoints()
             for object in self.objects{
+                self.sendObject(object: object)
                 self.updateObject(object: object)
             }
         }
@@ -184,7 +197,10 @@ extension DataManager: ConnectivityManagerDelegate{
                 }
             }
             if let newObject = object as? SharedARObject{
+                print("AR Object update received")
+                
                 self.updateObject(object: newObject)
+                self.delegate?.receivedNewObject(object: newObject)
             }
         }
     }
@@ -200,28 +216,29 @@ extension DataManager{
         
         let stationaryPhysicsBody = SCNPhysicsBody.static()
         
-        solarSystemObjects.append(SharedARObjectDescriptor(name: "Sun", physicsBody: stationaryPhysicsBody, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "candle", description: "The sun is the center of our solar system.  It is 109 times larger than Earth", multipleAllowed: false, animations: []))
-        solarSystemObjects.append(SharedARObjectDescriptor(name: "Mercury", physicsBody: stationaryPhysicsBody, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "cup", description: "Mercury is made out of solid iron.  It is the closest to the sun", multipleAllowed: false, animations: []))
-        solarSystemObjects.append(SharedARObjectDescriptor(name: "Venus", physicsBody: stationaryPhysicsBody, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "candle", description: "Venus is the brightest planet in our sky.", multipleAllowed: false, animations: []))
-        solarSystemObjects.append(SharedARObjectDescriptor(name: "Earth", physicsBody: stationaryPhysicsBody, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "cup", description: "Earth is our home.  It has life and water", multipleAllowed: false, animations: []))
-        solarSystemObjects.append(SharedARObjectDescriptor(name: "Mars", physicsBody: stationaryPhysicsBody, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "candle", description: "Mars has the largest volcano in our solar system. Elon Musk may try to live there!", multipleAllowed: false, animations: []))
-        solarSystemObjects.append(SharedARObjectDescriptor(name: "Jupiter", physicsBody: stationaryPhysicsBody, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "cup", description: "Jupiter is the largest planet in our solar system.  A day on jupter is only 10 hours long!", multipleAllowed: false, animations: []))
-        solarSystemObjects.append(SharedARObjectDescriptor(name: "Saturn", physicsBody: stationaryPhysicsBody, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "candle", description: "Saturn is the lightest planet.  It has rings that are 30 feet thick", multipleAllowed: false, animations: []))
-        solarSystemObjects.append(SharedARObjectDescriptor(name: "Uranus", physicsBody: stationaryPhysicsBody, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "cup", description: "Uranus is on a tilted orbit.  It has rings like Saturn too!", multipleAllowed: false, animations: []))
-        solarSystemObjects.append(SharedARObjectDescriptor(name: "Neptune", physicsBody: stationaryPhysicsBody, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "candle", description: "The sun is the center of our solar system.", multipleAllowed: false, animations: []))
-        solarSystemObjects.append(SharedARObjectDescriptor(name: "Pluto", physicsBody: stationaryPhysicsBody, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "cup", description: "The smallest dward planet in our solar system.", multipleAllowed: false, animations: []))
+        
+        solarSystemObjects.append(SharedARObjectDescriptor(name: "Sun", physicsBody: stationaryPhysicsBody, transform: SCNMatrix4Identity, modelName: "candle", description: "The sun is the center of our solar system.  It is 109 times larger than Earth", multipleAllowed: false, animations: []))
+        solarSystemObjects.append(SharedARObjectDescriptor(name: "Mercury", physicsBody: stationaryPhysicsBody, transform: SCNMatrix4Identity, modelName: "cup", description: "Mercury is made out of solid iron.  It is the closest to the sun", multipleAllowed: false, animations: []))
+        solarSystemObjects.append(SharedARObjectDescriptor(name: "Venus", physicsBody: stationaryPhysicsBody, transform: SCNMatrix4Identity, modelName: "candle", description: "Venus is the brightest planet in our sky.", multipleAllowed: false, animations: []))
+        solarSystemObjects.append(SharedARObjectDescriptor(name: "Earth", physicsBody: stationaryPhysicsBody, transform: SCNMatrix4Identity, modelName: "cup", description: "Earth is our home.  It has life and water", multipleAllowed: false, animations: []))
+        solarSystemObjects.append(SharedARObjectDescriptor(name: "Mars", physicsBody: stationaryPhysicsBody, transform: SCNMatrix4Identity, modelName: "candle", description: "Mars has the largest volcano in our solar system. Elon Musk may try to live there!", multipleAllowed: false, animations: []))
+        solarSystemObjects.append(SharedARObjectDescriptor(name: "Jupiter", physicsBody: stationaryPhysicsBody, transform: SCNMatrix4Identity, modelName: "cup", description: "Jupiter is the largest planet in our solar system.  A day on jupter is only 10 hours long!", multipleAllowed: false, animations: []))
+        solarSystemObjects.append(SharedARObjectDescriptor(name: "Saturn", physicsBody: stationaryPhysicsBody, transform: SCNMatrix4Identity, modelName: "candle", description: "Saturn is the lightest planet.  It has rings that are 30 feet thick", multipleAllowed: false, animations: []))
+        solarSystemObjects.append(SharedARObjectDescriptor(name: "Uranus", physicsBody: stationaryPhysicsBody, transform: SCNMatrix4Identity, modelName: "cup", description: "Uranus is on a tilted orbit.  It has rings like Saturn too!", multipleAllowed: false, animations: []))
+        solarSystemObjects.append(SharedARObjectDescriptor(name: "Neptune", physicsBody: stationaryPhysicsBody, transform: SCNMatrix4Identity, modelName: "candle", description: "The sun is the center of our solar system.", multipleAllowed: false, animations: []))
+        solarSystemObjects.append(SharedARObjectDescriptor(name: "Pluto", physicsBody: stationaryPhysicsBody, transform: SCNMatrix4Identity, modelName: "cup", description: "The smallest dward planet in our solar system.", multipleAllowed: false, animations: []))
       
         // Chess
         let chessphysics = SCNPhysicsBody.static()
-        chessObjects.append(SharedARObjectDescriptor(name: "Chess", physicsBody: chessphysics, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "candle", description: "", multipleAllowed: false, animations: []))
+        chessObjects.append(SharedARObjectDescriptor(name: "Chess", physicsBody: chessphysics, transform: SCNMatrix4Identity, modelName: "candle", description: "", multipleAllowed: false, animations: []))
       
         // Blocks
         let physics = SCNPhysicsBody.dynamic()
         physics.mass = 0.5
         physics.restitution = 0.4
-        constructionObjects.append(SharedARObjectDescriptor(name: "Wood", physicsBody: physics, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "Block_Wood", description: "", multipleAllowed: false,animations: []))
-        constructionObjects.append(SharedARObjectDescriptor(name: "Metal", physicsBody: physics, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "Block_Wood", description: "", multipleAllowed: false, animations: []))
-        constructionObjects.append(SharedARObjectDescriptor(name: "Rubber", physicsBody: physics, position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "Block_Wood", description: "", multipleAllowed: false,  animations: []))
+        constructionObjects.append(SharedARObjectDescriptor(name: "Wood", physicsBody: physics, transform: SCNMatrix4Identity, modelName: "Block_Wood", description: "", multipleAllowed: false,animations: []))
+        constructionObjects.append(SharedARObjectDescriptor(name: "Metal", physicsBody: physics, transform: SCNMatrix4Identity, modelName: "Block_Wood", description: "", multipleAllowed: false, animations: []))
+        constructionObjects.append(SharedARObjectDescriptor(name: "Rubber", physicsBody: physics, transform: SCNMatrix4Identity, modelName: "Block_Wood", description: "", multipleAllowed: false,  animations: []))
         
         print(VirtualObject.availableObjects)
     }

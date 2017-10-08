@@ -12,8 +12,7 @@ import SceneKit
 struct SharedARObjectDescriptor {
     var name: String
     var physicsBody: SCNPhysicsBody
-    var position: SCNVector3
-    var rotation: SCNVector4
+    var transform: SCNMatrix4
     var modelName: String
     var description: String
     var multipleAllowed: Bool
@@ -30,8 +29,7 @@ struct SharedARObjectDescriptor {
             node.physicsBody = physicsBody
             
             // configure transform
-            node.position = position
-            node.rotation = rotation
+            node.transform = transform
             
             // configure description
             node.name = name

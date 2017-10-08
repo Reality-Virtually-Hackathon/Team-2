@@ -185,11 +185,11 @@
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="trailing" secondItem="ECO-cI-T54" secondAttribute="trailing" constant="10" id="GSp-f9-Q6N"/>
                             <constraint firstAttribute="trailing" secondItem="R5W-V8-6lY" secondAttribute="trailing" id="J42-1v-Ihf"/>
                             <constraint firstItem="3cb-dQ-oXx" firstAttribute="centerX" secondItem="xcf-ic-uGo" secondAttribute="centerX" id="KPf-Pf-2mp"/>
+                            <constraint firstItem="xcf-ic-uGo" firstAttribute="centerX" secondItem="GBj-4O-Whc" secondAttribute="centerX" id="Rfe-7f-Fss"/>
                             <constraint firstItem="tnx-rc-95S" firstAttribute="top" secondItem="GBj-4O-Whc" secondAttribute="top" constant="20" id="Sdx-fT-fqG"/>
                             <constraint firstItem="ECO-cI-T54" firstAttribute="leading" secondItem="GBj-4O-Whc" secondAttribute="leading" constant="10" id="Tqf-sF-jMb"/>
                             <constraint firstItem="apb-8z-RSy" firstAttribute="centerX" secondItem="GBj-4O-Whc" secondAttribute="centerX" id="XqW-Rc-i9t"/>
                             <constraint firstItem="R5W-V8-6lY" firstAttribute="leading" secondItem="RLh-bf-1c3" secondAttribute="leading" id="Yj0-Fo-B5n"/>
-                            <constraint firstItem="xcf-ic-uGo" firstAttribute="leading" secondItem="GBj-4O-Whc" secondAttribute="leading" constant="163.5" id="ajJ-d9-mOg"/>
                             <constraint firstItem="E6c-py-dvH" firstAttribute="top" secondItem="RLh-bf-1c3" secondAttribute="top" id="boO-ZZ-neH"/>
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" id="brT-qF-Rdk"/>
                             <constraint firstItem="tnx-rc-95S" firstAttribute="leading" secondItem="GBj-4O-Whc" secondAttribute="leading" id="cGf-LE-hzb"/>
@@ -199,7 +199,6 @@
                             <constraint firstItem="apb-8z-RSy" firstAttribute="width" secondItem="GBj-4O-Whc" secondAttribute="width" id="hU8-dI-8zT"/>
                             <constraint firstItem="apb-8z-RSy" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="jE6-DZ-U28"/>
                             <constraint firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="kLb-BI-xJ4"/>
-                            <constraint firstItem="GBj-4O-Whc" firstAttribute="trailing" secondItem="xcf-ic-uGo" secondAttribute="trailing" constant="163.5" id="kN8-Ve-Xqq"/>
                             <constraint firstAttribute="bottom" secondItem="R5W-V8-6lY" secondAttribute="bottom" id="poH-DX-LIv"/>
                             <constraint firstItem="3cb-dQ-oXx" firstAttribute="height" secondItem="xcf-ic-uGo" secondAttribute="height" constant="-5" id="szW-aA-CXv"/>
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="xcf-ic-uGo" secondAttribute="bottom" constant="15" id="w7D-gO-FfL"/>
