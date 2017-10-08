@@ -15,6 +15,7 @@ enum UserType {
 }
 
 enum State{
+    case FindingPlane
     case AlignmentStage
     case Creative
 }

@@ -16,7 +16,12 @@ extension ViewController{
             print("Not in alignment stage, ")
             return
         }
-        //        guard !addObjectButton.isHidden && !virtualObjectLoader.isLoading else { return }
+        
+        if DataManager.shared().userType != .Host{
+            print("Not Host")
+            return
+        }
+        
         print("Adding point with hittest")
         
         guard let (worldPosition, _, onPlane) = sceneView.worldPosition(fromScreenPosition: gestureRecognize.location(in: sceneView), objectPosition: focusSquare.lastPosition, infinitePlane: true) else {
@@ -49,8 +54,11 @@ extension ViewController{
             DataManager.shared().alignmentPoints.append(CGPoint(x: Double(pointNode.position.x), y: Double(pointNode.position.z)))
             DataManager.shared().alignmentSCNNodes.append(pointNode)
             print("Alignment Points- \(DataManager.shared().alignmentPoints))")
-                
             DataManager.shared().rootNode!.addChildNode(pointNode)
+            if DataManager.shared().alignmentSCNNodes.count > 2{
+                self.expandContinueButton(message: "Confirm Alignment Points")
+            }
+            
         }else{
             self.statusViewController.showMessage("Point not detected on plane")
         }
