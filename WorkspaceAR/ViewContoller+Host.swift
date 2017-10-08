@@ -46,7 +46,7 @@ extension ViewController{
 		moveDeleteView = UIVisualEffectView(effect: blurEffect)
 		moveDeleteView.layer.cornerRadius = 20
 		moveDeleteView.clipsToBounds = true
-		moveDeleteView.frame = CGRect(x: 40, y: self.view.frame.width-210, width: 200, height: 200)
+		moveDeleteView.frame = CGRect(x: 40, y: self.view.frame.width-210, width: 200, height: 165)
 		moveDeleteView.backgroundColor = .gray
 		sceneView.addSubview(moveDeleteView)
 		let moveButton = UIButton(type: .system)
