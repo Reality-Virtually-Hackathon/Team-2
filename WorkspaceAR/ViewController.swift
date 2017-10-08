@@ -58,7 +58,7 @@ class ViewController: UIViewController {
     
     // @Use: boolean flag if true then motion listern for device is on
     // @Author: Xiao Ling
-    var senseMotion: Bool = false
+    var senseMotion: Bool = true
     let motionManager     = CMMotionManager()
     
     // MARK: - View Controller Life Cycle
@@ -249,13 +249,21 @@ class ViewController: UIViewController {
                 }
                     
 
-//                let cameraCoordinates = MDLTransform(matrix: cameraTransform!)
-//                    print("cameraTransform: ", cameraCoordinates)
 
                 print("====================================")
-//                print("camera coordinates: ", cameraCoordinates.x, cameraCoordinates.y, cameraCoordinates.z)
-     
+
         })
     }
+    
+    /**
+     @Use: 
+     @Author: Xiao Ling
+    */
+    
+    
+    
+    
+    
+    
 
 }
