@@ -75,7 +75,7 @@ class DataManager {
     
     var currentObjectPlacing: SCNNode? 
     var currentObjectDescriptor: SharedARObjectDescriptor?
-    
+    var currentPhysicsBody: SCNPhysicsBody?
     var displayLink = CADisplayLink()
     
     @objc func update(){
@@ -114,6 +114,11 @@ class DataManager {
     func lockNewNode(){
     //  For some reason crashes when calling.parent or trying to enter main queue
 		if let node = self.currentObjectPlacing, let root = rootNode {
+			
+//			let an = CAAnimation.animation(withSceneName: node.name!)
+//			node.addAnimation(an, forKey: "start")
+			
+			
             print("did we make it here?!?!???!?!?!?!?!?!?!?")
             node.transform = root.convertTransform(node.transform, from: node.parent)
             node.removeFromParentNode()
@@ -123,6 +128,13 @@ class DataManager {
                     sendObject(object: item)
                 }
             }
+            if let descriptor = self.currentObjectDescriptor {
+                node.physicsBody = descriptor.physicsBody.copy() as! SCNPhysicsBody
+            }
+            if let pBody = self.currentPhysicsBody{
+                node.physicsBody = pBody.copy() as! SCNPhysicsBody
+            }
+            
             self.currentObjectDescriptor = nil
             self.currentObjectPlacing = nil
             self.displayLink.isPaused = true
@@ -314,3 +326,30 @@ extension DataManager{
        print(VirtualObject.availableObjects)
     }
 }
+
+
+extension CAAnimation {
+	class func animation(withSceneName name: String) -> CAAnimation {
+		guard let scene = SCNScene(named: name) else {
+			fatalError("Failed to find scene with name \(name).")
+		}
+		
+		var animation: CAAnimation?
+		scene.rootNode.enumerateChildNodes { (child, stop) in
+			guard let firstKey = child.animationKeys.first else { return }
+			animation = child.animation(forKey: firstKey)
+			stop.initialize(to: true)
+		}
+		
+		guard let foundAnimation = animation else {
+			fatalError("Failed to find animation named \(name).")
+		}
+		
+		foundAnimation.fadeInDuration = 0.3
+		foundAnimation.fadeOutDuration = 0.3
+		foundAnimation.repeatCount = 1
+		
+		return foundAnimation
+	}
+}
+
