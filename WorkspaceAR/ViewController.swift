@@ -117,15 +117,9 @@ class ViewController: UIViewController {
 
     @IBAction func dropBall(_ sender: UIButton) {
 		
-		
-		ballNode.convertPosition(ballNode.position, to: sceneView.scene.rootNode) //convert the position from its current position to root node
+		ballNode.transform = ballNode.worldTransform //ballNode.convertTransform((ballNode.worldTransform)!, to: sceneView.scene.rootNode)
 		ballNode.removeFromParentNode() //removes it from the POV/camera
 		sceneView.scene.rootNode.addChildNode(ballNode) //add it to the root node (or whatever node it should be attached to)
-		
-        let cameraTransform = sceneView.session.currentFrame?.camera.transform
-//        print("Drop ball!!")
-		
-
     }
     
 	override func viewDidAppear(_ animated: Bool) {
