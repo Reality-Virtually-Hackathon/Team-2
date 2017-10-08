@@ -122,19 +122,40 @@ class ViewController: UIViewController {
 		mColor.diffuse.contents = UIColor.orange
 		ball2.materials = [mColor]
 		testNode = SCNNode(geometry: ball2)
-		testNode.position = SCNVector3(0.25,0.25,0.25)
+		testNode.position = SCNVector3(-0.2,0.0,0.0)
 		self.sceneView.scene.rootNode.addChildNode(testNode)
     }
 	
 	@IBAction func moveTestBall(_ sender: UIButton) {
-		testNode.position = SCNVector3(0.1,0.1,0.1)
+		testNode.position = SCNVector3(0.0,0.0,0.0)
 	}
 
     @IBAction func dropBall(_ sender: UIButton) {
 		
-		ballNode.transform = ballNode.worldTransform //ballNode.convertTransform((ballNode.worldTransform)!, to: sceneView.scene.rootNode)
-		ballNode.removeFromParentNode() //removes it from the POV/camera
-		sceneView.scene.rootNode.addChildNode(ballNode) //add it to the root node (or whatever node it should be attached to)
+//		print(ballNode.worldPosition)
+
+		//call function on parent that it's coming from
+		ballNode.transform = (ballNode.parent?.convertTransform(ballNode.transform, to: testNode))!
+		ballNode.removeFromParentNode()
+		testNode.addChildNode(ballNode)
+		//ballNode.transform = ballNode.worldTransform
+		//sceneView.scene.rootNode.addChildNode(ballNode)
+		//ballNode.transform = SCNMatrix4Mult(testNode.worldTransform, ballNode.worldTransform)
+		//sceneView.scene.rootNode.addChildNode(ballNode)
+		
+////		ballNode.transform = ballNode.worldTransform //ballNode.convertTransform((ballNode.worldTransform)!, to: sceneView.scene.rootNode)
+//		print(ballNode.worldTransform)
+//		print(ballNode.position)
+//		print(ballNode.eulerAngles)
+//		ballNode.transform = ballNode.convertTransform(ballNode.transform, to: testNode) //
+//		ballNode.removeFromParentNode() //removes it from the POV/camera
+//		//sceneView.scene.rootNode.addChildNode(ballNode) //add it to the root node (or whatever node it should be attached to)
+		
+		//now, instead of adding it to the rootNode of the entire view, add it to the testNode, which will then be moved around on 'moveTestBall'
+		testNode.addChildNode(ballNode)
+		print(ballNode.worldTransform)
+		print(ballNode.position)
+		print(ballNode.eulerAngles)
     }
     
 	override func viewDidAppear(_ animated: Bool) {
