@@ -119,7 +119,6 @@ class DataManager {
 //			node.addAnimation(an, forKey: "start")
 			
 			
-            print("did we make it here?!?!???!?!?!?!?!?!?!?")
             node.transform = root.convertTransform(node.transform, from: node.parent)
             node.removeFromParentNode()
             root.addChildNode(node)
@@ -133,7 +132,9 @@ class DataManager {
             }
             if let pBody = self.currentPhysicsBody{
                 node.physicsBody = pBody.copy() as! SCNPhysicsBody
+                self.currentPhysicsBody = nil
             }
+            
             
             self.currentObjectDescriptor = nil
             self.currentObjectPlacing = nil
@@ -327,8 +328,7 @@ extension DataManager{
         solarSystemObjects.append(SharedARObjectDescriptor(name: "Chair", physicsBody: stationaryPhysicsBody.copy() as! SCNPhysicsBody, transform: SCNMatrix4Identity, modelName: "chair", description: "Why not a chair?", multipleAllowed: false, animations: []))
         solarSystemObjects.append(SharedARObjectDescriptor(name: "Lamp", physicsBody: stationaryPhysicsBody.copy() as! SCNPhysicsBody, transform: SCNMatrix4Identity, modelName: "lamp", description: "Why not a lamp?", multipleAllowed: false, animations: []))
         
-
-       print(VirtualObject.availableObjects)
+        
     }
 }
 
