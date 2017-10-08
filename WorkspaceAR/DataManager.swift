@@ -95,6 +95,14 @@ class DataManager {
     }
     
     func broadcastAlignmentPoints(){
+        guard userType == .Host else {
+            print("Not host, don't broadcast points")
+            return
+        }
+        guard state == .Creative else{
+            print("Not finished picking alignment points")
+            return
+        }
         let pointData = NSKeyedArchiver.archivedData(withRootObject: alignmentPoints)
         connectivity.sendData(data: pointData)
     }

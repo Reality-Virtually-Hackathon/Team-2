@@ -176,16 +176,28 @@ class ViewController: UIViewController {
         //Replace later TODO
         testStringSend()
         
-        if DataManager.shared().state == State.AlignmentStage{
-            self.endAlignmentMode()
-        }
-		
-		if DataManager.shared().state == State.FindingPlane{
+        switch DataManager.shared().state {
+        case .Creative:
+            print("Meh")
+        case .FindingPlane:
+			print("Cool you found a plane")
 			DataManager.shared().state = State.AlignmentStage
 			if DataManager.shared().alignmentPoints.count > 0 {
 				drawPoints()
 			}
-		}
+        case .AlignmentStage:
+            if DataManager.shared().userType == .Host{
+                DataManager.shared().state = .Creative
+                self.endAlignmentMode()
+                DataManager.shared().broadcastAlignmentPoints()
+            }else{
+                DataManager.shared().state = .Creative
+                self.confirmAlignmentFromClient()
+                self.endAlignmentMode()
+            }
+        default:
+            print("Oh no")
+        }
 		
         continueButton.setTitle("", for: .normal)
         continueButtonHeightConstraint.constant = 0
