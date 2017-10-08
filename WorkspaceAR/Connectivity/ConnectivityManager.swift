@@ -21,7 +21,7 @@ protocol ConnectivityManagerDelegate {
 }
 
 class ConnectivityManager : NSObject {
-    let ServiceType = "WorkspaceAR (Kenny Test!)"
+    let ServiceType = "WorkspaceAR"
     let myPeerId = MCPeerID(displayName: UIDevice.current.name)
     var advertiser: MCNearbyServiceAdvertiser?
     var browser: MCNearbyServiceBrowser?
