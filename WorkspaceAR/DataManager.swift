@@ -43,6 +43,10 @@ class DataManager {
     init(){
         connectivity.delegate = self
         initiateObjectStore()
+        displayLink = CADisplayLink(target: self, selector: #selector(update))
+        displayLink.preferredFramesPerSecond = 10
+        displayLink.add(to: RunLoop.current, forMode: .defaultRunLoopMode)
+        displayLink.isPaused = true
     }
     
     var lastSelectedObjectSet = 0
@@ -69,18 +73,30 @@ class DataManager {
     
     var currentObjectPlacing: SCNNode? 
     var currentObjectDescriptor: SharedARObjectDescriptor?
-    func lockNewNode(){
-    //  For some reason crashes when calling.parent or trying to enter main queue
-
+    
+    var displayLink = CADisplayLink()
+    
+    @objc func update(){
+//       print("Run loop update \(CACurrentMediaTime())")
+        if let node = self.currentObjectPlacing, let objectDescriptor = currentObjectDescriptor, let root = rootNode{
+            var data = [String: Any]()
+            data["name"] = node.name!
+            let newTransform = root.convertTransform(node.transform, from: node.parent)
+            data["transform"] = newTransform.toFloatArray()
+            print("Sending new Transform -\(newTransform)")
+            sendAnimation(object: data)
+        }
+        
+    }
+    
+    func createSharedARObjectForCurrentNode(){
         if let node = self.currentObjectPlacing, let objectDescriptor  = self.currentObjectDescriptor, let root = rootNode {
-            node.transform = root.convertTransform(node.transform, from: node.parent)
-            node.removeFromParentNode()
-            root.addChildNode(node)
+            let firstTransform = root.convertTransform(node.transform, from: node.parent)
             
             let sharedARObj = SharedARObject(name: objectDescriptor.name,
                                              modelName: objectDescriptor.modelName,
                                              animation: objectDescriptor.animations,
-                                             transform: node.transform,
+                                             transform: firstTransform,
                                              descriptionText: objectDescriptor.description,
                                              mass: Double(objectDescriptor.physicsBody.mass),
                                              restitution: Double(objectDescriptor.physicsBody.restitution))
@@ -88,10 +104,44 @@ class DataManager {
             self.objects.append(sharedARObj)
             sendObject(object: sharedARObj)
             
+        }
+    }
+    
+    func lockNewNode(){
+    //  For some reason crashes when calling.parent or trying to enter main queue
+        if let node = self.currentObjectPlacing, let objectDescriptor  = self.currentObjectDescriptor, let root = rootNode {
+            
+            node.transform = root.convertTransform(node.transform, from: node.parent)
+            node.removeFromParentNode()
+            root.addChildNode(node)
+            for item in self.objects{
+                if item.name == node.name{
+                    sendObject(object: item)
+                }
+            }
             self.currentObjectDescriptor = nil
             self.currentObjectPlacing = nil
         }
         print("Lock node called")
+    }
+    
+    func nodeAnimation(nodeName: String, transform: SCNMatrix4){
+        print("attempting to animate")
+        if let root = rootNode, let movingNode = root.childNode(withName: nodeName, recursively: false){
+            print("Animating new Transform \(transform.m41), \(transform.m42), \(transform.m43)")
+            let animation = CABasicAnimation(keyPath: "transform")
+            animation.fromValue = movingNode.transform
+            animation.toValue = transform
+            animation.duration = 12 / 60.0
+            movingNode.addAnimation(animation, forKey: nil)
+            movingNode.transform = transform
+        }
+        
+    }
+    
+    func sendAnimation(object: [String: Any]){
+        let objectData = NSKeyedArchiver.archivedData(withRootObject: object)
+        connectivity.sendData(data: objectData)
     }
     
     func sendObject(object: SharedARObject){
@@ -102,8 +152,8 @@ class DataManager {
     func updateObject(object: SharedARObject){
         if let root = rootNode{
             if let node = root.childNode(withName: object.id, recursively: true){
+                print("Updating transform of object")
                 node.transform = object.transform
-                
             }else{
                 var physicsBody = SCNPhysicsBody()
                 if object.mass > 0{
@@ -116,6 +166,7 @@ class DataManager {
                 
                 let objectDescriptor = SharedARObjectDescriptor(name: object.name, physicsBody: physicsBody, transform: object.transform, modelName: object.modelName, description: object.descriptionText, multipleAllowed: true, animations:object.animation)
                 if let pointNode = objectDescriptor.BuildSCNNode(){
+                    pointNode.name = object.id
                     root.addChildNode(pointNode)
                 }else{
                     print("FAILED TO BUILD NODE")
@@ -204,9 +255,12 @@ extension DataManager: ConnectivityManagerDelegate{
             }
             if let newObject = object as? SharedARObject{
                 print("AR Object update received")
-                
                 self.updateObject(object: newObject)
                 self.delegate?.receivedNewObject(object: newObject)
+            }
+            if let animationObject = object as? [String: Any], let nodeName = animationObject["name"] as? String, let transformValues = animationObject["transform"] as? [Float]{
+//                print("received animation values \(SCNMatrix4.matrixFromFloatArray(transformValue: transformValues))")
+                self.nodeAnimation(nodeName: nodeName, transform: SCNMatrix4.matrixFromFloatArray(transformValue: transformValues))
             }
         }
     }

@@ -67,6 +67,8 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
             node.position = SCNVector3Make(0, 0, -0.5)
             DataManager.shared().currentObjectPlacing = node
             DataManager.shared().currentObjectDescriptor = object
+            DataManager.shared().displayLink.isPaused = false
+            DataManager.shared().createSharedARObjectForCurrentNode()
             self.sceneView.pointOfView?.addChildNode(node)
             print("Placed node")
             hideObjectLoadingUI()

@@ -50,7 +50,8 @@ class SharedARObject: NSObject, NSCoding {
         let name = aDecoder.decodeObject(forKey: "name") as! String
         let animation = aDecoder.decodeObject(forKey: "animation") as! [String]
         let transformValue = aDecoder.decodeObject(forKey: "transform") as! [Float]
-        let transform = SCNMatrix4(m11: transformValue[0], m12: transformValue[1], m13: transformValue[2], m14: transformValue[3], m21: transformValue[4], m22: transformValue[5], m23: transformValue[6], m24: transformValue[7], m31: transformValue[8], m32: transformValue[9], m33: transformValue[10], m34: transformValue[11], m41: transformValue[12], m42: transformValue[13], m43: transformValue[14], m44: transformValue[15])
+        let transform = SCNMatrix4.matrixFromFloatArray(transformValue: transformValue)
+        
         let descriptionText = aDecoder.decodeObject(forKey: "descriptionText") as! String
         let mass = aDecoder.decodeObject(forKey: "mass") as! NSNumber
         let restitution = aDecoder.decodeObject(forKey: "restitution") as! NSNumber
@@ -71,28 +72,8 @@ class SharedARObject: NSObject, NSCoding {
         aCoder.encode(self.modelName, forKey: "modelName")
         aCoder.encode(self.name, forKey: "name")
         aCoder.encode(self.animation, forKey: "animation")
-        var transformValues = [Float]()
-        transformValues.append(self.transform.m11)
-        transformValues.append(self.transform.m12)
-        transformValues.append(self.transform.m13)
-        transformValues.append(self.transform.m14)
         
-        transformValues.append(self.transform.m21)
-        transformValues.append(self.transform.m22)
-        transformValues.append(self.transform.m23)
-        transformValues.append(self.transform.m24)
-        
-        transformValues.append(self.transform.m31)
-        transformValues.append(self.transform.m32)
-        transformValues.append(self.transform.m33)
-        transformValues.append(self.transform.m34)
-        
-        transformValues.append(self.transform.m41)
-        transformValues.append(self.transform.m42)
-        transformValues.append(self.transform.m43)
-        transformValues.append(self.transform.m44)
-        
-        aCoder.encode(transformValues, forKey: "transform")
+        aCoder.encode(self.transform.toFloatArray(), forKey: "transform")
         aCoder.encode(descriptionText, forKey: "descriptionText")
         
         aCoder.encode(NSNumber.init(value: mass), forKey: "mass")
