@@ -103,10 +103,12 @@ extension ViewController: DataManagerDelegate{
     }
     
     func receivedObjectsUpdate(objects: [SharedARObject]) {
+        statusViewController.showMessage("Received Object update ")
         print("Received Objects Update")
     }
     
     func receivedNewObject(object: SharedARObject) {
+        statusViewController.showMessage("Received new obejct: \(object.name) ")
         print("Received New Object")
     }
     
