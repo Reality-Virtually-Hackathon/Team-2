@@ -146,7 +146,16 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     /// A helper method to return the first object that is found under the provided `gesture`s touch locations.
     /// - Tag: TouchTesting
     private func objectInteracting(with gesture: UIGestureRecognizer, in view: ARSCNView) -> VirtualObject? {
-        for index in 0..<gesture.numberOfTouches {
+		
+		let ut = DataManager.shared().userType
+		let state = DataManager.shared().state
+		if (ut == .Client && state == .AlignmentStage) {
+			return selectedObject //if it's a client in the alignment stage,
+								  //regardless of the tap, return the selectedObject,
+								  //which is 'vo', the virtual object holding the root node
+		}
+		
+		for index in 0..<gesture.numberOfTouches {
             let touchLocation = gesture.location(ofTouch: index, in: view)
             
             // Look for an object directly under the `touchLocation`.
