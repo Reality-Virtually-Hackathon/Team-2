@@ -70,7 +70,20 @@ extension ViewController{
 		DataManager.shared().creativeIsMovingAPoint = true
 
 		guard let currentNode = DataManager.shared().currentObjectPlacing else { return }
-	
+        var id = ""
+        var sharedARObj: SharedARObject? = nil
+        for item in DataManager.shared().objects {
+            if item.id == currentNode.name{
+                id = item.id
+                sharedARObj = item
+            }
+        }
+        guard id != "" , sharedARObj != nil else{
+            print("NODE DOES NOT HAVE iD")
+            return
+        }
+        DataManager.shared().displayLink.isPaused = false
+        
 		//three step solution: 1) change transform 2) remove from parent 3) add to new child
 		currentNode.transform = (currentNode.parent?.convertTransform(currentNode.transform, to: sceneView.pointOfView))!
 		currentNode.removeFromParentNode() //remove from main node

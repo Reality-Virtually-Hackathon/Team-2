@@ -80,7 +80,7 @@ class DataManager {
     
     @objc func update(){
 //       print("Run loop update \(CACurrentMediaTime())")
-        if let node = self.currentObjectPlacing, let objectDescriptor = currentObjectDescriptor, let root = rootNode{
+        if let node = self.currentObjectPlacing, let root = rootNode{
             var data = [String: Any]()
             data["name"] = node.name!
             let newTransform = root.convertTransform(node.transform, from: node.parent)
@@ -125,6 +125,7 @@ class DataManager {
             }
             self.currentObjectDescriptor = nil
             self.currentObjectPlacing = nil
+            self.displayLink.isPaused = true
         }
         print("Lock node called")
 		DataManager.shared().creativeIsMovingAPoint = false
