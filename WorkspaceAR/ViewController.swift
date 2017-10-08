@@ -59,22 +59,14 @@ class ViewController: UIViewController {
     // @Author: Xiao Ling
     var senseMotion: Bool = false
     let motionManager     = CMMotionManager()
-    
-    /*
-     @Use: keep a reference to virtual object
-     @Comment: this value is mutated in ViewController+ObjectSelection.swift
-               and does not pass a code smell
-     @Author: Xiao Ling
-    */
-    var currentObject : VirtualObject?
+
     
     // MARK: - View Controller Life Cycle
-
     override func viewDidLoad() {
 
         super.viewDidLoad()
         
-        sceneView.delegate = self
+        sceneView.delegate         = self
         sceneView.session.delegate = self
 
         // Set up scene content.
@@ -88,7 +80,7 @@ class ViewController: UIViewController {
          physically based materials, so disable automatic lighting.
          */
         sceneView.automaticallyUpdatesLighting = false
-
+        
         if let environmentMap = UIImage(named: "Models.scnassets/sharedImages/environment_blur.exr") {
             sceneView.scene.lightingEnvironment.contents = environmentMap
         }
@@ -98,26 +90,29 @@ class ViewController: UIViewController {
             self.restartExperience()
         }
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showVirtualObjectSelectionViewController))
-        // Set the delegate to ensure this gesture is only used when there are no virtual objects in the scene.
-        tapGesture.delegate = self
-        sceneView.addGestureRecognizer(tapGesture)
-        
-        
-        
         // @Xiao's changes
         // debug options
         self.sceneView.debugOptions = [ ARSCNDebugOptions.showWorldOrigin
                                       , ARSCNDebugOptions.showFeaturePoints
                                       ]
-        // try joe's code snippet
-//        let ball     = SCNSphere(radius: 0.04)
-//        var ballNode = SCNNode(geometry: ball)
-//        ballNode.position = SCNVector3(0.0, 0.0, -0.2)
-//        self.sceneView.pointOfView?.addChildNode(ballNode)
         
+        /**
+            prototype an SCNNode that can be moved around
+        **/
+        // let ball     = SCNSphere(radius: 0.04)
+        // let ballNode = SCNNode(geometry: ball)
+        // ballNode.position = SCNVector3(0.0, 0.0, -0.2)
+        // self.sceneView.pointOfView?.addChildNode(ballNode)
     }
-
+    
+    /**
+     @Author: Xiao's stuff
+    */
+    @IBAction func dropBall(_ sender: UIButton) {
+        
+        print("Drop ball!!")
+    }
+    
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
@@ -150,6 +145,23 @@ class ViewController: UIViewController {
         camera.minimumExposure = -1
         camera.maximumExposure = 3
     }
+    
+    // MARK: Xiao's additions
+    // Print the device attitudes over the last five time periods
+    func startMotionListener(){
+        
+        if !self.senseMotion { return }
+        
+        withMotion( motion   : motionManager
+            , interval : 1.0/2.0
+            , handle   : {(attitudes: FixedQueue<CMAttitude>) -> Void in
+                
+                print("attitudes", attitudes.read())
+                print("====================================")
+        })
+    }
+    
+
 
     // MARK: - Session management
     
@@ -218,7 +230,6 @@ class ViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    // MARK: Xiao's additions
-    
+
     
 }

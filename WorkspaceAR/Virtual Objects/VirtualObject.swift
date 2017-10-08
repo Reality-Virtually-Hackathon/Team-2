@@ -25,7 +25,6 @@ class VirtualObject: SCNReferenceNode {
         recentVirtualObjectDistances.removeAll()
     }
     
-
     /**
      Set the object's position based on the provided position relative to the `cameraTransform`.
      If `smoothMovement` is true, the new position will be averaged with previous position to

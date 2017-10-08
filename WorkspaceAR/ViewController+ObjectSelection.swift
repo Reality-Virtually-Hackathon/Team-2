@@ -43,13 +43,6 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
             // the same translation matrix to position of the ball
             virtualObject.position = SCNVector3(0.0, 0.0, -5.0)
             
-            //        let ball     = SCNSphere(radius: 0.04)
-            //        var ballNode = SCNNode(geometry: ball)
-            //        ballNode.position = SCNVector3(0.0, 0.0, -0.2)
-            //        self.sceneView.pointOfView?.addChildNode(ballNode)
-
-            self.currentObject = virtualObject
-            
         } else {
             
             virtualObject.setPosition(focusSquarePosition
