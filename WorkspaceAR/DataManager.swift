@@ -28,7 +28,9 @@ protocol DataManagerDelegate {
 }
 
 class DataManager {
-    
+	
+	var creativeIsMovingAPoint:Bool = false
+	
     var delegate : DataManagerDelegate?
     
     static var sharedInstance: DataManager = {

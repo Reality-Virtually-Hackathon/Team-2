@@ -29,10 +29,37 @@ extension ViewController{
 		guard let tappedNode = hits.first?.node else { print("tapped, but not on node"); return } //if it didn't hit anything, just return
 		
 		DataManager.shared().currentObjectPlacing = tappedNode
-		
+
 		print("tapped node!")
-		
+		//SHOW DELETE VS. MOVE UI
+		let moveDeleteView = UIView()
+		moveDeleteView.frame = CGRect(x: 40, y: self.view.frame.width-210, width: 200, height: 200)
+		moveDeleteView.backgroundColor = .red
+		sceneView.addSubview(moveDeleteView)
+		let moveButton = UIButton(type: .system)
+		moveButton.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
+		moveButton.setTitle("Move", for: .normal)
+		let deleteButton = UIButton(type: .system)
+		deleteButton.frame = CGRect(x: 0, y: 60, width: 100, height: 50)
+		deleteButton.setTitle("Delete", for: .normal)
+		moveButton.addTarget(self, action: #selector(moveCurrentObjectPlacingNode), for: .touchUpInside)
+		deleteButton.addTarget(self, action: #selector(deleteCurrentObjectPlacingNode), for: .touchUpInside)
+		moveDeleteView.addSubview(moveButton)
+		moveDeleteView.addSubview(deleteButton)
 	}
+	
+	@objc func moveCurrentObjectPlacingNode() {
+		//remove view
+		print("is this working!?!?!?!")
+		DataManager.shared().creativeIsMovingAPoint = true
+		DataManager.shared().lockNewNode()
+	}
+	
+	@objc func deleteCurrentObjectPlacingNode() {
+		//delete and remove view
+	}
+	
+	
 		
 	func tapHostInAlignmentMode(gestureRecognize: UITapGestureRecognizer) {
 		print("Adding point with hittest")
