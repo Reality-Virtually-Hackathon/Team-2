@@ -15,6 +15,7 @@ enum UserType {
 }
 
 enum State{
+    case FindingPlane
     case AlignmentStage
     case Creative
 }
@@ -50,7 +51,7 @@ class DataManager {
     var userType: UserType?
     var state: State = State.AlignmentStage
     
-    var alignmentSCNVectors = [SCNVector3]()
+    var alignmentSCNNodes = [SCNNode]()
     var alignmentPoints = [CGPoint]()
     
     var rootNode: SCNNode?
@@ -96,6 +97,18 @@ class DataManager {
     func broadcastAlignmentPoints(){
         let pointData = NSKeyedArchiver.archivedData(withRootObject: alignmentPoints)
         connectivity.sendData(data: pointData)
+    }
+    
+    func fullReset(){
+        if let node = self.rootNode{
+            node.removeFromParentNode()
+        }
+        alignmentSCNNodes = [SCNNode]()
+        alignmentPoints = [CGPoint]()
+        objects = [SharedARObject]()
+        allConnectedDevices = [String]()
+        state = .AlignmentStage
+        userType = nil
     }
     
 }

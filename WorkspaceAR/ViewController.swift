@@ -21,6 +21,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
 
+    @IBOutlet weak var continueButton: UIButton!
+    
+    @IBOutlet weak var continueButtonHeightConstraint: NSLayoutConstraint!
+    
+    
     // MARK: - UI Elements
     
     var focusSquare = FocusSquare()
@@ -67,7 +72,7 @@ class ViewController: UIViewController {
         sceneView.session.delegate = self
 		
 		//debugging
-		sceneView.showsStatistics = true
+//        sceneView.showsStatistics = true
 		
         // Set up scene content.
         setupCamera()
@@ -111,11 +116,6 @@ class ViewController: UIViewController {
         fadeView.addTarget(self, action: #selector(fadeViewClicked(sender:)), for: .touchUpInside)
         self.view.addSubview(fadeView)
         
-        
-        let testButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height - 50, width: 120, height: 50))
-        testButton.setTitle("Confirm Alignment Points", for: .normal)
-        testButton.addTarget(self, action: #selector(testStringSend), for: .touchUpInside)
-        self.view.addSubview(testButton)
     }
     
     @objc func testStringSend(){
@@ -155,7 +155,41 @@ class ViewController: UIViewController {
 
         session.pause()
 	}
-
+    
+    func expandContinueButton(message:String){
+        self.continueButtonHeightConstraint.constant = 60
+        self.continueButton.setTitle(message, for: .normal)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func hideContinueButton(){
+        self.continueButtonHeightConstraint.constant = 0
+        self.continueButton.setTitle("", for: .normal)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    @IBAction func continueButtonClicked(_ sender: Any) {
+        //Replace later TODO
+        testStringSend()
+        
+        if DataManager.shared().state == State.AlignmentStage{
+            self.endAlignmentMode()
+        }
+        
+        continueButton.setTitle("", for: .normal)
+        continueButtonHeightConstraint.constant = 0
+        UIView.animate(withDuration: 0.8, animations: {
+            self.view.layoutIfNeeded()
+        })
+        
+        
+    }
+    
+    
     // MARK: - Scene content setup
 
     func setupCamera() {
@@ -218,7 +252,7 @@ class ViewController: UIViewController {
                 self.focusSquare.state = .featuresDetected(anchorPosition: worldPosition, camera: camera)
             }
         }
-        addObjectButton.isHidden = false
+//        addObjectButton.isHidden = false
         statusViewController.cancelScheduledMessage(for: .focusSquare)
 	}
     

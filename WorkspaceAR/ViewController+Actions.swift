@@ -48,7 +48,11 @@ extension ViewController: UIGestureRecognizerDelegate {
         addObjectButton.setImage(#imageLiteral(resourceName: "addPressed"), for: [.highlighted])
 
         resetTracking()
-
+        
+        DataManager.shared().fullReset()
+        self.checkPrompts()
+        self.hideContinueButton()
+        self.alignmentPointInstructionsShown = false
         // Disable restart for a while in order to give the session time to restart.
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             self.isRestartAvailable = true
