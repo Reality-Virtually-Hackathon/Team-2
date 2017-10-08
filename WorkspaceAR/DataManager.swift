@@ -28,7 +28,9 @@ protocol DataManagerDelegate {
 }
 
 class DataManager {
-    
+	
+	var creativeIsMovingAPoint:Bool = false
+	
     var delegate : DataManagerDelegate?
     
     static var sharedInstance: DataManager = {
@@ -123,6 +125,7 @@ class DataManager {
             self.currentObjectPlacing = nil
         }
         print("Lock node called")
+		DataManager.shared().creativeIsMovingAPoint = false
     }
     
     func nodeAnimation(nodeName: String, transform: SCNMatrix4){
@@ -302,7 +305,4 @@ extension DataManager{
         
         print(VirtualObject.availableObjects)
     }
-    
-    
 }
-
