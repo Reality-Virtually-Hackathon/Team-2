@@ -11,14 +11,15 @@ import SceneKit
 
 extension ViewController: DataManagerDelegate{
 	
-	func receivedAlignmentPoints(points: [CGPoint]) {
+	func drawPoints() {
+		let points = DataManager.shared().alignmentPoints
 		guard points.count > 0 else { print("NO POINTS SENT!"); return }
 		guard let cameraTransform = session.currentFrame?.camera.transform,
 			let focusSquarePosition = focusSquare.lastPosition else {
 				statusViewController.showMessage("CANNOT PLACE OBJECT\nTry moving left or right.")
 				return
 		}
-
+		
 		let plane = SCNPlane.init(width: 0.25, height: 0.25)
 		let planeNode = SCNNode.init(geometry: plane)
 		let vo = VirtualObject()
@@ -57,12 +58,12 @@ extension ViewController: DataManagerDelegate{
 		for i in 0..<points.count-1 {
 			let newTempNode = SCNNode()
 			let newLine = newTempNode.buildLineInTwoPointsWithRotation(from: vecPoints[i],
-														 to: vecPoints[i+1],
-														 radius: 0.005,
-														 color: .cyan)
+																	   to: vecPoints[i+1],
+																	   radius: 0.005,
+																	   color: .cyan)
 			rootNode.addChildNode(newLine)
 		}
-
+		
 		virtualObjectInteraction.selectedObject = vo
 		vo.setPosition(focusSquarePosition, relativeTo: cameraTransform, smoothMovement: false)
 		
@@ -70,7 +71,20 @@ extension ViewController: DataManagerDelegate{
 			self.sceneView.scene.rootNode.addChildNode(vo)
 		}
 		
-        print("Received Alignment Points")
+		print("Received Alignment Points")
+	}
+	
+	//incoming recieved delegates
+	func receivedAlignmentPoints(points: [CGPoint]) {
+		//must be client!
+		let ut = DataManager.shared().userType
+		guard ut == .Client else { return }
+		//must be alignment!
+		let state = DataManager.shared().state
+		guard state == .AlignmentStage else { return }
+		
+		//if it is, draw the points
+		drawPoints()
     }
     
     func receivedObjectsUpdate(objects: [SharedARObject]) {
