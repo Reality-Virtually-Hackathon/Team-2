@@ -23,10 +23,10 @@ extension ViewController: DataManagerDelegate{
 		let plane = SCNPlane.init(width: 0.25, height: 0.25)
 		let planeNode = SCNNode.init(geometry: plane)
 		let vo = VirtualObject()
-		let rootNode = SCNNode()
+		let rootNode = SCNNode.init()
 		
 		vo.addChildNode(rootNode)
-		DataManager.shared().rootNode = rootNode
+		
 		
 		//CGPoint.init(x: 0, y: 0)
 		//let size = 0.25
@@ -36,18 +36,24 @@ extension ViewController: DataManagerDelegate{
 		guard let (worldPosition, _, _/*onPlane*/) = sceneView.worldPosition(fromScreenPosition: screenCenter, objectPosition: focusSquare.lastPosition, infinitePlane: true) else {
 			print("No Plane found"); return
 		}
-		rootNode.position = SCNVector3.init(worldPosition)
+		
+		vo.position = SCNVector3.init(worldPosition)
 		
 		var vecPoints:[SCNVector3] = []
 		
 		//loops through the points, drawing spheres
-		for cgp in points {
+		for i in 0..<points.count {
+			let cgp = points[i]
 			let newVec = SCNVector3.init(cgp.x, 0, cgp.y)
 			vecPoints.append(newVec)
 			let pointNode = SCNNode()
 			let pointGeometry = SCNSphere(radius: 0.007)
 			let orangeMaterial = SCNMaterial()
-			orangeMaterial.diffuse.contents = UIColor.red
+			if i == 0 {
+				orangeMaterial.diffuse.contents = UIColor.green
+			} else {
+				orangeMaterial.diffuse.contents = UIColor.red
+			}
 			pointGeometry.materials = [orangeMaterial]
 			pointNode.geometry = pointGeometry
 			pointNode.position = newVec
@@ -72,6 +78,7 @@ extension ViewController: DataManagerDelegate{
 		}
 		
 		print("Received Alignment Points")
+		DataManager.shared().rootNode = rootNode
 	}
 	
 	//incoming recieved delegates

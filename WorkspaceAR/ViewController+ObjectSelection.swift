@@ -33,7 +33,7 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
 		let vo = VirtualObject()
 		
 		//CGPoint.init(x: 0, y: 0)
-		let size = 0.25
+		//let size = 0.25
 		//let incomingNode = self.makeShapeWith(points: [CGPoint.init(x: size, y: size), CGPoint.init(x: -size, y: size), CGPoint.init(x: -size, y: -size), CGPoint.init(x: size, y: -size)])
 		//vo.addChildNode(incomingNode)
 		
