@@ -168,10 +168,12 @@ class ViewController: UIViewController {
         case .FindingPlane:
 			print("Cool you found a plane")
 			DataManager.shared().state = State.AlignmentStage
-			if DataManager.shared().alignmentPoints.count > 0 {
-                hideContinueButton()
+            hideContinueButton()
+            if DataManager.shared().alignmentPoints.count > 0 {
 				drawPoints()
-			}
+            }else{
+                self.statusViewController.showMessage("Waiting for Alignment Points")
+            }
         case .AlignmentStage:
             DataManager.shared().state = .Creative
             if DataManager.shared().userType == .Host{
@@ -179,7 +181,7 @@ class ViewController: UIViewController {
             }
             self.endAlignmentMode()
             let cubeNode = SCNNode()
-            let cubeGeometry = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.02)
+            let cubeGeometry = SCNBox(width: 0.03, height: 0.03, length: 0.03, chamferRadius: 0.02)
             let cubeMaterial = SCNMaterial()
             cubeMaterial.ambient.contents = UIColor.green
             cubeGeometry.materials = [cubeMaterial]
