@@ -42,6 +42,7 @@ extension ViewController: DataManagerDelegate{
 			let pointGeometry = SCNSphere(radius: 0.007)
 			let orangeMaterial = SCNMaterial()
 			if i == 0 {
+                pointNode.name = "first-alignment-node"
 				orangeMaterial.diffuse.contents = UIColor.green
 			} else {
 				orangeMaterial.diffuse.contents = UIColor.red
