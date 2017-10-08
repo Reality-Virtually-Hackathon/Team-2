@@ -19,14 +19,8 @@ struct SharedARObjectDescriptor {
     var multipleAllowed: Bool
     
     func BuildSCNNode() -> SCNNode? {
-        
-        let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.1)
-        return SCNNode(geometry: box)
-        
         let url = Bundle.main.url(forResource: "Models.scnassets/\(modelName)/\(modelName)", withExtension: ".scn")
         let node = SCNReferenceNode(url: url!)
-        
-//        let scene = SCNScene(named: "Models.scnassets/" + modelName)
         
         if let node = node {
             node.load()

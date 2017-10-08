@@ -64,7 +64,7 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         displayObjectLoadingUI()
         if let node = object.BuildSCNNode(), let rootNode = DataManager.shared().rootNode{
             DataManager.shared().loadedNodes.append(node)
-            node.position = SCNVector3Make(0, 0, -0.5)
+            node.position = SCNVector3Make(0, 0, -1.5)
             DataManager.shared().currentObjectPlacing = node
             //let extraLayerNode = SCNNode()
             //extraLayerNode.addChildNode(node)
