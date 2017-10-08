@@ -62,7 +62,10 @@ class ViewController: UIViewController {
 
 	//keep around a class variable for the ball
 	var ballNode = SCNNode()
-    
+	
+	//tester ball
+	var testNode = SCNNode()
+	
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
 
@@ -113,7 +116,19 @@ class ViewController: UIViewController {
         ballNode = SCNNode(geometry: ball)
         ballNode.position = SCNVector3(0.0, 0.0, -0.2)
         self.sceneView.pointOfView?.addChildNode(ballNode)
+		
+		let ball2 = SCNSphere(radius: 0.04)
+		let mColor = SCNMaterial()
+		mColor.diffuse.contents = UIColor.orange
+		ball2.materials = [mColor]
+		testNode = SCNNode(geometry: ball2)
+		testNode.position = SCNVector3(0.25,0.25,0.25)
+		self.sceneView.scene.rootNode.addChildNode(testNode)
     }
+	
+	@IBAction func moveTestBall(_ sender: UIButton) {
+		testNode.position = SCNVector3(0.1,0.1,0.1)
+	}
 
     @IBAction func dropBall(_ sender: UIButton) {
 		
