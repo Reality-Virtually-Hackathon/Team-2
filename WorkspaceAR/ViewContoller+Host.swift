@@ -45,8 +45,10 @@ extension ViewController{
             }else{
                 let newRootNode = SCNNode()
                 newRootNode.position = SCNVector3Make(worldPosition.x, worldPosition.y, worldPosition.z)
+                
                 self.sceneView.scene.rootNode.addChildNode(newRootNode)
                 DataManager.shared().rootNode = newRootNode
+                
                 pointNode.position = SCNVector3Make(0, 0, 0)
                 let greenMaterial = SCNMaterial()
                 greenMaterial.diffuse.contents = UIColor.green
