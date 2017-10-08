@@ -60,6 +60,8 @@ class ViewController: UIViewController {
     var senseMotion: Bool = false
     let motionManager     = CMMotionManager()
 
+	//keep around a class variable for the ball
+	var ballNode = SCNNode()
     
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
@@ -107,16 +109,22 @@ class ViewController: UIViewController {
     */
     func prepBall(){
         
-        let ball     = SCNSphere(radius: 0.04)
-        let ballNode = SCNNode(geometry: ball)
+        let ball = SCNSphere(radius: 0.04)
+        ballNode = SCNNode(geometry: ball)
         ballNode.position = SCNVector3(0.0, 0.0, -0.2)
         self.sceneView.pointOfView?.addChildNode(ballNode)
     }
 
     @IBAction func dropBall(_ sender: UIButton) {
-        
+		
+		
+		ballNode.convertPosition(ballNode.position, to: sceneView.scene.rootNode) //convert the position from its current position to root node
+		ballNode.removeFromParentNode() //removes it from the POV/camera
+		sceneView.scene.rootNode.addChildNode(ballNode) //add it to the root node (or whatever node it should be attached to)
+		
         let cameraTransform = sceneView.session.currentFrame?.camera.transform
 //        print("Drop ball!!")
+		
 
     }
     
