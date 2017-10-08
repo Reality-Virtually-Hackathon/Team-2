@@ -75,7 +75,7 @@ class DataManager {
     
     var currentObjectPlacing: SCNNode? 
     var currentObjectDescriptor: SharedARObjectDescriptor?
-    
+    var currentPhysicsBody: SCNPhysicsBody?
     var displayLink = CADisplayLink()
     
     @objc func update(){
@@ -128,6 +128,13 @@ class DataManager {
                     sendObject(object: item)
                 }
             }
+            if let descriptor = self.currentObjectDescriptor {
+                node.physicsBody = descriptor.physicsBody.copy() as! SCNPhysicsBody
+            }
+            if let pBody = self.currentPhysicsBody{
+                node.physicsBody = pBody.copy() as! SCNPhysicsBody
+            }
+            
             self.currentObjectDescriptor = nil
             self.currentObjectPlacing = nil
             self.displayLink.isPaused = true
