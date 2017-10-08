@@ -10,6 +10,8 @@ import SceneKit
 import ARKit
 
 class VirtualObject: SCNReferenceNode {
+	
+	
     
     /// The model name derived from the `referenceURL`.
     var modelName: String {
