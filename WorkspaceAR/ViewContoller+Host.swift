@@ -14,12 +14,15 @@ extension ViewController{
     @objc func handleAddPointTap(gestureRecognize: UITapGestureRecognizer) {
         print("Add Point tapped")
 		if (DataManager.shared().state == State.AlignmentStage && DataManager.shared().userType == .Host) {
+			print("tap hosted to alignment mode")
 			tapHostInAlignmentMode(gestureRecognize: gestureRecognize)
 			return
 		} else if (DataManager.shared().state == State.Creative) {
+			print("tap hosted to createive mode")
 			tapCreativeMode(gesture: gestureRecognize)
 			return
 		}
+		print("tap pressed but didn't make it through the if else")
     }
 	
 	func tapCreativeMode(gesture: UITapGestureRecognizer) {
@@ -42,6 +45,7 @@ extension ViewController{
 		moveDeleteView.backgroundColor = .red
 		sceneView.addSubview(moveDeleteView)
 		let moveButton = UIButton(type: .system)
+		moveButton.titleLabel?.font = UIFont(name: "Avenir-Book", size: 16)
 		moveButton.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
 		moveButton.setTitle("Move", for: .normal)
 		let deleteButton = UIButton(type: .system)
