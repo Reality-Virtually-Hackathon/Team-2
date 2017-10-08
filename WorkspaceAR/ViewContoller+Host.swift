@@ -24,7 +24,10 @@ extension ViewController{
 	
 	func tapCreativeMode(gesture: UITapGestureRecognizer) {
 		
-		guard (DataManager.shared().creativeIsMovingAPoint == false) else { print("not done placing a point"); return; }
+		guard (DataManager.shared().creativeIsMovingAPoint == false) else {
+			DataManager.shared().lockNewNode()
+			return
+		}
 		
 		let location = gesture.location(in: sceneView)
 		let hits = self.sceneView.hitTest(location, options: nil)
