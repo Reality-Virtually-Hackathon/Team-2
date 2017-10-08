@@ -14,12 +14,15 @@ extension ViewController{
     @objc func handleAddPointTap(gestureRecognize: UITapGestureRecognizer) {
         print("Add Point tapped")
 		if (DataManager.shared().state == State.AlignmentStage && DataManager.shared().userType == .Host) {
+			print("tap hosted to alignment mode")
 			tapHostInAlignmentMode(gestureRecognize: gestureRecognize)
 			return
 		} else if (DataManager.shared().state == State.Creative) {
+			print("tap hosted to createive mode")
 			tapCreativeMode(gesture: gestureRecognize)
 			return
 		}
+		print("tap pressed but didn't make it through the if else")
     }
 	
 	func tapCreativeMode(gesture: UITapGestureRecognizer) {
@@ -37,20 +40,29 @@ extension ViewController{
 
 		print("tapped node!")
 		//SHOW DELETE VS. MOVE UI
-		moveDeleteView = UIView()
-		moveDeleteView.frame = CGRect(x: 40, y: self.view.frame.width-210, width: 200, height: 200)
-		moveDeleteView.backgroundColor = .red
+		
+		
+		let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+		moveDeleteView = UIVisualEffectView(effect: blurEffect)
+		moveDeleteView.layer.cornerRadius = 20
+		moveDeleteView.clipsToBounds = true
+		moveDeleteView.frame = CGRect(x: 40, y: self.view.frame.width-210, width: 200, height: 165)
+		moveDeleteView.backgroundColor = .gray
 		sceneView.addSubview(moveDeleteView)
 		let moveButton = UIButton(type: .system)
-		moveButton.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
+		moveButton.titleLabel?.font = UIFont(name: "Avenir-Book", size: 24)
+		moveButton.frame = CGRect(x: 50, y:  20, width: 100, height: 50)
 		moveButton.setTitle("Move", for: .normal)
+		moveButton.tintColor = .white
 		let deleteButton = UIButton(type: .system)
-		deleteButton.frame = CGRect(x: 0, y: 60, width: 100, height: 50)
+		deleteButton.frame = CGRect(x: 50, y:  90, width: 100, height: 50)
 		deleteButton.setTitle("Delete", for: .normal)
+		deleteButton.tintColor = .white
+		deleteButton.titleLabel?.font = UIFont(name: "Avenir-Book", size: 24)
 		moveButton.addTarget(self, action: #selector(moveCurrentObjectPlacingNode), for: .touchUpInside)
 		deleteButton.addTarget(self, action: #selector(deleteCurrentObjectPlacingNode), for: .touchUpInside)
-		moveDeleteView.addSubview(moveButton)
-		moveDeleteView.addSubview(deleteButton)
+		moveDeleteView.contentView.addSubview(moveButton)
+		moveDeleteView.contentView.addSubview(deleteButton)
 	}
 	
 	@objc func moveCurrentObjectPlacingNode() {

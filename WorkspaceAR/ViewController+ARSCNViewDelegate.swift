@@ -30,8 +30,6 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
 
-        
-        
         DispatchQueue.main.async {
             self.statusViewController.cancelScheduledMessage(for: .planeEstimation)
             self.statusViewController.showMessage("SURFACE DETECTED")

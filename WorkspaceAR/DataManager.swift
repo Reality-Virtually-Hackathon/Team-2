@@ -113,8 +113,8 @@ class DataManager {
     
     func lockNewNode(){
     //  For some reason crashes when calling.parent or trying to enter main queue
-        if let node = self.currentObjectPlacing, let objectDescriptor  = self.currentObjectDescriptor, let root = rootNode {
-            
+		if let node = self.currentObjectPlacing, let root = rootNode {
+            print("did we make it here?!?!???!?!?!?!?!?!?!?")
             node.transform = root.convertTransform(node.transform, from: node.parent)
             node.removeFromParentNode()
             root.addChildNode(node)
