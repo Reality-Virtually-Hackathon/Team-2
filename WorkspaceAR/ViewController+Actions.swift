@@ -81,7 +81,7 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
               segueIdentifer == .showObjects else { return }
         
         let objectsViewController = segue.destination as! VirtualObjectSelectionViewController
-        objectsViewController.virtualObjects = VirtualObject.availableObjects
+        objectsViewController.sharedObjectDescriptors = DataManager.shared().solarSystemObjects
         objectsViewController.delegate = self
         
         // Set all rows of currently placed objects to selected.

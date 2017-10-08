@@ -17,7 +17,7 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
      
      - Tag: PlaceVirtualObject
      */
-    func placeVirtualObject(_ virtualObject: VirtualObject) {
+    func placePointAlignmentNodes(_ virtualObject: VirtualObject) {
         guard let cameraTransform = session.currentFrame?.camera.transform,
             let focusSquarePosition = focusSquare.lastPosition else {
             statusViewController.showMessage("CANNOT PLACE OBJECT\nTry moving left or right.")
@@ -60,22 +60,41 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
     
     // MARK: - VirtualObjectSelectionViewControllerDelegate
     
-    func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didSelectObject object: VirtualObject) {
-        virtualObjectLoader.loadVirtualObject(object, loadedHandler: { [unowned self] loadedObject in
-            DispatchQueue.main.async {
-                self.hideObjectLoadingUI()
-                self.placeVirtualObject(loadedObject)
-            }
-        })
-
+    func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didSelectObject object: SharedARObjectDescriptor) {
+        if let node = object.BuildSCNNode(), let rootNode = DataManager.shared().rootNode{
+            DataManager.shared().loadedNodes.append(node)
+            node.position = SCNVector3Zero
+            rootNode.addChildNode(node)
+            print("Placed node")
+        }
+        
+        
         displayObjectLoadingUI()
     }
     
-    func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didDeselectObject object: VirtualObject) {
-        guard let objectIndex = virtualObjectLoader.loadedObjects.index(of: object) else {
-            fatalError("Programmer error: Failed to lookup virtual object in scene.")
+    func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didDeselectObject object: SharedARObjectDescriptor) {
+//        guard let objectIndex = DataManager.shared().loadedNodes.index(of: object) else {
+//            fatalError("Programmer error: Failed to lookup virtual object in scene.")
+//        }
+        if object.multipleAllowed == false{
+            var objectIndex = -1
+            var objectNode: SCNNode? = nil
+            for i in 0..<DataManager.shared().loadedNodes.count{
+                let node = DataManager.shared().loadedNodes[i]
+                if node.name == object.name{
+                    objectIndex = i
+                    objectNode = node
+                }
+            }
+            guard objectIndex != -1, objectNode != nil else{
+                print("UNABLE TO FIND OBJECT IN LOADED NODES")
+                fatalError("Failed to find object in loaded objects")
+                return
+            }
+            objectNode!.removeFromParentNode()
+            DataManager.shared().loadedNodes.remove(at: objectIndex)
         }
-        virtualObjectLoader.removeVirtualObject(at: objectIndex)
+//        virtualObjectLoader.removeVirtualObject(at: objectIndex)
     }
 
     // MARK: Object Loading UI

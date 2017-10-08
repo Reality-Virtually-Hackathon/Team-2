@@ -182,6 +182,7 @@ class ViewController: UIViewController {
             cubeNode.position = SCNVector3Make(0, 0.2, 0)
             DataManager.shared().rootNode?.addChildNode(cubeNode)
             hideContinueButton()
+            self.addObjectButton.isHidden = false
         default:
             print("Oh no")
         }

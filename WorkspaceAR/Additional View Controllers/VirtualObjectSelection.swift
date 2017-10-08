@@ -27,15 +27,15 @@ class ObjectCell: UITableViewCell {
 
 /// A protocol for reporting which objects have been selected.
 protocol VirtualObjectSelectionViewControllerDelegate: class {
-    func virtualObjectSelectionViewController(_ selectionViewController: VirtualObjectSelectionViewController, didSelectObject: VirtualObject)
-    func virtualObjectSelectionViewController(_ selectionViewController: VirtualObjectSelectionViewController, didDeselectObject: VirtualObject)
+    func virtualObjectSelectionViewController(_ selectionViewController: VirtualObjectSelectionViewController, didSelectObject: SharedARObjectDescriptor)
+    func virtualObjectSelectionViewController(_ selectionViewController: VirtualObjectSelectionViewController, didDeselectObject: SharedARObjectDescriptor)
 }
 
 /// A custom table view controller to allow users to select `VirtualObject`s for placement in the scene.
 class VirtualObjectSelectionViewController: UITableViewController {
     
     /// The collection of `VirtualObject`s to select from.
-    var virtualObjects = [VirtualObject]()
+    var sharedObjectDescriptors = [SharedARObjectDescriptor]()
     
     /// The rows of the currently selected `VirtualObject`s.
     var selectedVirtualObjectRows = IndexSet()
@@ -44,7 +44,6 @@ class VirtualObjectSelectionViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         tableView.separatorEffect = UIVibrancyEffect(blurEffect: UIBlurEffect(style: .light))
     }
     
@@ -55,7 +54,7 @@ class VirtualObjectSelectionViewController: UITableViewController {
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let object = virtualObjects[indexPath.row]
+        let object = sharedObjectDescriptors[indexPath.row]
         
         // Check if the current row is already selected, then deselect it.
         if selectedVirtualObjectRows.contains(indexPath.row) {
@@ -70,7 +69,7 @@ class VirtualObjectSelectionViewController: UITableViewController {
     // MARK: - UITableViewDataSource
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return virtualObjects.count
+        return sharedObjectDescriptors.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,7 +77,7 @@ class VirtualObjectSelectionViewController: UITableViewController {
             fatalError("Expected `\(ObjectCell.self)` type for reuseIdentifier \(ObjectCell.reuseIdentifier). Check the configuration in Main.storyboard.")
         }
         
-        cell.modelName = virtualObjects[indexPath.row].modelName
+        cell.modelName = sharedObjectDescriptors[indexPath.row].modelName
 
         if selectedVirtualObjectRows.contains(indexPath.row) {
             cell.accessoryType = .checkmark

@@ -111,7 +111,7 @@ extension VirtualObject {
             let url = element as! URL
 
             guard url.pathExtension == "scn" else { return nil }
-
+            print("MODEL URL - \(url)")
             return VirtualObject(url: url)
         }
     }()

@@ -42,8 +42,12 @@ class DataManager {
     
     init(){
         connectivity.delegate = self
+        initiateObjectStore()
     }
     
+    var solarSystemObjects = [SharedARObjectDescriptor]()
+    var chessObjects = [SharedARObjectDescriptor]()
+    var constructionObjects = [SharedARObjectDescriptor]()
     
     
     var connectivity = ConnectivityManager()
@@ -57,7 +61,7 @@ class DataManager {
     var alignmentPoints = [CGPoint]()
     
     var rootNode: SCNNode?
-	var voRoot: VirtualObject?
+    var loadedNodes = [SCNNode]()
     
     var objects = [SharedARObject]()
     
@@ -163,5 +167,21 @@ extension DataManager: ConnectivityManagerDelegate{
 			}
 		}
     }
+}
+
+extension DataManager{
+    
+    
+    func initiateObjectStore(){
+        solarSystemObjects = [SharedARObjectDescriptor]()
+        chessObjects = [SharedARObjectDescriptor]()
+        constructionObjects = [SharedARObjectDescriptor]()
+        
+        solarSystemObjects.append(SharedARObjectDescriptor(name: "Sun", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "candle", description: "The sun is the center of our solar system.", multipleAllowed: false))
+        solarSystemObjects.append(SharedARObjectDescriptor(name: "Mercury", physicsBody: SCNPhysicsBody(), position: SCNVector3Zero, rotation: SCNVector4Zero, modelName: "cup", description: "Mercury is a cool planet.", multipleAllowed: false))
+        print(VirtualObject.availableObjects)
+    }
+    
+    
 }
 

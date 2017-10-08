@@ -16,17 +16,17 @@ struct SharedARObjectDescriptor {
     var rotation: SCNVector4
     var modelName: String
     var description: String
+    var multipleAllowed: Bool
     
     func BuildSCNNode() -> SCNNode? {
-        let node = SCNNode()
         
-        let scene = SCNScene(named: "Models.scnassets/" + modelName)
-        if let nodeArray = scene?.rootNode.childNodes {
-            // generate child nodes
-            for childNode in nodeArray {
-                node.addChildNode(childNode as SCNNode)
-            }
-            
+        let url = Bundle.main.url(forResource: "Models.scnassets/\(modelName)/\(modelName)", withExtension: ".scn")
+        let node = SCNReferenceNode(url: url!)
+        
+//        let scene = SCNScene(named: "Models.scnassets/" + modelName)
+        
+        if let node = node {
+            node.load()
             // configure physics
             node.physicsBody = physicsBody
             
@@ -36,6 +36,7 @@ struct SharedARObjectDescriptor {
             
             // configure description
             node.name = name
+            return node
         }
         
         return nil
